@@ -56,4 +56,9 @@ public class Alamat {
     public void setNo_telp_penerima(String no_telp_penerima) {
         this.no_telp_penerima = no_telp_penerima;
     }
+
+    @Override
+    public String toString() {
+        return "Alamat{" + "id_alamat=" + id_alamat + ", nama_tempat=" + nama_tempat + ", alamat=" + alamat + ", nama_penerima=" + nama_penerima + ", no_telp_penerima=" + no_telp_penerima + '}';
+    }
 }

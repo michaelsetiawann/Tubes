@@ -5,22 +5,27 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author acer
  */
-public class LaporanBarang {
+public class LaporanBarang extends LaporanAbstract{
 
-    int id_laporan;
-    int id_barang;
-    int id_user;
-//    Date tanggal_;aporan;
-    String pesan;
-    int status;
+    Barang barang;
 
-    @Override
-    public String toString() {
-        return "LaporanBarang{" + "id_laporan=" + id_laporan + ", id_barang=" + id_barang + ", id_user=" + id_user + ", pesan=" + pesan + ", status=" + status + '}';
+    public LaporanBarang(Barang barang, int id_laporan, Date tanggal, String komentar, boolean status, User user) {
+        super(id_laporan, tanggal, komentar, status, user);
+        this.barang = barang;
+    }
+
+    public Barang getBarang() {
+        return barang;
+    }
+
+    public void setBarang(Barang barang) {
+        this.barang = barang;
     }
 
     public int getId_laporan() {
@@ -31,36 +36,40 @@ public class LaporanBarang {
         this.id_laporan = id_laporan;
     }
 
-    public int getId_barang() {
-        return id_barang;
+    public Date getTanggal() {
+        return tanggal;
     }
 
-    public void setId_barang(int id_barang) {
-        this.id_barang = id_barang;
+    public void setTanggal(Date tanggal) {
+        this.tanggal = tanggal;
     }
 
-    public int getId_user() {
-        return id_user;
+    public String getKomentar() {
+        return komentar;
     }
 
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
+    public void setKomentar(String komentar) {
+        this.komentar = komentar;
     }
 
-    public String getPesan() {
-        return pesan;
-    }
-
-    public void setPesan(String pesan) {
-        this.pesan = pesan;
-    }
-
-    public int getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "LaporanBarang{" + "barang=" + barang + '}';
+    }
 }

@@ -24,4 +24,9 @@ public class Admin extends PersonAbstract {
     public void setNpwp(String npwp) {
         this.npwp = npwp;
     }
+
+    @Override
+    public String toString() {
+        return "Admin{" + "npwp=" + npwp + '}';
+    }
 }

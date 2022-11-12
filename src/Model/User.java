@@ -17,15 +17,19 @@ public class User extends PersonAbstract{
     String nama_lengkap;
     Date tanggal_lahir;
     boolean jenis_kelamin;
-    String alamat;
     String no_telepon;
     String email;
     ArrayList<Alamat> listAlamat = new ArrayList();
     ArrayList<Transaksi> listTransaksi = new ArrayList();
     ArrayList<Keranjang> listKeranjang = new ArrayList();
 
-    public User(int id, String username, String password) {
+    public User(String nama_lengkap, Date tanggal_lahir, boolean jenis_kelamin, String no_telepon, String email, int id, String username, String password) {
         super(id, username, password);
+        this.nama_lengkap = nama_lengkap;
+        this.tanggal_lahir = tanggal_lahir;
+        this.jenis_kelamin = jenis_kelamin;
+        this.no_telepon = no_telepon;
+        this.email = email;
     }
 
     public String getNama_lengkap() {
@@ -52,15 +56,6 @@ public class User extends PersonAbstract{
         this.jenis_kelamin = jenis_kelamin;
     }
 
-    
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
-
     public String getNo_telepon() {
         return no_telepon;
     }
@@ -75,5 +70,34 @@ public class User extends PersonAbstract{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ArrayList<Alamat> getListAlamat() {
+        return listAlamat;
+    }
+
+    public void setListAlamat(ArrayList<Alamat> listAlamat) {
+        this.listAlamat = listAlamat;
+    }
+
+    public ArrayList<Transaksi> getListTransaksi() {
+        return listTransaksi;
+    }
+
+    public void setListTransaksi(ArrayList<Transaksi> listTransaksi) {
+        this.listTransaksi = listTransaksi;
+    }
+
+    public ArrayList<Keranjang> getListKeranjang() {
+        return listKeranjang;
+    }
+
+    public void setListKeranjang(ArrayList<Keranjang> listKeranjang) {
+        this.listKeranjang = listKeranjang;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "nama_lengkap=" + nama_lengkap + ", tanggal_lahir=" + tanggal_lahir + ", jenis_kelamin=" + jenis_kelamin + ", no_telepon=" + no_telepon + ", email=" + email + ", listAlamat=" + listAlamat + ", listTransaksi=" + listTransaksi + ", listKeranjang=" + listKeranjang + '}';
     }
 }
