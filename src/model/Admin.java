@@ -13,11 +13,9 @@ public class Admin extends PersonAbstract {
 
     private String npwp;
     
-    public Admin(){
-        
-    }
-    public Admin(int id, String username, String password) {
+    public Admin(int id, String username, String password, String npwp) {
         super(id, username, password);
+        this.npwp = npwp;
     }
 
     public String getNpwp() {
