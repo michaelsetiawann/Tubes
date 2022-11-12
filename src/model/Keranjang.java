@@ -15,6 +15,9 @@ public class Keranjang {
     Barang barang;
     int jumlah_barang;
 
+    public Keranjang() {
+    }
+    
     public Keranjang(int id_keranjang, Barang barang, int jumlah_barang) {
         this.id_keranjang = id_keranjang;
         this.barang = barang;

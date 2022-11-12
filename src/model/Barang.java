@@ -29,6 +29,9 @@ public class Barang {
         this.status = status;
     }
 
+    public Barang() {
+    }
+    
     public int getId_barang() {
         return id_barang;
     }

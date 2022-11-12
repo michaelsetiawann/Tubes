@@ -15,6 +15,9 @@ public class LaporanBarang extends LaporanAbstract{
 
     Barang barang;
 
+    public LaporanBarang() {
+    }
+
     public LaporanBarang(Barang barang, int id_laporan, Date tanggal, String komentar, boolean status, User user) {
         super(id_laporan, tanggal, komentar, status, user);
         this.barang = barang;

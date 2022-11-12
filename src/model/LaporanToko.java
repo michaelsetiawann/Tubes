@@ -15,6 +15,9 @@ public class LaporanToko extends LaporanAbstract{
 
     Toko toko;
 
+    public LaporanToko() {
+    }
+
     public LaporanToko(Toko toko, int id_laporan, Date tanggal, String komentar, boolean status, User user) {
         super(id_laporan, tanggal, komentar, status, user);
         this.toko = toko;

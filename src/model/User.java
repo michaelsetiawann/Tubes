@@ -23,6 +23,10 @@ public class User extends PersonAbstract{
     ArrayList<Transaksi> listTransaksi = new ArrayList();
     ArrayList<Keranjang> listKeranjang = new ArrayList();
 
+    public User(int id, String username, String password) {
+        super(id, username, password);
+    }
+
     public User(String nama_lengkap, Date tanggal_lahir, boolean jenis_kelamin, String no_telepon, String email, int id, String username, String password) {
         super(id, username, password);
         this.nama_lengkap = nama_lengkap;
