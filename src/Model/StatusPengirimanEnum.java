@@ -10,5 +10,5 @@ package Model;
  * @author Lenovo
  */
 public enum StatusPengirimanEnum {
-    MENUNGGU, KONFIRMASI, DIPROSES, DIKIRIM, SAMPAI, SELESAI
+    MENUNGGU_KONFIRMASI, DIPROSES, DIKIRIM, SAMPAI, SELESAI
 }

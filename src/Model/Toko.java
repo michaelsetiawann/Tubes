@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author acer
@@ -12,15 +14,19 @@ package Model;
 public class Toko {
 
     int id_toko;
-    int id_user;
     String nama_toko;
     String alamat_toko;
     String deskripsi_toko;
-    String status;
+    boolean status;
+    ArrayList<Barang> listBarang = new ArrayList();
+    ArrayList<Transaksi> listTransaksi = new ArrayList();
 
-    @Override
-    public String toString() {
-        return "Toko{" + "id_toko=" + id_toko + ", id_user=" + id_user + ", nama_toko=" + nama_toko + ", alamat_toko=" + alamat_toko + ", deskripsi_toko=" + deskripsi_toko + ", status=" + status + '}';
+    public Toko(int id_toko, String nama_toko, String alamat_toko, String deskripsi_toko, boolean status) {
+        this.id_toko = id_toko;
+        this.nama_toko = nama_toko;
+        this.alamat_toko = alamat_toko;
+        this.deskripsi_toko = deskripsi_toko;
+        this.status = status;
     }
 
     public int getId_toko() {
@@ -29,14 +35,6 @@ public class Toko {
 
     public void setId_toko(int id_toko) {
         this.id_toko = id_toko;
-    }
-
-    public int getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
     }
 
     public String getNama_toko() {
@@ -63,12 +61,32 @@ public class Toko {
         this.deskripsi_toko = deskripsi_toko;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
+    public ArrayList<Barang> getListBarang() {
+        return listBarang;
+    }
+
+    public void setListBarang(ArrayList<Barang> listBarang) {
+        this.listBarang = listBarang;
+    }
+
+    public ArrayList<Transaksi> getListTransaksi() {
+        return listTransaksi;
+    }
+
+    public void setListTransaksi(ArrayList<Transaksi> listTransaksi) {
+        this.listTransaksi = listTransaksi;
+    }
+
+    @Override
+    public String toString() {
+        return "Toko{" + "id_toko=" + id_toko + ", nama_toko=" + nama_toko + ", alamat_toko=" + alamat_toko + ", deskripsi_toko=" + deskripsi_toko + ", status=" + status + ", listBarang=" + listBarang + ", listTransaksi=" + listTransaksi + '}';
+    }
 }
