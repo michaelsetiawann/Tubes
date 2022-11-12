@@ -1,8 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package Model;
+package model;
 
 import java.util.Date;
 
@@ -10,19 +11,21 @@ import java.util.Date;
  *
  * @author acer
  */
-public abstract class LaporanAbstract {
-    int id_laporan;
-    Date tanggal;
-    String komentar;
-    boolean status;
-    User user;
+public class LaporanBarang extends LaporanAbstract{
 
-    public LaporanAbstract(int id_laporan, Date tanggal, String komentar, boolean status, User user) {
-        this.id_laporan = id_laporan;
-        this.tanggal = tanggal;
-        this.komentar = komentar;
-        this.status = status;
-        this.user = user;
+    Barang barang;
+
+    public LaporanBarang(Barang barang, int id_laporan, Date tanggal, String komentar, boolean status, User user) {
+        super(id_laporan, tanggal, komentar, status, user);
+        this.barang = barang;
+    }
+
+    public Barang getBarang() {
+        return barang;
+    }
+
+    public void setBarang(Barang barang) {
+        this.barang = barang;
     }
 
     public int getId_laporan() {
@@ -67,6 +70,6 @@ public abstract class LaporanAbstract {
 
     @Override
     public String toString() {
-        return "LaporanAbstract{" + "id_laporan=" + id_laporan + ", tanggal=" + tanggal + ", komentar=" + komentar + ", status=" + status + ", user=" + user + '}';
+        return "LaporanBarang{" + "barang=" + barang + '}';
     }
 }

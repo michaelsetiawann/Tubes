@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package view;
 
 /**
  *
  * @author Lenovo
  */
-public enum MetodePembayaranEnum {
-    TRANSFER_BANK, COD, EMONEY
+public class UserViews {
+    
 }
