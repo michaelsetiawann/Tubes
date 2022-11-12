@@ -18,10 +18,10 @@ import javax.swing.JPanel;
 public class HomeScreen extends TemplateScreen {
 
     public HomeScreen() {
-        homeSceen();
+        homeScreen();
     }
     
-    private void homeSceen() {
+    private void homeScreen() {
         JFrame frame = getTemplate();
         
         
