@@ -7,18 +7,28 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
  *
  * @author shyen
  */
-public abstract class PanelScreen {
-    JPanel panelMenu = new JPanel();
-    public JPanel getPanelMenu(){
-        
+public abstract class TemplateScreen {
+    
+    public JFrame getTemplate(){
+        //frame
+        JFrame frame = new JFrame("Tokomedia");
+        frame.setSize(1080, 720);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         Font font2 = new Font("SansSerif", Font.PLAIN, 25);
+        //panel
+        JPanel panelMenu = new JPanel();
         panelMenu.setBackground(Color.GREEN);
 
         panelMenu.setBounds(0,0,1080,75);
@@ -38,7 +48,9 @@ public abstract class PanelScreen {
         transaksi.setBorderPainted(false);
         panelMenu.add(transaksi);
         
-        return panelMenu;
+        frame.add(panelMenu);
+        
+        return frame;
     }
     
 }

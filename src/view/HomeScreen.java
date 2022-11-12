@@ -15,24 +15,16 @@ import javax.swing.JPanel;
  *
  * @author shyen
  */
-public class HomeScreen extends PanelScreen {
+public class HomeScreen extends TemplateScreen {
 
     public HomeScreen() {
         homeSceen();
     }
     
     private void homeSceen() {
-        //frame
-        JFrame frame = new JFrame("Tokomedia");
-        frame.setSize(1080, 720);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-        //font 
-        Font font1 = new Font("SansSerif", Font.PLAIN, 15);
-        Font font2 = new Font("SansSerif", Font.PLAIN, 25);
-        frame.add(getPanelMenu());
+        JFrame frame = getTemplate();
+        
+        
         
         
         
