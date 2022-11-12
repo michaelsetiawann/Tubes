@@ -17,6 +17,17 @@ public class Alamat {
     private String nama_penerima;
     private String no_telp_penerima;
 
+    public Alamat() {
+    }
+
+    public Alamat(int id_alamat, String nama_tempat, String alamat, String nama_penerima, String no_telp_penerima) {
+        this.id_alamat = id_alamat;
+        this.nama_tempat = nama_tempat;
+        this.alamat = alamat;
+        this.nama_penerima = nama_penerima;
+        this.no_telp_penerima = no_telp_penerima;
+    }
+
     public int getId_alamat() {
         return id_alamat;
     }

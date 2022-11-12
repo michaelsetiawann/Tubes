@@ -12,7 +12,10 @@ package model;
 public class Admin extends PersonAbstract {
 
     private String npwp;
-
+    
+    public Admin(){
+        
+    }
     public Admin(int id, String username, String password) {
         super(id, username, password);
     }

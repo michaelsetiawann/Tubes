@@ -17,6 +17,9 @@ public abstract class LaporanAbstract {
     boolean status;
     User user;
 
+    public LaporanAbstract() {
+    }
+
     public LaporanAbstract(int id_laporan, Date tanggal, String komentar, boolean status, User user) {
         this.id_laporan = id_laporan;
         this.tanggal = tanggal;
