@@ -21,6 +21,9 @@ public class Toko {
     ArrayList<Barang> listBarang = new ArrayList();
     ArrayList<Transaksi> listTransaksi = new ArrayList();
 
+    public Toko() {
+    }
+
     public Toko(int id_toko, String nama_toko, String alamat_toko, String deskripsi_toko, boolean status) {
         this.id_toko = id_toko;
         this.nama_toko = nama_toko;

@@ -21,6 +21,9 @@ public class Transaksi {
     String pesan_review;
     int rating;
 
+    public Transaksi() {
+    }
+
     public Transaksi(int id_transaksi, Barang barang, int jumlahBarang, Date tanggal, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, int rating) {
         this.id_transaksi = id_transaksi;
         this.barang = barang;
