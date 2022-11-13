@@ -16,8 +16,7 @@ import model.User;
 public class LihatKeranjangScreen extends TemplateScreen{
     public LihatKeranjangScreen() {
         User loggedInUser;
-        ArrayList<Keranjang> listKeranjang;
-        lihatKeranjang(loggedInUser, listKeranjang);
+        
     }
     
     private void lihatKeranjang(User loggedInUser, ArrayList<Keranjang> listKeranjang) {
