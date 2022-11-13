@@ -19,9 +19,9 @@ import javax.swing.JTextField;
  * @author shyen
  */
 public abstract class TemplateScreen {
-    
+
     static JFrame frame = new JFrame("Tokomedia");
-    
+
     public JFrame getTemplate() {
         //frame
         frame.setSize(1080, 720);
@@ -53,25 +53,18 @@ public abstract class TemplateScreen {
         transaksi.setBorderPainted(false);
         panelMenu.add(transaksi);
 
-        frame.add(panelMenu);
-
-        return frame;
-
-    }
-
-    public TemplateScreen() {
         JLabel label = new JLabel();
         label.setText("Cari Produk");
         label.setBounds(350, 33, 110, 10);
-        frame.add(label);
+        panelMenu.add(label);
 
         JTextField namaBarang = new JTextField();
         namaBarang.setBounds(425, 27, 150, 30);
-        frame.add(namaBarang);
-        
+        panelMenu.add(namaBarang);
+
         JButton btnCari = new JButton("Klik Cari");
         btnCari.setBounds(580, 20, 150, 40);
-        frame.add(btnCari);
+        panelMenu.add(btnCari);
         btnCari.addActionListener(
                 new ActionListener() {
             @Override
@@ -80,6 +73,15 @@ public abstract class TemplateScreen {
 
                 new CariProdukJtable(namaBarang.getText());
             }
-        }); 
+        });
+        
+        frame.add(panelMenu);
+
+        return frame;
+
+    }
+
+    public TemplateScreen() {
+
     }
 }
