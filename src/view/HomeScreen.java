@@ -30,6 +30,5 @@ public class HomeScreen extends TemplateScreen {
         
         
         
-        
     }
 }

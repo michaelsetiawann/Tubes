@@ -13,17 +13,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static view.TemplateScreen.frame;
 
 /**
  *
  * @author shyen
  */
-public class TemplateScreen {
-
-    static JFrame frame = new JFrame("Tokomedia");
-
-    public JFrame getTemplate() {
-        //frame
+public class TransactionScreen {
+    public TransactionScreen() {
+        transScreen();
+    }
+    
+    private void transScreen() {
+        TemplateScreen aa = new TemplateScreen();
+        JFrame frame = new JFrame("transaksi");
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
@@ -95,11 +98,16 @@ public class TemplateScreen {
         
         frame.add(panelMenu);
 
-        return frame;
-
-    }
-
-    public TemplateScreen() {
-
+        
+        
+        
+        JLabel transaksi2 = new JLabel ("Daftar Transaksi");
+        transaksi2.setBounds(100,100,100,100);
+        frame.add(transaksi2);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
+        
+        
     }
 }
