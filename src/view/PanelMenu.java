@@ -18,24 +18,13 @@ import javax.swing.JTextField;
  *
  * @author shyen
  */
-public class TemplateScreen {
+public class PanelMenu {
 
-    static JFrame frame = new JFrame("Tokomedia");
-
-    public JFrame getTemplate() {
-        //frame
-        frame.setSize(1080, 720);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-        //font 
-        Font font1 = new Font("SansSerif", Font.PLAIN, 15);
-        Font font2 = new Font("SansSerif", Font.PLAIN, 25);
-        //panel
+    public JPanel getPanel(JFrame frame) {
         JPanel panelMenu = new JPanel();
         panelMenu.setBackground(Color.GREEN);
-
+        Font font1 = new Font("SansSerif", Font.PLAIN, 15);
+        Font font2 = new Font("SansSerif", Font.PLAIN, 25);
         panelMenu.setBounds(0, 0, 1080, 75);
         panelMenu.setLayout(null);
         JButton namaApp = new JButton("TOKOMEDIA");
@@ -47,6 +36,7 @@ public class TemplateScreen {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
+                frame.setVisible(false);
                 new HomeScreen();
             }
         });
@@ -66,11 +56,11 @@ public class TemplateScreen {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-
+                frame.setVisible(false);
                 new TransactionScreen();
             }
         });
-        
+
         JLabel label = new JLabel();
         label.setText("Cari Produk");
         label.setBounds(350, 33, 110, 10);
@@ -92,14 +82,8 @@ public class TemplateScreen {
                 new CariProdukJtable(namaBarang.getText());
             }
         });
-        
-        frame.add(panelMenu);
 
-        return frame;
-
+        return panelMenu;
     }
 
-    public TemplateScreen() {
-
-    }
 }
