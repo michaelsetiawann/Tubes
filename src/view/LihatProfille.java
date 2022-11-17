@@ -6,18 +6,14 @@
 package view;
 
 import database.DatabaseHandler;
-import java.io.IOException;
+import controller.ControlUser;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import controller.DateLabelFormatter;
 import java.awt.Font;
-import java.util.Date;
-import java.util.Properties;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import model.User;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -25,38 +21,12 @@ import org.jdatepicker.impl.UtilDateModel;
  */
 public class LihatProfille {
     static User user;
-    static boolean search = false;
-    public static void searchUser(int index) {
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        try {
-            java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("SELECT * FROM ktp WHERE id_user='" + index + "'");
-            if (result.next()) {
-                int idUser = result.getInt("id_user");
-                String nama = result.getString("nama_lengkap_pembeli");
-                String tglLahir = result.getString("tanggal_lahir");
-                String jenisKelamin = result.getString("jenis_kelamin");
-                String noTlp = result.getString("no_telepon");
-                String email = result.getString("email");
-                String username = result.getString("username");
-                String password = result.getString("password");
-
-                user = new User(nama, tglLahir, jenisKelamin, noTlp, email, idUser, username, password);
-                tampilProfille(user);
-                search = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "User not found.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
-        }
-        conn.disconnect();
-    }
-    public static void tampilProfille(User user){
+    public static void tampilProfille(User user, int user_id){
+        ControlUser cu = new ControlUser();
+        user = cu.searchUser(user_id);
         JFrame view = new JFrame();
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(380, 500);
+        view.setSize(600, 500);
         
         JLabel title = new JLabel("Your Profille");
         title.setFont(new Font("Serif", Font.PLAIN, 34));
@@ -79,19 +49,40 @@ public class LihatProfille {
         
         JLabel[] valueLabel = new JLabel[labels.length];
         valueLabel[0] = new JLabel(user.getNama_lengkap());
-        valueLabel[0].setBounds(210, 100, 150, 25);
+        valueLabel[0].setBounds(210, 100, 250, 25);
         valueLabel[1] = new JLabel(user.getTanggal_lahir());
-        valueLabel[1].setBounds(210, 135, 150, 25);
+        valueLabel[1].setBounds(210, 135, 250, 25);
         valueLabel[2] = new JLabel(user.getJenis_kelamin());
-        valueLabel[2].setBounds(210, 170, 150, 25);
+        valueLabel[2].setBounds(210, 170, 250, 25);
         valueLabel[3] = new JLabel(user.getNo_telepon());
-        valueLabel[3].setBounds(210, 205, 150, 25);
+        valueLabel[3].setBounds(210, 205, 250, 25);
         valueLabel[4] = new JLabel(user.getEmail());
-        valueLabel[4].setBounds(210, 240, 150, 25);
+        valueLabel[4].setBounds(210, 240, 250, 25);
         valueLabel[5] = new JLabel(user.getUsername());
-        valueLabel[5].setBounds(210, 275, 150, 25);
+        valueLabel[5].setBounds(210, 275, 250, 25);
         valueLabel[6] = new JLabel(user.getPassword());
-        valueLabel[6].setBounds(210, 310, 150, 25);
+        valueLabel[6].setBounds(210, 310, 250, 25);
+        
+        JButton kembali = new JButton("Kembali");
+        kembali.setEnabled(true);
+        kembali.setBounds(80, 350, 120, 30);
+        JButton edit = new JButton("Ubah Profille");
+        edit.setEnabled(true);
+        edit.setBounds(250, 350, 120, 30);
+        
+        kembali.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //tampilan home
+            }
+        });
+        edit.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditProfille.mengeditProfille(user, user_id);
+                System.exit(0);
+            }
+        });
         
         view.add(title);
         for (JLabel label : labels) {
@@ -100,11 +91,14 @@ public class LihatProfille {
         for(JLabel value : valueLabel){
             view.add(value);
         }
+        view.add(kembali);
+        view.add(edit);
         view.getContentPane().setLayout(null);
         view.setVisible(true);
+        view.setLocationRelativeTo(null);
     }
-    public static void main(String[] args) {
-        User user1 = new User("Udin Saepufin ", "2003-01-02", "Pria", "09823164372", "usin@gmail.com", 2211, "DinSAe", "DIDINGANT");
-        tampilProfille(user1);
-    }
+//    public static void main(String[] args) {
+//        User user1 = new User("Udin Saepufin ", "2003-01-02", "Pria", "09823164372", "usin@gmail.com", 2211, "DinSAe", "DIDINGANT");
+//        tampilProfille(user,1);
+//    }
 }
