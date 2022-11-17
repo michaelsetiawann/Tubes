@@ -19,15 +19,15 @@ import javax.swing.JTextField;
  *
  * @author shyen
  */
-public class HomeScreen {
+public class TransactionScreen {
 
-    public HomeScreen() {
-        homeScreen();
+    public TransactionScreen() {
+        transScreen();
     }
-    
-    private void homeScreen() {
-        JFrame frame = new JFrame("home");
-        //frame
+
+    private void transScreen() {
+
+        JFrame frame = new JFrame("transaksi");
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
@@ -36,15 +36,19 @@ public class HomeScreen {
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         Font font2 = new Font("SansSerif", Font.PLAIN, 25);
-        
+        //panel add
         PanelMenu menu = new PanelMenu();
         JPanel panelMenu = menu.getPanel(frame);
         frame.add(panelMenu);
         
-        
-        
-        
-        
-        
+
+
+        JLabel transaksi2 = new JLabel("Daftar Transaksi");
+        transaksi2.setBounds(100, 100, 100, 100);
+        frame.add(transaksi2);
+        frame.setLocationRelativeTo(null);
+        frame.setLayout(null);
+        frame.setVisible(true);
+
     }
 }

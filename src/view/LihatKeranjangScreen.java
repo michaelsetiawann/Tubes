@@ -13,14 +13,14 @@ import model.User;
  *
  * @author acer
  */
-public class LihatKeranjangScreen extends TemplateScreen{
+public class LihatKeranjangScreen{
     public LihatKeranjangScreen() {
         User loggedInUser;
         
     }
     
     private void lihatKeranjang(User loggedInUser, ArrayList<Keranjang> listKeranjang) {
-        JFrame frame = getTemplate();
+//        JFrame frame = getTemplate();
         
         
     }

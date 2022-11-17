@@ -18,30 +18,28 @@ import javax.swing.JTextField;
  *
  * @author shyen
  */
-public abstract class TemplateScreen {
+public class PanelMenu {
 
-    static JFrame frame = new JFrame("Tokomedia");
-
-    public JFrame getTemplate() {
-        //frame
-        frame.setSize(1080, 720);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-        //font 
-        Font font1 = new Font("SansSerif", Font.PLAIN, 15);
-        Font font2 = new Font("SansSerif", Font.PLAIN, 25);
-        //panel
+    public JPanel getPanel(JFrame frame) {
         JPanel panelMenu = new JPanel();
         panelMenu.setBackground(Color.GREEN);
-
+        Font font1 = new Font("SansSerif", Font.PLAIN, 15);
+        Font font2 = new Font("SansSerif", Font.PLAIN, 25);
         panelMenu.setBounds(0, 0, 1080, 75);
         panelMenu.setLayout(null);
         JButton namaApp = new JButton("TOKOMEDIA");
         namaApp.setFont(font2);
         namaApp.setBackground(null);
         namaApp.setBorderPainted(false);
+        namaApp.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {
+                frame.setVisible(false);
+                new HomeScreen();
+            }
+        });
 
         namaApp.setBounds(0, 0, 200, 75);
         panelMenu.add(namaApp);
@@ -52,6 +50,16 @@ public abstract class TemplateScreen {
         transaksi.setBackground(null);
         transaksi.setBorderPainted(false);
         panelMenu.add(transaksi);
+
+        transaksi.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {
+                frame.setVisible(false);
+                new TransactionScreen();
+            }
+        });
 
         JLabel label = new JLabel();
         label.setText("Cari Produk");
@@ -74,14 +82,8 @@ public abstract class TemplateScreen {
                 new CariProdukJtable(namaBarang.getText());
             }
         });
-        
-        frame.add(panelMenu);
 
-        return frame;
-
+        return panelMenu;
     }
 
-    public TemplateScreen() {
-
-    }
 }
