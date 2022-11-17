@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import controller.DateLabelFormatter;
+import java.awt.Font;
 import java.util.Date;
 import java.util.Properties;
 import javax.swing.*;
@@ -55,8 +56,11 @@ public class LihatProfille {
     public static void tampilProfille(User user){
         JFrame view = new JFrame();
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        view.setSize(800, 800);
+        view.setSize(380, 500);
         
+        JLabel title = new JLabel("Your Profille");
+        title.setFont(new Font("Serif", Font.PLAIN, 34));
+        title.setBounds(80, 40, 200, 50);
         JLabel []labels = new JLabel[7];
         labels[0] = new JLabel("Nama");
         labels[0].setBounds(80, 100, 120, 25);
@@ -89,41 +93,13 @@ public class LihatProfille {
         valueLabel[6] = new JLabel(user.getPassword());
         valueLabel[6].setBounds(210, 310, 150, 25);
         
-        JTextField txtNama = new JTextField();
-        txtNama.setBounds(200, 100, 120, 25);
-        txtNama.setText(user.getNama_lengkap());
-        UtilDateModel model = new UtilDateModel();
-        Properties p = new Properties();
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-        JDatePickerImpl tglLahir = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-        tglLahir.setBounds(200, 135, 120, 25);
-        JTextField txtJenisKelamin = new JTextField();
-        txtJenisKelamin.setBounds(200, 170, 120, 25);
-        JTextField txtNoTelepon = new JTextField();
-        txtNoTelepon.setBounds(200, 205, 120, 25);
-        JTextField txtEmail = new JTextField();
-        txtEmail.setBounds(200, 240, 120, 25);
-        JTextField txtUsername = new JTextField();
-        txtUsername.setBounds(200, 275, 120, 25);
-        JTextField txtPassword = new JTextField();
-        txtPassword.setBounds(200, 310, 120, 25);
-        
+        view.add(title);
         for (JLabel label : labels) {
             view.add(label);
         }
         for(JLabel value : valueLabel){
             view.add(value);
         }
-        view.add(txtNama);
-        view.add(tglLahir);
-        view.add(txtJenisKelamin);
-        view.add(txtNoTelepon);
-        view.add(txtEmail);
-        view.add(txtUsername);
-        view.add(txtPassword);
         view.getContentPane().setLayout(null);
         view.setVisible(true);
     }
