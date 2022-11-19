@@ -161,8 +161,11 @@ public class RegistrasiUser extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new LoginUser("user");
+                new HomeScreen();
             }
         });
+
+        frame.setVisible(true);
+        frame.add(contentPane);
     }
 }
