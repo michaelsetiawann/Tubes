@@ -26,7 +26,6 @@ import model.Barang;
 public class CariProdukJtable extends JFrame {
 
     Barang barang;
-    boolean found = false;
     static DatabaseHandler conn = new DatabaseHandler();
 
     public CariProdukJtable() {
@@ -49,40 +48,27 @@ public class CariProdukJtable extends JFrame {
         });
         JTable tabel = new JTable(model);
         tabel = new JTable(model) {
-        	public boolean isCellEditable(int row, int column) {
-        		return false;
-        	}
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
         };
 
         conn.connect();
         try {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE nama_barang like'%" + search + "%'");
-            java.sql.Statement stat1 = conn.con.createStatement();
-            ResultSet countSize = stat1.executeQuery("SELECT count(*) as 'size' FROM barang WHERE nama_barang like'%" + search + "%'");
 
-            if (countSize.next()) {
-                int size = countSize.getInt("size");
-                for (int i = 0; i < size; i++) {
-                    if (result.next()) {
-                        int id_barang = result.getInt("id_barang");
-                        String nama_barang = result.getString("nama_barang");
-                        int stok_barang = result.getInt("stok_barang");
-                        double harga_barang = result.getDouble("harga_barang");
-                        String deskripsi_barang = result.getString("deskripsi_barang");
-                        int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
-                        boolean status = result.getBoolean("status");
-                        JButton btnCari = new JButton("Klik Cari");
-                                btnCari.setBounds(580, 20, 150, 40);
-                        model.addRow(new Object[]{id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung, status, new JButton("Button1")});
-
-                        found = true;
-                    } else {
-                        JOptionPane.showMessageDialog(null, "User not found.");
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "User not found.");
+            while (result.next()) {
+                int id_barang = result.getInt("id_barang");
+                String nama_barang = result.getString("nama_barang");
+                int stok_barang = result.getInt("stok_barang");
+                double harga_barang = result.getDouble("harga_barang");
+                String deskripsi_barang = result.getString("deskripsi_barang");
+                int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
+                boolean status = result.getBoolean("status");
+                JButton btnCari = new JButton("Klik Cari");
+                btnCari.setBounds(580, 20, 150, 40);
+                model.addRow(new Object[]{id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung, status, new JButton("Button1")});
             }
 
         } catch (SQLException e) {
