@@ -69,17 +69,31 @@ public class PanelMenu {
         JTextField namaBarang = new JTextField();
         namaBarang.setBounds(425, 27, 150, 30);
         panelMenu.add(namaBarang);
+        
 
         JButton btnCari = new JButton("Klik Cari");
-        btnCari.setBounds(580, 20, 150, 40);
+        btnCari.setBounds(600, 30, 100, 20);
         panelMenu.add(btnCari);
         btnCari.addActionListener(
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-
+                frame.setVisible(false);
                 new CariProdukJtable(namaBarang.getText());
+            }
+        });
+        
+        JButton btnLogin = new JButton("Login");
+        btnLogin.setBounds(720, 30, 100, 20);
+        panelMenu.add(btnLogin);
+        btnLogin.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {
+                frame.setVisible(false);
+                new LoginUser("user");
             }
         });
 

@@ -15,21 +15,25 @@ import java.util.Date;
 public class User extends PersonAbstract{
 
     String nama_lengkap;
-    Date tanggal_lahir;
-    boolean jenis_kelamin;
+    String tanggal_lahir;
+    String jenis_kelamin;
     String no_telepon;
     String email;
     ArrayList<Alamat> listAlamat = new ArrayList();
     ArrayList<Transaksi> listTransaksi = new ArrayList();
     ArrayList<Keranjang> listKeranjang = new ArrayList();
 
-    public User(String nama_lengkap, Date tanggal_lahir, boolean jenis_kelamin, String no_telepon, String email, int id, String username, String password) {
+    public User(String nama_lengkap, String tanggal_lahir, String jenis_kelamin, String no_telepon, String email, int id, String username, String password) {
         super(id, username, password);
         this.nama_lengkap = nama_lengkap;
         this.tanggal_lahir = tanggal_lahir;
         this.jenis_kelamin = jenis_kelamin;
         this.no_telepon = no_telepon;
         this.email = email;
+    }
+
+    public User() {
+        
     }
 
     public String getNama_lengkap() {
@@ -40,19 +44,19 @@ public class User extends PersonAbstract{
         this.nama_lengkap = nama_lengkap;
     }
 
-    public Date getTanggal_lahir() {
+    public String getTanggal_lahir() {
         return tanggal_lahir;
     }
 
-    public void setTanggal_lahir(Date tanggal_lahir) {
+    public void setTanggal_lahir(String tanggal_lahir) {
         this.tanggal_lahir = tanggal_lahir;
     }
 
-    public boolean isJenis_kelamin() {
+    public String isJenis_kelamin() {
         return jenis_kelamin;
     }
 
-    public void setJenis_kelamin(boolean jenis_kelamin) {
+    public void setJenis_kelamin(String jenis_kelamin) {
         this.jenis_kelamin = jenis_kelamin;
     }
 
