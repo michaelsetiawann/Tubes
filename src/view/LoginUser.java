@@ -94,7 +94,7 @@ public class LoginUser extends JFrame {
             }
         });
 
-        btnBack.addActionListener(
+        btnRegistrasi.addActionListener(
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae
@@ -107,7 +107,7 @@ public class LoginUser extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new LoginUser("user");
+                new HomeScreen();
             }
         });
 
