@@ -20,7 +20,7 @@ import javax.swing.JTextField;
  */
 public class LoginUser extends JFrame {
 
-    public LoginUser(String tipeUser) {
+    public LoginUser() {
         JFrame frame = new JFrame("Registrasi");
         frame.setSize(1080, 700);
         JPanel contentPane = new JPanel();
@@ -74,19 +74,32 @@ public class LoginUser extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String result = controller.UserController.LoginController(tipeUser, username.getText(), password.getText());
-                if (result.equals("Login Berhasil!")) {
+                String loginUser = controller.UserController.LoginUser(username.getText(), password.getText());
+                String loginAdmin = controller.UserController.LoginAdmin(username.getText(), password.getText());
+                if (loginUser.equals("Login Berhasil!")) {
                     new HomeScreen();
                     frame.dispose();
-                    JOptionPane.showMessageDialog(null, result);
+                    JOptionPane.showMessageDialog(null, loginUser);
                     //masukin tujuan dibawah
-
-                } else if (result.equals("Password Salah!")) {
-                    JOptionPane.showMessageDialog(null, result);
+                } 
+                if (loginAdmin.equals("Login Berhasil!")) {
+                    new HomeScreen();
+                    frame.dispose();
+                    JOptionPane.showMessageDialog(null, loginAdmin);
+                    //masukin tujuan dibawah
+                } 
+                else if (loginUser.equals("Password Salah!")) {
+                    JOptionPane.showMessageDialog(null, loginUser);
                     password.setText("");
                     password.requestFocus();
-                } else {
-                    JOptionPane.showMessageDialog(null, result);
+                }  
+                else if (loginAdmin.equals("Password Salah!")) {
+                    JOptionPane.showMessageDialog(null, loginAdmin);
+                    password.setText("");
+                    password.requestFocus();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, loginUser);
                     username.setText("");
                     password.setText("");
                     username.requestFocus();
