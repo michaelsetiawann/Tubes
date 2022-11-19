@@ -13,14 +13,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import model.SingletonProfile;
+import model.User;
 
 /**
  *
  * @author Lenovo
  */
 public class UserController {
-    
-        public static String LoginController(String tipe, String username, String password) {
+
+    public static String LoginUser(String username, String password) {
 
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
@@ -39,7 +41,54 @@ public class UserController {
         }
         try {
             java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("select * from " + tipe + " where username='" + username + "'");
+            ResultSet result = stat.executeQuery("select * from  user where username='" + username + "'");
+            if (result.next()) {
+                if (password.equals(result.getString("password"))) {
+                    int id_user = result.getInt("id_user");
+                    String userName = result.getString("username");
+                    String passWord = result.getString("password");
+                    String nama_lengkap_pembeli = result.getString("nama_lengkap_pembeli");
+                    String tanggal_lahir = result.getString("tanggal_lahir");
+                    String jenis_kelamin = result.getString("jenis_kelamin");
+                    String no_telepon = result.getString("no_telepon");
+                    String email = result.getString("email");
+                    
+                    User user = new User(nama_lengkap_pembeli, tanggal_lahir, jenis_kelamin, no_telepon, email, id_user, userName, passWord);
+                    SingletonProfile.getInstance().setUser(user);
+                    
+                    return "Login Berhasil!";
+                } else {
+                    return "Password Salah!";
+                }
+            } else {
+                return "User tidak ditemukan!";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "Error";
+        }
+    }
+    
+    public static String LoginAdmin(String username, String password) {
+
+        DatabaseHandler conn = new DatabaseHandler();
+        conn.connect();
+
+        try {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(password.getBytes());
+            byte[] bytes = m.digest();
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            password = s.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        try {
+            java.sql.Statement stat = conn.con.createStatement();
+            ResultSet result = stat.executeQuery("select * from admin where username='" + username + "'");
             if (result.next()) {
                 if (password.equals(result.getString("password"))) {
                     return "Login Berhasil!";
@@ -104,4 +153,6 @@ public class UserController {
         }
         return jk;
     }
+    
+    
 }

@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.LogoutController;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,8 +12,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import model.SingletonProfile;
 
 /**
  *
@@ -51,15 +54,25 @@ public class PanelMenu {
         transaksi.setBorderPainted(false);
         panelMenu.add(transaksi);
 
+        
         transaksi.addActionListener(
-                new ActionListener() {
+            new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae
-            ) {
-                frame.setVisible(false);
-                new TransactionScreen();
+            public void actionPerformed(ActionEvent ae) 
+            {
+                if(SingletonProfile.getInstance().getUser() != null)
+                {
+                    frame.setVisible(false);
+                    new TransactionScreen();
+                }
+                else 
+                {
+                    JOptionPane.showMessageDialog(null, "Mohon untuk login terlebih dahulu!");
+                }
             }
         });
+        
+        
 
         JLabel label = new JLabel();
         label.setText("Cari Produk");
@@ -84,18 +97,37 @@ public class PanelMenu {
             }
         });
         
-        JButton btnLogin = new JButton("Login");
-        btnLogin.setBounds(720, 30, 100, 20);
-        panelMenu.add(btnLogin);
-        btnLogin.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae
-            ) {
-                frame.setVisible(false);
-                new LoginUser("user");
-            }
-        });
+        if(SingletonProfile.getInstance().getUser() != null)
+        {
+            JButton btnLogout = new JButton("Logout");
+            btnLogout.setBounds(720, 30, 100, 20);
+            panelMenu.add(btnLogout);
+            btnLogout.addActionListener(
+                    new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae
+                ) {
+                    frame.setVisible(false);
+                     new LogoutController();
+                }
+            });
+        } 
+        else
+        {
+           JButton btnLogin = new JButton("Login");
+           btnLogin.setBounds(720, 30, 100, 20);
+           panelMenu.add(btnLogin);
+           btnLogin.addActionListener(
+                   new ActionListener() {
+               @Override
+               public void actionPerformed(ActionEvent ae
+               ) {
+                   frame.setVisible(false);
+                   new LoginUser();
+               }
+           });
+        }
+       
 
         return panelMenu;
     }
