@@ -35,7 +35,7 @@ public class CariProdukJtable extends JFrame {
 
     public CariProdukJtable(String nama) {
         setTitle("Produk yang ditemukan");
-        setSize(350, 200);
+        setSize(1080, 700);
         setLocationRelativeTo(null);
         userInterfaceGUI(nama);
         setVisible(true);
@@ -48,6 +48,11 @@ public class CariProdukJtable extends JFrame {
             "ID Barang", "Nama Barang", "Stok Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status", "Tambah Keranjang"
         });
         JTable tabel = new JTable(model);
+        tabel = new JTable(model) {
+        	public boolean isCellEditable(int row, int column) {
+        		return false;
+        	}
+        };
 
         conn.connect();
         try {

@@ -40,11 +40,7 @@ public class HomeScreen {
         PanelMenu menu = new PanelMenu();
         JPanel panelMenu = menu.getPanel(frame);
         frame.add(panelMenu);
-        
-        
-        
-        
-        
+     
         
     }
 }

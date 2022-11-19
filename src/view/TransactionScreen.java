@@ -42,7 +42,6 @@ public class TransactionScreen {
         frame.add(panelMenu);
         
 
-
         JLabel transaksi2 = new JLabel("Daftar Transaksi");
         transaksi2.setBounds(100, 100, 100, 100);
         frame.add(transaksi2);
