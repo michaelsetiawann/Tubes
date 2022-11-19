@@ -1,5 +1,7 @@
 
-package model;
+package controller;
+
+import model.User;
 
 public class SingletonProfile {
     

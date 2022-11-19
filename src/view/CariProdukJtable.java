@@ -5,12 +5,14 @@
  */
 package view;
 
+import controller.SingletonBarang;
 import database.DatabaseHandler;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -52,29 +54,19 @@ public class CariProdukJtable extends JFrame {
                 return false;
             }
         };
-
-        conn.connect();
-        try {
-            java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE nama_barang like'%" + search + "%'");
-
-            while (result.next()) {
-                int id_barang = result.getInt("id_barang");
-                String nama_barang = result.getString("nama_barang");
-                int stok_barang = result.getInt("stok_barang");
-                double harga_barang = result.getDouble("harga_barang");
-                String deskripsi_barang = result.getString("deskripsi_barang");
-                int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
-                boolean status = result.getBoolean("status");
-                JButton btnCari = new JButton("Klik Cari");
-                btnCari.setBounds(580, 20, 150, 40);
-                model.addRow(new Object[]{id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung, status, new JButton("Button1")});
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
+        Vector<Barang> tableBarang = SingletonBarang.getInstance().getBarangByName(nama);
+        for (Barang b : tableBarang) {
+            int id_barang = b.getId_barang();
+            String nama_barang = b.getNama_barang();
+            int stok_barang = b.getStok_barang();
+            double harga_barang = b.getHarga_barang();
+            String deskripsi_barang = b.getDeskripsi_barang();
+            int jumlah_pengunjung = b.getJumlah_pengunjung();
+            boolean status = b.isStatus();
+            JButton btnCari = new JButton("Klik Cari");
+            btnCari.setBounds(580, 20, 150, 40);
+            model.addRow(new Object[]{id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung, status, new JButton("Button1")});
         }
-        conn.disconnect();
 
         JScrollPane scroll = new JScrollPane();
         scroll.setViewportView(tabel);

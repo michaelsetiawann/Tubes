@@ -5,7 +5,6 @@
  */
 package controller;
 
-import model.SingletonProfile;
 import view.HomeScreen;
 
 /**
