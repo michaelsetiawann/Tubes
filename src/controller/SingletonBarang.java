@@ -33,54 +33,55 @@ public class SingletonBarang {
         barang = new Barang(0, null, 0, 0, null, 0, false);
     }
 
-    public Vector<Barang> getAllBarang() throws SQLException {
+    public Vector<Barang> getAllBarang() {
         conn.connect();
-        java.sql.Statement stat = conn.con.createStatement();
-        ResultSet result = stat.executeQuery("SELECT * FROM barang");
+
         Vector<Barang> barangVector = new Vector<>();
         try {
+            java.sql.Statement stat = conn.con.createStatement();
+            ResultSet result = stat.executeQuery("SELECT * FROM barang");
             while (result.next()) {
-                    int id_barang = result.getInt("id_barang");
-                    String nama_barang = result.getString("nama_barang");
-                    int stok_barang = result.getInt("stok_barang");
-                    double harga_barang = result.getDouble("harga_barang");
-                    String deskripsi_barang = result.getString("deskripsi_barang");
-                    int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
-                    boolean status = result.getBoolean("status");
-                    
-                    Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
-					status);
-                    barangVector.add(barang);
+                int id_barang = result.getInt("id_barang");
+                String nama_barang = result.getString("nama_barang");
+                int stok_barang = result.getInt("stok_barang");
+                double harga_barang = result.getDouble("harga_barang");
+                String deskripsi_barang = result.getString("deskripsi_barang");
+                int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
+                boolean status = result.getBoolean("status");
+
+                Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
+                        status);
+                barangVector.add(barang);
             }
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
+            JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
         return barangVector;
     }
-    
+
     public Vector<Barang> getBarangByName(String nama) {
         conn.connect();
         Vector<Barang> barangVector = new Vector<>();
-        
+
         try {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE nama_barang like'%" + nama + "%'");
-            
+
             while (result.next()) {
-                    int id_barang = result.getInt("id_barang");
-                    String nama_barang = result.getString("nama_barang");
-                    int stok_barang = result.getInt("stok_barang");
-                    double harga_barang = result.getDouble("harga_barang");
-                    String deskripsi_barang = result.getString("deskripsi_barang");
-                    int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
-                    boolean status = result.getBoolean("status");
-                    
-                    Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
-					status);
-                    barangVector.add(barang);
+                int id_barang = result.getInt("id_barang");
+                String nama_barang = result.getString("nama_barang");
+                int stok_barang = result.getInt("stok_barang");
+                double harga_barang = result.getDouble("harga_barang");
+                String deskripsi_barang = result.getString("deskripsi_barang");
+                int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
+                boolean status = result.getBoolean("status");
+
+                Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
+                        status);
+                barangVector.add(barang);
             }
         } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
+            JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
         return barangVector;
     }
@@ -88,7 +89,6 @@ public class SingletonBarang {
 //    public Barang getProductDetails(int productId) {
 //        
 //    }
-
 //    public double getAverage(int prouductId) {
 //        
 //    }
