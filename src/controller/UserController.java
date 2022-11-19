@@ -13,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import model.SingletonProfile;
 import model.User;
 
 /**
