@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main;
+import controller.SingletonProfile;
 import view.*;
 /**
  *
@@ -11,6 +12,7 @@ import view.*;
  */
 public class Main {
     public static void main(String[] args) {
-        new HomeScreen();
+//      new HomeScreen();
+        new LihatKeranjangScreen();
     }
 }

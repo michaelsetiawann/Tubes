@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.SingletonProfile;
 import java.awt.Color;
 import java.awt.Font;
 import static java.awt.PageAttributes.ColorType.COLOR;
@@ -35,10 +36,10 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     static JFrame frame = new JFrame("Product Details");
 
     public LihatKeranjangScreen() {
-        lihatKeranjangScreen();
+        lihatKeranjang();
     }
     
-    private void lihatKeranjangScreen() {
+    private void lihatKeranjang() {
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         Font font2 = new Font("SansSerif", Font.PLAIN, 25);
@@ -110,18 +111,19 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     
     private void loadData() {
     	String headerTitle[] = {
-    			"ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang"
+            "ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang"
     	};
     	DefaultTableModel tableModel = new DefaultTableModel(headerTitle, 0);
-    	Vector<Keranjang> tableKeranjang = new Keranjang().getAll(id_user);//somehow get from somewhere
+        User user = SingletonProfile.getInstance().getUser();
+    	Vector<Keranjang> tableKeranjang = new Keranjang().getAll(user.getId());//somehow get from somewhere
     	for(Keranjang b : tableKeranjang) {
-    		Vector<Object> tableVector = new Vector<>();
-    		tableVector.add(b.getId_keranjang());
-    		tableVector.add(b.getBarang().getNama_barang());
-    		tableVector.add(b.getBarang().getStok_barang()); 
-    		tableVector.add(b.getBarang().getHarga_barang());
-    		tableVector.add(b.getJumlah_barang());
-    		tableModel.addRow(tableVector);
+            Vector<Object> tableVector = new Vector<>();
+            tableVector.add(b.getId_keranjang());
+            tableVector.add(b.getBarang().getNama_barang());
+            tableVector.add(b.getBarang().getStok_barang()); 
+            tableVector.add(b.getBarang().getHarga_barang());
+            tableVector.add(b.getJumlah_barang());
+            tableModel.addRow(tableVector);
     	}
     	tableData.setModel(tableModel);
     }
