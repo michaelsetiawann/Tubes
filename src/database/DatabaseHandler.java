@@ -11,11 +11,18 @@ package database;
  */
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class DatabaseHandler {
 
     public Connection con;
+    public Statement stat;
+    public ResultSet resultSet;
+    public java.sql.ResultSetMetaData resultSetMD;
+    
     private String driver = "com.mysql.cj.jdbc.Driver";
 //    private String url = "jdbc:mysql://localhost/db_test";
     private String url = "jdbc:mysql://localhost/mydb";
@@ -61,4 +68,32 @@ public class DatabaseHandler {
             System.out.println("Error occured when connecting to database");
         }
     }
+    
+    public ResultSet execQuery(String query) {
+		try {
+			resultSet = stat.executeQuery(query);
+			resultSetMD = resultSet.getMetaData();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return resultSet;
+	}
+
+	public void executeUpdate(String query) {
+		try {
+			stat.executeUpdate(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public PreparedStatement prepareStatement(String query) {
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = con.prepareStatement(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return preparedStatement;
+	}
 }
