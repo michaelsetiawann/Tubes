@@ -14,19 +14,21 @@ public abstract class LaporanAbstract {
     int id_laporan;
     Date tanggal;
     String komentar;
-    boolean status;
+    int status;
     User user;
 
     public LaporanAbstract() {
     }
 
-    public LaporanAbstract(int id_laporan, Date tanggal, String komentar, boolean status, User user) {
+    public LaporanAbstract(int id_laporan, Date tanggal, String komentar, int status, User user) {
         this.id_laporan = id_laporan;
         this.tanggal = tanggal;
         this.komentar = komentar;
         this.status = status;
         this.user = user;
     }
+
+    
 
     public int getId_laporan() {
         return id_laporan;
@@ -52,13 +54,15 @@ public abstract class LaporanAbstract {
         this.komentar = komentar;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
     public User getUser() {
         return user;
