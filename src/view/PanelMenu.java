@@ -31,8 +31,6 @@ import model.Barang;
  */
 public class PanelMenu {
 
-
-
     public JPanel getPanel(JFrame frame) {
         JPanel panelMenu = new JPanel();
         panelMenu.setBackground(Color.GREEN);
@@ -112,7 +110,19 @@ public class PanelMenu {
                     new LogoutController();
                 }
             });
-            
+            JButton regisToko = new JButton("Buat Toko");
+            regisToko.setBounds(840, 30, 120, 20);
+            panelMenu.add(regisToko);
+            regisToko.addActionListener(
+                    new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae
+                ) {
+                    frame.setVisible(false);
+                    new RegistrasiTokoScreen();
+                }
+            });
+
             JButton btnKeranjang = new JButton("Keranjang");
             btnKeranjang.setBounds(840, 30, 100, 20);
             panelMenu.add(btnKeranjang);
@@ -140,9 +150,8 @@ public class PanelMenu {
             });
         }
 
-
         frame.add(panelMenu);
-        
+
         return panelMenu;
     }
 }

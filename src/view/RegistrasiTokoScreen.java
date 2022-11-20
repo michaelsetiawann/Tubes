@@ -4,15 +4,21 @@
  */
 package view;
 
+import controller.SingletonProfile;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.User;
 
 /**
  *
@@ -35,71 +41,73 @@ public class RegistrasiTokoScreen {
         Font font1 = new Font("Arial", Font.PLAIN, 15);
         Font font2 = new Font("Arial", Font.PLAIN, 35);
 
-        //Nama
-        JLabel namaLab = new JLabel("Nama:");
+        //Nama toko
+        JLabel namaLab = new JLabel("Nama Toko:");
         namaLab.setBounds(15, 80, 150, 40);
         namaLab.setFont(font1);
         frame.add(namaLab);
 
-        JTextField nama = new JTextField();
-        nama.setBounds(175, 80, 200, 40);
-        frame.add(nama);
+        JTextField namaToko = new JTextField();
+        namaToko.setBounds(175, 80, 200, 40);
+        frame.add(namaToko);
 
-        //Email
-        JLabel emailLab = new JLabel("Email:");
-        emailLab.setBounds(15, 130, 150, 40);
-        emailLab.setFont(font1);
-        frame.add(emailLab);
+        //Alamat toko
+        JLabel alamatLab = new JLabel("Alamat Toko:");
+        alamatLab.setBounds(15, 130, 150, 40);
+        alamatLab.setFont(font1);
+        frame.add(alamatLab);
 
-        JTextField email = new JTextField();
-        email.setBounds(175, 130, 200, 40);
-        frame.add(email);
+        JTextArea alamat = new JTextArea();
+        alamat.setBounds(175, 130, 300, 100);
+        frame.add(alamat);
 
-        //Gender
-        JLabel labJK = new JLabel("Jenis Kelamin:");
-        labJK.setBounds(15, 180, 250, 40);
-        labJK.setFont(font1);
-        frame.add(labJK);
+        //deskripsi toko
+        JLabel tokoLab = new JLabel("Deskripsi Toko:");
+        tokoLab.setBounds(15, 280, 250, 40);
+        tokoLab.setFont(font1);
+        frame.add(tokoLab);
+        
+        JTextArea toko = new JTextArea();
+        toko.setBounds(175, 280, 300, 200);
+        frame.add(toko);
+        
 
-        JRadioButton jkLaki = new JRadioButton(" Laki-laki");
-        jkLaki.setBounds(175, 180, 100, 40);
-        jkLaki.setFont(font1);
-        frame.add(jkLaki);
-
-        JRadioButton jkCewe = new JRadioButton(" Perempuan");
-        jkCewe.setBounds(275, 180, 125, 40);
-        jkCewe.setFont(font1);
-        frame.add(jkCewe);
         
         
-        //pass
-        JLabel password = new JLabel("Password:");
-        password.setBounds(15, 230, 250, 40);
-        password.setFont(font1);
-        frame.add(password);
-
-        JPasswordField pass = new JPasswordField();
-        pass.setBounds(175, 230, 200, 40);
-        frame.add(pass);
         
-        //follower
-        JLabel fol= new JLabel("User Follower:");
-        fol.setBounds(15, 280, 250, 40);
-        fol.setFont(font1);
-        frame.add(fol);
-
-        JTextField foll = new JTextField();
-        foll.setBounds(175, 280, 200, 40);
-        frame.add(foll);
 
 
         JButton reg = new JButton("registrasi");
-        reg.setBounds(55, 430, 100, 40);
+        reg.setBounds(55, 500, 100, 40);
         frame.add(reg);
 
         JButton back = new JButton("back");
-        back.setBounds(205, 430, 100, 40);
+        back.setBounds(205, 500, 100, 40);
         frame.add(back);
+        
+        
+        reg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (namaToko.getText().isEmpty() || alamat.getText().isEmpty() || toko.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
+                } else {
+                    User user = SingletonProfile.getInstance().getUser();
+                    int user_id = user.getId();
+                    int status =0; //default 0
+                    JOptionPane.showMessageDialog(null, controller.TokoController.insertDataToko(namaToko.getText(),alamat.getText(),toko.getText(),user_id,status));
+            
+                }
+            }
+        });
+
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
+                new HomeScreen();
+            }
+        });
 
     }
 }
