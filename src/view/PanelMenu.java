@@ -31,9 +31,7 @@ import model.Barang;
  */
 public class PanelMenu {
 
-    private DefaultTableModel tableModel;
-    private JTable jTable;
-    private Vector<Object> table;
+
 
     public JPanel getPanel(JFrame frame) {
         JPanel panelMenu = new JPanel();
@@ -129,80 +127,7 @@ public class PanelMenu {
             });
         }
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(10, 80, 1050, 500);
-        frame.getContentPane().add(scrollPane);
 
-        tableModel = new DefaultTableModel();
-        jTable = new JTable(tableModel) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        scrollPane.setViewportView(jTable);
-
-        jTable.addMouseListener(new MouseListener() {
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
-                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-//					System.out.println("Masuk");
-                    int selectedRow;
-                    selectedRow = jTable.getSelectedRow();
-                    int productId = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
-//                    new ProductDetails(productId);
-                }
-            }
-        });
-        
-        String headerTitle[] = {
-    			"ID Barang", "Nama Barang", "Stock Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status"
-    	};
-    	DefaultTableModel tableModel = new DefaultTableModel(headerTitle, 0);
-    	Vector<Barang> tableBarang = SingletonBarang.getInstance().getAllBarang();
-    	for(Barang b : tableBarang) {
-    		table = new Vector<>();
-    		table.add(b.getId_barang());
-    		table.add(b.getNama_barang());
-    		table.add(b.getStok_barang());
-    		table.add(b.getHarga_barang());
-    		table.add(b.getDeskripsi_barang());
-    		table.add(b.getJumlah_pengunjung());
-    		table.add(b.isStatus());
-    		tableModel.addRow(table);
-    	}
-    	jTable.setModel(tableModel);
-
-        //frame
-        frame.setSize(1080, 720);
-        frame.setLocationRelativeTo(null);
-        frame.setLayout(null);
-        frame.setVisible(true);
         frame.add(panelMenu);
         
         return panelMenu;
