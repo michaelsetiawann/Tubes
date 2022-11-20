@@ -114,9 +114,9 @@ public class PanelMenu {
             });
             
             JButton btnKeranjang = new JButton("Keranjang");
-            btnLogout.setBounds(840, 30, 100, 20);
-            panelMenu.add(btnLogout);
-            btnLogout.addActionListener(
+            btnKeranjang.setBounds(840, 30, 100, 20);
+            panelMenu.add(btnKeranjang);
+            btnKeranjang.addActionListener(
                     new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae
