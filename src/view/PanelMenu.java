@@ -112,6 +112,19 @@ public class PanelMenu {
                     new LogoutController();
                 }
             });
+            
+            JButton btnKeranjang = new JButton("Keranjang");
+            btnLogout.setBounds(840, 30, 100, 20);
+            panelMenu.add(btnLogout);
+            btnLogout.addActionListener(
+                    new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae
+                ) {
+                    frame.setVisible(false);
+                    new LihatKeranjangScreen();
+                }
+            });
         } else {
             JButton btnLogin = new JButton("Login");
             btnLogin.setBounds(720, 30, 100, 20);
