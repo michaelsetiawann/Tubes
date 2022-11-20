@@ -62,7 +62,7 @@ public class CariProdukJtable extends JFrame {
             double harga_barang = b.getHarga_barang();
             String deskripsi_barang = b.getDeskripsi_barang();
             int jumlah_pengunjung = b.getJumlah_pengunjung();
-            boolean status = b.isStatus();
+            int status = b.getStatus();
             JButton btnCari = new JButton("Klik Cari");
             btnCari.setBounds(580, 20, 150, 40);
             model.addRow(new Object[]{id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung, status, new JButton("Button1")});

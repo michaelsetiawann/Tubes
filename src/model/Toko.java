@@ -11,26 +11,28 @@ import java.util.ArrayList;
  *
  * @author acer
  */
-public class Toko {
+public class Toko implements StatusInterface {
 
     int id_toko;
     String nama_toko;
     String alamat_toko;
     String deskripsi_toko;
-    boolean status;
+    int status;
     ArrayList<Barang> listBarang = new ArrayList();
     ArrayList<Transaksi> listTransaksi = new ArrayList();
 
     public Toko() {
     }
 
-    public Toko(int id_toko, String nama_toko, String alamat_toko, String deskripsi_toko, boolean status) {
+    public Toko(int id_toko, String nama_toko, String alamat_toko, String deskripsi_toko, int status) {
         this.id_toko = id_toko;
         this.nama_toko = nama_toko;
         this.alamat_toko = alamat_toko;
         this.deskripsi_toko = deskripsi_toko;
         this.status = status;
     }
+
+
 
     public int getId_toko() {
         return id_toko;
@@ -64,13 +66,15 @@ public class Toko {
         this.deskripsi_toko = deskripsi_toko;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+
 
     public ArrayList<Barang> getListBarang() {
         return listBarang;
