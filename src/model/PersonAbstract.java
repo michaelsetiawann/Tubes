@@ -9,8 +9,8 @@ package model;
  *
  * @author Lenovo
  */
-public abstract class  PersonAbstract {
-    
+public abstract class PersonAbstract {
+
     private int id;
     private String username;
     private String password;
@@ -19,6 +19,10 @@ public abstract class  PersonAbstract {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public PersonAbstract() {
+
     }
 
     public int getId() {
