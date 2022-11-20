@@ -17,9 +17,9 @@ public class Barang {
     double harga_barang;
     String deskripsi_barang;
     int jumlah_pengunjung;
-    boolean status;
+    int status;
 
-    public Barang(int id_barang, String nama_barang, int stok_barang, double harga_barang, String deskripsi_barang, int jumlah_pengunjung, boolean status) {
+    public Barang(int id_barang, String nama_barang, int stok_barang, double harga_barang, String deskripsi_barang, int jumlah_pengunjung, int status) {
         this.id_barang = id_barang;
         this.nama_barang = nama_barang;
         this.stok_barang = stok_barang;
@@ -28,6 +28,8 @@ public class Barang {
         this.jumlah_pengunjung = jumlah_pengunjung;
         this.status = status;
     }
+
+    
 
     public Barang() {
     }
@@ -80,13 +82,15 @@ public class Barang {
         this.jumlah_pengunjung = jumlah_pengunjung;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
     @Override
     public String toString() {
