@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
-import controller.SingletonProfile;
-import view.*;
+package controller;
+
+import view.HomeScreen;
+
 /**
  *
  * @author Lenovo
  */
-public class Main {
-    public static void main(String[] args) {
-      new HomeScreen();
+public class LogoutController {
+
+    public LogoutController() {
+        SingletonProfile.getInstance().reset();
+        new HomeScreen();
     }
 }

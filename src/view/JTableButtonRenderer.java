@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
-import controller.SingletonProfile;
-import view.*;
+package view;
+
 /**
  *
  * @author Lenovo
  */
-public class Main {
-    public static void main(String[] args) {
-      new HomeScreen();
-    }
+public class JTableButtonRenderer {
+    
 }
