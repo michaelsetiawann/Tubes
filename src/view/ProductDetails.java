@@ -6,6 +6,7 @@
 package view;
 
 import controller.SingletonBarang;
+import controller.SingletonProfile;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,12 +39,11 @@ public class ProductDetails extends JFrame {
         int qty = SingletonBarang.getInstance().getProductDetails(productId).getStok_barang();
         double price = SingletonBarang.getInstance().getProductDetails(productId).getHarga_barang();
         String descriptionText = SingletonBarang.getInstance().getProductDetails(productId).getDeskripsi_barang();
-        
+
 //        JLabel lblProductName = new JLabel(namaBarang);
 //        lblProductName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 //        lblProductName.setBounds(38, 37, 1003, 34);
 //        frame.getContentPane().add(lblProductName);
-        
         inputNamaBarang = new JTextField();
         inputNamaBarang.setFont(new Font("Tahoma", Font.PLAIN, 14));
         inputNamaBarang.setBounds(38, 37, 1003, 34);
@@ -51,7 +51,6 @@ public class ProductDetails extends JFrame {
         inputNamaBarang.setText(namaBarang);
         frame.getContentPane().add(inputNamaBarang);
         inputNamaBarang.setColumns(10);
-
 
         JLabel lblQuantity = new JLabel("Quantity");
         lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -109,7 +108,7 @@ public class ProductDetails extends JFrame {
 //        lblRatingChange.setFont(new Font("Tahoma", Font.PLAIN, 20));
 //        lblRatingChange.setBounds(38, 462, 29, 20);
 //        frame.getContentPane().add(lblRatingChange);
-        
+
         inputRate = new JTextField();
         inputRate.setFont(new Font("Tahoma", Font.PLAIN, 14));
         inputRate.setBounds(38, 462, 60, 20);
@@ -126,13 +125,12 @@ public class ProductDetails extends JFrame {
 //        table = new JTable();
 //        table.setBounds(38, 493, 994, 155);
 //        frame.getContentPane().add(table);
-
         JButton btnAddToCart = new JButton("Add to Cart");
         btnAddToCart.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnAddToCart.setBounds(879, 86, 149, 36);
         frame.getContentPane().add(btnAddToCart);
         frame.setVisible(true);
-        
+
 //        btnAddToCart.addActionListener(
 //                new ActionListener() {
 //            @Override
@@ -140,7 +138,6 @@ public class ProductDetails extends JFrame {
 //                new Cart(productId);
 //            }
 //        });
-        
         JButton btnBack = new JButton("Back to home");
         btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnBack.setBounds(879, 150, 149, 36);
@@ -152,6 +149,42 @@ public class ProductDetails extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 SingletonBarang.getInstance().reset();
+                frame.setVisible(false);
+                new HomeScreen();
+            }
+        });
+        JButton laporToko = new JButton("Lapor Toko");
+        laporToko.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        laporToko.setBounds(879, 490, 149, 36);
+        frame.getContentPane().add(laporToko);
+        frame.setVisible(true);
+
+        laporToko.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                int id_toko = productId; //sementara karena model barang tidak ada id_toko
+                if (SingletonProfile.getInstance().getUser() != null){
+                int id_user=SingletonProfile.getInstance().getUser().getId();
+                new LaporTokoScreen(id_toko,id_user);
+                frame.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu");
+                }
+            }
+        });
+
+        JButton laporBarang = new JButton("Lapor Barang");
+        laporBarang.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        laporBarang.setBounds(879, 440, 149, 36);
+        frame.getContentPane().add(laporBarang);
+        frame.setVisible(true);
+
+        laporBarang.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                frame.setVisible(false);
                 new HomeScreen();
             }
         });
