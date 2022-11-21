@@ -86,6 +86,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         frame.add(panelMenu);
     }
     private void loadData() {
+        int id_user = SingletonProfile.getInstance().getUser().getId();
+        listAlamat = AlamatController.getInstance().getAll(id_user);
     	String headerTitle[] = {
             "ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang"
     	};
@@ -116,10 +118,6 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         labelTotal.setBounds(700, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
         
-        int id_user = SingletonProfile.getInstance().getUser().getId();
-        listAlamat = new AlamatController().getAll(id_user);
-        
-        
         if(listAlamat == null){
             JButton addAlamat = new JButton("Tambah Alamat");
             addAlamat.setBounds(700, 550, 130, 30);
@@ -127,8 +125,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             addAlamat.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    new AddAlamatScreen(listKeranjang);
-                    frame.setVisible(false);
+                    new AddAlamatScreen();
+                    loadData();
                 }
             });
             //add alamat
@@ -167,8 +165,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             addAlamat.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    new AddAlamatScreen(listKeranjang);
-                    frame.setVisible(false);
+                    new AddAlamatScreen();
+                    loadData();
                 }
             });
             
@@ -195,8 +193,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                         String e5 = "";
                         double e6 = 0;
                         
-                        new TransaksiController().insertTransaksi(e1, e2, e3, e4, e5, e6);
-                        new KeranjangController().deleteKeranjang(b.getId_keranjang());
+                        TransaksiController.getInstance().insertTransaksi(e1, e2, e3, e4, e5, e6);
+                        KeranjangController.getInstance().deleteKeranjang(b.getId_keranjang());
                         int newQuantity = b.getBarang().getStok_barang() - e2;
                         SingletonBarang.getInstance().updateStokBarang(b.getBarang().getId_barang(), newQuantity);
                         frame.setVisible(false);

@@ -45,17 +45,15 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     ArrayList<Keranjang> selectedItems = new ArrayList<>();
     Font font2 = new Font("SansSerif", Font.PLAIN, 25);
     double total = 0;
-    JLabel labelTotal = new JLabel();
+    JLabel labelTotal = new JLabel("Total Harga : " + total);
     JButton checkout;
     
     public LihatKeranjangScreen() {
-        User user = SingletonProfile.getInstance().getUser();
-        tableKeranjang = null;
-    	tableKeranjang = new KeranjangController().getAll(user.getId());
         lihatKeranjang();
     }
     
     private void lihatKeranjang() {
+        
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         
@@ -68,7 +66,8 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(10,80,1050,190);
         frame.getContentPane().add(scrollPane);
-
+        
+        frame.add(labelTotal);
         tableData = new JTable(tableModel) {
             public boolean isCellEditable(int row, int column) {
                     return false;
@@ -107,22 +106,23 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             public void actionPerformed(ActionEvent ae) {
                                 if (ae.getSource() == update){
                                     int jumlahBarangBaru = (Integer) spinner.getValue();
-//                                    if(jumlahBarangBaru > keranjang){
-//                                        
-//                                    }
-                                    
-                                    Keranjang keranjangA = new KeranjangController().getKeranjang(keranjangId);
-                                    new KeranjangController().updateKeranjang(keranjangId, jumlahBarangBaru);
-                                    Keranjang keranjangB = new KeranjangController().getKeranjang(keranjangId);
-                                    int counter = 0;
-                                    for (Keranjang temp : selectedItems) {                                        
-                                        if(temp.getId_keranjang() == keranjangA.getId_keranjang()){
-                                            selectedItems.set(counter, keranjangB);
+                                    if(jumlahBarangBaru <= KeranjangController.getInstance().getKeranjang(keranjangId).getBarang().getStok_barang()){
+                                        Keranjang keranjangA = KeranjangController.getInstance().getKeranjang(keranjangId);
+                                        KeranjangController.getInstance().updateKeranjang(keranjangId, jumlahBarangBaru);
+                                        Keranjang keranjangB = KeranjangController.getInstance().getKeranjang(keranjangId);
+                                        int counter = 0;
+                                        for (Keranjang temp : selectedItems) {                                        
+                                            if(temp.getId_keranjang() == keranjangA.getId_keranjang()){
+                                                selectedItems.set(counter, keranjangB);
+                                            }
+                                            counter++;
                                         }
-                                        counter++;
+                                        f.setVisible(false);
+                                        loadData();
                                     }
-                                    loadData();
-                                    f.setVisible(false);
+                                    else{
+                                        JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
+                                    }
                                 } 
                             }
                         });
@@ -155,7 +155,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                         int keranjangId = Integer.valueOf(tableData.getValueAt(selectedRow, 0).toString());
                         //check if in selected
                         boolean isThere = false;
-                        Keranjang keranjang = new KeranjangController().getKeranjang(keranjangId);
+                        Keranjang keranjang = KeranjangController.getInstance().getKeranjang(keranjangId);
                         for (Keranjang c : selectedItems) {
                             if(c.getId_keranjang() == keranjangId){
                                 isThere = true;
@@ -169,12 +169,12 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             selectedItems.add(keranjang);
                         }
                         //alter selected
-                        loadData();
                         tableData.setModel(tableModel);
+                        loadData();
                     }
                 }
         });
-        loadData();
+        
         
         JButton delete = new JButton("Delete");
         delete.setBounds(940,290,80,20);
@@ -185,9 +185,10 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                     public void actionPerformed(ActionEvent ae) {
                         if(!selectedItems.isEmpty()){
                             for (Keranjang k : selectedItems) {
-                                new KeranjangController().deleteKeranjang(k.getId_keranjang());
+                                KeranjangController.getInstance().deleteKeranjang(k.getId_keranjang());
                             }
                         }
+                        loadData();
                     }
                 });
         
@@ -202,21 +203,26 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         frame.setLayout(null);
         frame.setVisible(true);
         frame.add(panelMenu);
-        
+        loadData();
     }
     
     private void loadData() {
+        User user = SingletonProfile.getInstance().getUser();
+        tableKeranjang = null;
+    	tableKeranjang = KeranjangController.getInstance().getAll(user.getId());
+        
     	String headerTitle[] = {
             "ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang", "Seleksi"
     	};
-        
+        tableModel = null;
     	tableModel = new DefaultTableModel(headerTitle, 0);
         
-        
         if( !selectedItems.isEmpty()){
+            System.out.println("in here1");
             for(Keranjang b : tableKeranjang) {
                 for (Keranjang c : selectedItems) {
                     if(b.getId_keranjang() == c.getId_keranjang()){
+                        System.out.println("shit");
                         Vector<Object> tableVector = new Vector<>();
                         tableVector.add(b.getId_keranjang());
                         tableVector.add(b.getBarang().getNama_barang());
@@ -227,6 +233,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                         tableModel.addRow(tableVector);
                     }
                     else{
+                        System.out.println("prick");
                         Vector<Object> tableVector = new Vector<>();
                         tableVector.add(b.getId_keranjang());
                         tableVector.add(b.getBarang().getNama_barang());
@@ -240,8 +247,10 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
             }
     	}
         else{
+            System.out.println("in here2");
             if(tableKeranjang != null){
                 for(Keranjang b : tableKeranjang) {
+                    System.out.println("asshole");
                     Vector<Object> tableVector = new Vector<>();
                     tableVector.add(b.getId_keranjang());
                     tableVector.add(b.getBarang().getNama_barang());
@@ -269,7 +278,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         labelTotal.setFont(font2);
         labelTotal.setBounds(800, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
-        frame.add(labelTotal);
+        
     }
     @Override
     public void actionPerformed(ActionEvent e) {
