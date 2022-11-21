@@ -127,16 +127,6 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             //add alamat
         }
         else{
-            String[] alamatArray = new String[listAlamat.size()];
-            int counter = 0;
-            for (Alamat a : listAlamat) {
-                alamatArray[counter] = a.getNama_tempat();
-                counter++;
-            }
-            JComboBox alamatComboBox = new JComboBox(alamatArray);
-            alamatComboBox.setBounds(700, 430, 130, 30);
-            frame.add(alamatComboBox);
-            
             //get enums
             int counterx = 0;
             for (MetodePembayaranEnum x : MetodePembayaranEnum.values()) {
@@ -149,13 +139,23 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                 counterr++;
             }
             
+            String[] alamatArray = new String[listAlamat.size()];
+            int counter = 0;
+            for (Alamat a : listAlamat) {
+                alamatArray[counter] = a.getNama_tempat();
+                counter++;
+            }
             JComboBox metodePembayaran = new JComboBox(enums);
-            metodePembayaran.setBounds(550, 430, 130, 30);
+            metodePembayaran.setBounds(560, 510, 150, 30);
             frame.add(metodePembayaran);
             
+            JComboBox alamatComboBox = new JComboBox(alamatArray);
+            alamatComboBox.setBounds(710, 510, 150, 30);
+            frame.add(alamatComboBox);
             
             JButton addAlamat = new JButton("Tambah Alamat");
-            addAlamat.setBounds(840, 430, 130, 30);
+            addAlamat.setBounds(860, 510, 150, 30);
+
             frame.add(addAlamat);
             addAlamat.addActionListener(new ActionListener() {
                 @Override
@@ -166,7 +166,9 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             });
             
             JButton bayar = new JButton("Bayar");
-            bayar.setBounds(840, 550, 130, 30);
+
+            bayar.setBounds(560, 550, 450, 50);
+
             frame.add(bayar);
             bayar.addActionListener(new ActionListener() {
                 @Override
