@@ -6,6 +6,7 @@ package view;
 
 import controller.AlamatController;
 import controller.KeranjangController;
+import controller.SingletonBarang;
 import controller.SingletonProfile;
 import controller.TransaksiController;
 import java.awt.Font;
@@ -193,8 +194,11 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                         }
                         String e5 = "";
                         double e6 = 0;
+                        
                         new TransaksiController().insertTransaksi(e1, e2, e3, e4, e5, e6);
                         new KeranjangController().deleteKeranjang(b.getId_keranjang());
+                        int newQuantity = b.getBarang().getStok_barang() - e2;
+                        SingletonBarang.getInstance().updateStokBarang(b.getBarang().getId_barang(), newQuantity);
                         frame.setVisible(false);
                         JOptionPane.showMessageDialog(null, "Yay! Transaksi Anda Berhasil!!");
                         new HomeScreen();
