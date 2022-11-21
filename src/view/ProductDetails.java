@@ -22,7 +22,9 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
 import model.Keranjang;
+import model.Review;
 import static view.LihatKeranjangScreen.frame;
 
 /**
@@ -35,7 +37,7 @@ public class ProductDetails extends JFrame {
     private JTextField inputNamaBarang;
     private JTextField inputPrice;
     private JTextField inputRate;
-    private JTable table;
+    private JTable table = new JTable();
 
     public ProductDetails(int productId) {
         String namaBarang = SingletonBarang.getInstance().getProductDetails(productId).getNama_barang();
@@ -59,7 +61,7 @@ public class ProductDetails extends JFrame {
         lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblQuantity.setBounds(38, 99, 68, 34);
         frame.getContentPane().add(lblQuantity);
-        
+
         JLabel lblStok = new JLabel("Stock = " + SingletonBarang.getInstance().getProductDetails(productId).getStok_barang());
         lblStok.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblStok.setBounds(225, 99, 100, 34);
@@ -129,53 +131,48 @@ public class ProductDetails extends JFrame {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if(SingletonProfile.getInstance().getUser() != null){
+                if (SingletonProfile.getInstance().getUser() != null) {
                     int x = (Integer) inputQty.getValue();
-                    if(x == 0){
+                    if (x == 0) {
                         JOptionPane.showMessageDialog(null, "Kuantitas masih 0");
-                    }
-                    else if(x > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()){
+                    } else if (x > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
                         JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
-                    }
-                    else{
+                    } else {
                         int id_user = SingletonProfile.getInstance().getUser().getId();
                         ArrayList<Keranjang> listKeranjang = new KeranjangController().getAll(id_user);
                         Keranjang temp = new Keranjang();
-                        if(listKeranjang != null){
+                        if (listKeranjang != null) {
                             boolean isThere = false;
                             for (Keranjang k : listKeranjang) {
-                                if(productId == k.getBarang().getId_barang()){
-                                   isThere = true;
-                                   temp = k;
+                                if (productId == k.getBarang().getId_barang()) {
+                                    isThere = true;
+                                    temp = k;
                                 }
                             }
-                            if(isThere){
+                            if (isThere) {
                                 int jumlah = temp.getJumlah_barang() + x;
                                 System.out.println(jumlah);
                                 new KeranjangController().updateKeranjang(temp.getId_keranjang(), jumlah);
                                 frame.setVisible(false);
                                 new LihatKeranjangScreen();
-                            }
-                            else{
+                            } else {
                                 new KeranjangController().insertKeranjang(productId, x);
                                 frame.setVisible(false);
                                 new LihatKeranjangScreen();
                             }
-                        }
-                        else{
+                        } else {
                             new KeranjangController().insertKeranjang(productId, x);
                             frame.setVisible(false);
                             new LihatKeranjangScreen();
                         }
                     }
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Maaf Anda harus login terlebih dahulu");
                 }
-                
+
             }
         });
-        
+
         JButton btnBack = new JButton("Back to home");
         btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnBack.setBounds(879, 150, 149, 36);
@@ -232,6 +229,27 @@ public class ProductDetails extends JFrame {
                 }
             }
         });
+
+        JScrollPane scrollPane1 = new JScrollPane();
+        scrollPane1.setBounds(38, 490, 700, 150);
+        scrollPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        frame.getContentPane().add(scrollPane1);
+        String headerTitle[] = {
+            "ID User", "Review", "Rating"
+        };
+        DefaultTableModel tableModel = new DefaultTableModel(headerTitle, 0);
+        ArrayList<Review> tableBarang = SingletonBarang.getInstance().getUserReview(productId);
+        for (int i = 0; i < tableBarang.size(); i++) {
+            int id_user = tableBarang.get(i).getId_user();
+            String pesan_review = tableBarang.get(i).getPesan_review();
+            int rating = tableBarang.get(i).getRating();
+            tableModel.addRow(new Object[]{id_user, pesan_review, rating});
+        }
+
+        table.setModel(tableModel);
+        frame.setLayout(null);
+        scrollPane1.setViewportView(table);
+        frame.setVisible(true);
 
     }
 }
