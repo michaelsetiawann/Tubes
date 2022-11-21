@@ -18,9 +18,9 @@ public class Barang {
     String deskripsi_barang;
     int jumlah_pengunjung;
     int status;
-    
+    int id_toko;
 
-    public Barang(int id_barang, String nama_barang, int stok_barang, double harga_barang, String deskripsi_barang, int jumlah_pengunjung, int status) {
+    public Barang(int id_barang, String nama_barang, int stok_barang, double harga_barang, String deskripsi_barang, int jumlah_pengunjung, int status, int id_toko) {
         this.id_barang = id_barang;
         this.nama_barang = nama_barang;
         this.stok_barang = stok_barang;
@@ -28,7 +28,10 @@ public class Barang {
         this.deskripsi_barang = deskripsi_barang;
         this.jumlah_pengunjung = jumlah_pengunjung;
         this.status = status;
+        this.id_toko = id_toko;
     }
+
+    
 
     
 
@@ -91,6 +94,14 @@ public class Barang {
         this.status = status;
     }
 
+    public int getId_toko() {
+        return id_toko;
+    }
+
+    public void setId_toko(int id_toko) {
+        this.id_toko = id_toko;
+    }
+    
     
 
     @Override
