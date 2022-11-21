@@ -155,6 +155,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             
             JButton addAlamat = new JButton("Tambah Alamat");
             addAlamat.setBounds(860, 510, 150, 30);
+
             frame.add(addAlamat);
             addAlamat.addActionListener(new ActionListener() {
                 @Override
@@ -165,7 +166,9 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             });
             
             JButton bayar = new JButton("Bayar");
+
             bayar.setBounds(560, 550, 450, 50);
+
             frame.add(bayar);
             bayar.addActionListener(new ActionListener() {
                 @Override

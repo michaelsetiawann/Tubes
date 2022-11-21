@@ -63,8 +63,8 @@ public class KeranjangController {
                 preparedStatement.setInt(1, id);
                 con.resultSet = preparedStatement.executeQuery();
                 if(con.resultSet.next()) {
-                        Barang barang = map(con.resultSet);
-                        return barang;
+                Barang barang = map(con.resultSet);
+                    return barang;
                 }
         } catch (SQLException e) {
                 // TODO: handle exception
@@ -83,11 +83,6 @@ public class KeranjangController {
                 jumlah_barang = rs.getInt("jumlah_barang");
                 id_barang = rs.getInt("id_barang");
                 barang = getProductDetails(id_barang);
-//                stok_barang = rs.getInt("stok_barang");
-//                harga_barang = rs.getDouble("harga_barang");
-//                deskripsi_barang = rs.getString("deskripsi_barang");
-//                jumlah_pengunjung = rs.getInt("jumlah_pengunjung");
-//                status = rs.getBoolean("status");
                 return new Keranjang(id_keranjang, barang, jumlah_barang);
         } catch (Exception e) {
 
@@ -100,7 +95,7 @@ public class KeranjangController {
         try {
                 java.sql.Statement stat = con.con.createStatement();
                 ResultSet result = stat.executeQuery("SELECT * FROM keranjang WHERE id_user='" + id_user + "'");
-                if(result.next()) {
+                while(result.next()) {
                         Keranjang keranjang = mapKeranjang(result);
                         keranjangList.add(keranjang);
                         return keranjangList;
@@ -117,8 +112,8 @@ public class KeranjangController {
                 java.sql.Statement stat = con.con.createStatement();
                 ResultSet result = stat.executeQuery("SELECT * FROM keranjang WHERE id_keranjang='" + id_keranjang + "'");
                 if(result.next()) {
-                        Keranjang keranjang = mapKeranjang(result);
-                        return keranjang;
+                Keranjang keranjang = mapKeranjang(result);
+                return keranjang;
                 }
         } catch (SQLException e) {
                 // TODO: handle exception

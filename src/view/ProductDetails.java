@@ -104,11 +104,6 @@ public class ProductDetails extends JFrame {
         frame.getContentPane().add(lblRating);
 
         double rate = SingletonBarang.getInstance().getAverage(productId);
-//        JLabel lblRatingChange = new JLabel(String.valueOf(rate));
-//        lblRatingChange.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//        lblRatingChange.setBounds(38, 462, 29, 20);
-//        frame.getContentPane().add(lblRatingChange);
-
         inputRate = new JTextField();
         inputRate.setFont(new Font("Tahoma", Font.PLAIN, 14));
         inputRate.setBounds(38, 462, 60, 20);
@@ -117,14 +112,6 @@ public class ProductDetails extends JFrame {
         frame.getContentPane().add(inputRate);
         inputRate.setColumns(10);
 
-//        JLabel lblRatingChange_1 = new JLabel("/ 5.0");
-//        lblRatingChange_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//        lblRatingChange_1.setBounds(71, 462, 46, 20);
-//        frame.getContentPane().add(lblRatingChange_1);
-//        JOptionPane.showMessageDialog(null, namaBarang + ",      " + rate);
-//        table = new JTable();
-//        table.setBounds(38, 493, 994, 155);
-//        frame.getContentPane().add(table);
         JButton btnAddToCart = new JButton("Add to Cart");
         btnAddToCart.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnAddToCart.setBounds(879, 86, 149, 36);
@@ -149,7 +136,6 @@ public class ProductDetails extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 SingletonBarang.getInstance().reset();
-                frame.setVisible(false);
                 new HomeScreen();
             }
         });
@@ -163,7 +149,8 @@ public class ProductDetails extends JFrame {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int id_toko = productId; //sementara karena model barang tidak ada id_toko
+
+                int id_toko = SingletonBarang.getInstance().getBarang().getId_toko();
                 if (SingletonProfile.getInstance().getUser() != null) {
                     int id_user = SingletonProfile.getInstance().getUser().getId();
                     new LaporTokoScreen(id_toko, id_user);

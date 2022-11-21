@@ -37,15 +37,15 @@ import model.User;
  */
 public class LihatKeranjangScreen extends JFrame implements ActionListener{
     private DefaultTableModel tableModel;
-    private DefaultTableModel tableModel1;
     private JTable tableData;
     private Vector<Object> tableVector;
-    static JFrame frame = new JFrame("Product Details");
+    static JFrame frame = new JFrame("Keranjang");
     ArrayList<Keranjang> tableKeranjang;
     ArrayList<Keranjang> selectedItems = new ArrayList<>();
     Font font2 = new Font("SansSerif", Font.PLAIN, 25);
     double total = 0;
     JLabel labelTotal = new JLabel();
+    JButton checkout;
     
     public LihatKeranjangScreen() {
         lihatKeranjang();
@@ -168,8 +168,9 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         });
         loadData();
         
-        JButton checkout = new JButton("Checkout");
+        checkout = new JButton("Checkout");
         checkout.setBounds(800, 580, 100, 30);
+        checkout.addActionListener(this);
         frame.add(checkout);
         //frame
         frame.setSize(1080, 720);
@@ -177,7 +178,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         frame.setLayout(null);
         frame.setVisible(true);
         frame.add(panelMenu);
-
+        
     }
     
     private void loadData() {
@@ -237,15 +238,16 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
             total += jumlah*harga;
         }
         
-        
         labelTotal.setFont(font2);
         labelTotal.setBounds(800, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
-        System.out.println("total = " + total);
         frame.add(labelTotal);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource() == checkout){
+            frame.setVisible(false);
+            new CheckoutScreen(selectedItems);
+        }
     }
 }
