@@ -135,4 +135,28 @@ public class SingletonBarang {
         }
         return 0;
     }
+<<<<<<< Updated upstream
 }
+=======
+    public void updateStokBarang(int id_barang, int jumlah_barang_sekarang) {
+        conn.connect();
+        try {
+            java.sql.Statement stat = conn.con.createStatement();
+            stat.executeUpdate("UPDATE barang SET stok_barang = '"+jumlah_barang_sekarang+"' WHERE id_barang= '"+id_barang+"'");
+//            System.out.println(result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+                // TODO: handle exception
+        }
+    }
+    
+    public Barang getBarang() {
+        return barang;
+    }
+
+    public void setBarang(Barang barang) {
+        this.barang = barang;
+    }
+    
+}
+>>>>>>> Stashed changes
