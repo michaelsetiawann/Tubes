@@ -132,10 +132,10 @@ public class ProductDetails extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (SingletonProfile.getInstance().getUser() != null) {
-                    int x = (Integer) inputQty.getValue();
-                    if (x == 0) {
+                    int jumlahAddCart = (Integer) inputQty.getValue();
+                    if (jumlahAddCart == 0) {
                         JOptionPane.showMessageDialog(null, "Kuantitas masih 0");
-                    } else if (x > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
+                    } else if (jumlahAddCart > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
                         JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
                     } else {
                         int id_user = SingletonProfile.getInstance().getUser().getId();
@@ -150,18 +150,19 @@ public class ProductDetails extends JFrame {
                                 }
                             }
                             if (isThere) {
-                                int jumlah = temp.getJumlah_barang() + x;
-                                System.out.println(jumlah);
-                                new KeranjangController().updateKeranjang(temp.getId_keranjang(), jumlah);
-                                frame.setVisible(false);
-                                new LihatKeranjangScreen();
+                                int jumlah = temp.getJumlah_barang() + jumlahAddCart;
+                                if (jumlah > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
+                                    new KeranjangController().updateKeranjang(temp.getId_keranjang(), jumlah);
+                                    frame.setVisible(false);
+                                    new LihatKeranjangScreen();
+                                }
                             } else {
-                                new KeranjangController().insertKeranjang(productId, x);
+                                new KeranjangController().insertKeranjang(productId, jumlahAddCart);
                                 frame.setVisible(false);
                                 new LihatKeranjangScreen();
                             }
                         } else {
-                            new KeranjangController().insertKeranjang(productId, x);
+                            new KeranjangController().insertKeranjang(productId, jumlahAddCart);
                             frame.setVisible(false);
                             new LihatKeranjangScreen();
                         }

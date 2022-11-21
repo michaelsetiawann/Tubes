@@ -77,15 +77,15 @@ public class LoginUser extends JFrame {
                 String loginUser = controller.UserController.LoginUser(username.getText(), password.getText());
                 String loginAdmin = controller.UserController.LoginAdmin(username.getText(), password.getText());
                 if (loginUser.equals("Login Berhasil!")) {
+                    JOptionPane.showMessageDialog(null,"Selamat Datang " + username.getText() + "!!!");
                     new HomeScreen();
                     frame.dispose();
-                    JOptionPane.showMessageDialog(null, loginUser);
                     //masukin tujuan dibawah
                 } 
                 if (loginAdmin.equals("Login Berhasil!")) {
+                    JOptionPane.showMessageDialog(null,"Selamat Datang Admin!!!");
                     new HomeScreen();
                     frame.dispose();
-                    JOptionPane.showMessageDialog(null, loginAdmin);
                     //masukin tujuan dibawah
                 } 
                 else if (loginUser.equals("Password Salah!")) {
