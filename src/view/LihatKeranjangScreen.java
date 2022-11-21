@@ -45,7 +45,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     ArrayList<Keranjang> selectedItems = new ArrayList<>();
     Font font2 = new Font("SansSerif", Font.PLAIN, 25);
     double total = 0;
-    JLabel labelTotal;
+    JLabel labelTotal = new JLabel();
     
     public LihatKeranjangScreen() {
         lihatKeranjang();
@@ -78,9 +78,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
 			
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    System.out.println("in here");
                     timeClicked = new Date().getTime() - pressedTime.getTime();
-                    System.out.println(timeClicked);
                     if (timeClicked >= 500){
                         int selectedRow;
                         selectedRow = tableData.getSelectedRow();
@@ -105,7 +103,16 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             public void actionPerformed(ActionEvent ae) {
                                 if (ae.getSource() == update){
                                     int jumlahBarangBaru = (Integer) spinner.getValue();
+                                    Keranjang keranjangA = new KeranjangController().getKeranjang(keranjangId);
                                     new KeranjangController().updateKeranjang(keranjangId, jumlahBarangBaru);
+                                    Keranjang keranjangB = new KeranjangController().getKeranjang(keranjangId);
+                                    int counter = 0;
+                                    for (Keranjang temp : selectedItems) {                                        
+                                        if(temp.getId_keranjang() == keranjangA.getId_keranjang()){
+                                            selectedItems.set(counter, keranjangB);
+                                        }
+                                        counter++;
+                                    }
                                     loadData();
                                     f.setVisible(false);
                                 } 
@@ -234,6 +241,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         labelTotal.setFont(font2);
         labelTotal.setBounds(800, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
+        System.out.println("total = " + total);
         frame.add(labelTotal);
     }
     @Override

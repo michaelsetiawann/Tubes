@@ -30,7 +30,7 @@ public class SingletonBarang {
     }
 
     public SingletonBarang() {
-        barang = new Barang(0, null, 0, 0, null, 0, 0);
+        barang = new Barang(0, null, 0, 0, null, 0, 0, 0);
     }
     
     public void reset(){
