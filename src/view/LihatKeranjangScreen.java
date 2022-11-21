@@ -49,6 +49,9 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     JButton checkout;
     
     public LihatKeranjangScreen() {
+        User user = SingletonProfile.getInstance().getUser();
+        tableKeranjang = null;
+    	tableKeranjang = new KeranjangController().getAll(user.getId());
         lihatKeranjang();
     }
     
@@ -104,6 +107,10 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             public void actionPerformed(ActionEvent ae) {
                                 if (ae.getSource() == update){
                                     int jumlahBarangBaru = (Integer) spinner.getValue();
+//                                    if(jumlahBarangBaru > keranjang){
+//                                        
+//                                    }
+                                    
                                     Keranjang keranjangA = new KeranjangController().getKeranjang(keranjangId);
                                     new KeranjangController().updateKeranjang(keranjangId, jumlahBarangBaru);
                                     Keranjang keranjangB = new KeranjangController().getKeranjang(keranjangId);
@@ -188,8 +195,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     	};
         
     	tableModel = new DefaultTableModel(headerTitle, 0);
-        User user = SingletonProfile.getInstance().getUser();
-    	tableKeranjang = new KeranjangController().getAll(user.getId());
+        
         
         if( !selectedItems.isEmpty()){
             for(Keranjang b : tableKeranjang) {
