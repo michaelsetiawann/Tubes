@@ -5,16 +5,20 @@
 package view;
 
 import controller.AlamatController;
+import controller.KeranjangController;
 import controller.SingletonProfile;
+import controller.TransaksiController;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,6 +27,7 @@ import model.Alamat;
 import model.Barang;
 import model.Keranjang;
 import model.MetodePembayaranEnum;
+import model.StatusPengirimanEnum;
 import static view.LihatKeranjangScreen.frame;
 
 /**
@@ -70,8 +75,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         scrollPane.setViewportView(tableData);
         
         
-        
         loadData();
+        
         
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
@@ -112,6 +117,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         
         int id_user = SingletonProfile.getInstance().getUser().getId();
         listAlamat = new AlamatController().getAll(id_user);
+        
         
         if(listAlamat == null){
             JButton addAlamat = new JButton("Tambah Alamat");
@@ -173,7 +179,26 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             bayar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                     
+                    for (Keranjang b : listKeranjang) {
+                        //(Barang barang, int jumlahBarang, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, double rating)
+                        Barang e1 = b.getBarang();
+                        int e2 = b.getJumlah_barang();
+                        StatusPengirimanEnum e3 = StatusPengirimanEnum.MENUNGGU_KONFIRMASI;
+                        String metodePembayarann = metodePembayaran.getSelectedItem().toString();
+                        MetodePembayaranEnum e4 = null;
+                        for (MetodePembayaranEnum x : MetodePembayaranEnum.values()) {
+                            if(metodePembayarann.equals(String.valueOf(x))){
+                                e4 = x;
+                            }
+                        }
+                        String e5 = "";
+                        double e6 = 0;
+                        new TransaksiController().insertTransaksi(e1, e2, e3, e4, e5, e6);
+                        new KeranjangController().deleteKeranjang(b.getId_keranjang());
+                        frame.setVisible(false);
+                        JOptionPane.showMessageDialog(null, "Yay! Transaksi Anda Berhasil!!");
+                        new HomeScreen();
+                    }
                 }
             });
         }

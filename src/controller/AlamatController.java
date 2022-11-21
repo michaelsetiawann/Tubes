@@ -88,26 +88,6 @@ public class AlamatController {
 //        }
 //    }
     public void insertAlamat( String nama_tempat, String alamat, String nama_penerima, String no_telp_penerima) {
-//        conn.connect();
-//        System.out.println("in hereeeeesasdf");
-//        int id_user = SingletonProfile.getInstance().getUser().getId();
-//        String query = "INSERT INTO alamat (id_user, nama_tempat, alamat, nama_penerima, no_telepon_penerima) VALUES "
-//                        + "("+id_user+",'"
-//                                        +nama_tempat+"','"
-//                                                +alamat+"','"
-//                                                        +nama_penerima+"','"
-//                                                                +no_telp_penerima
-//                        +"')";
-//        try {
-//            System.out.println("in hereaq34523452354");
-//            java.sql.Statement stat = conn.con.createStatement();        
-//            System.out.println("check1");
-//            stat.executeUpdate(query);
-//            System.out.println("cehck2");
-////                stmt.executeUpdate();
-//        } catch (SQLException e) {
-//                // TODO: handle exception
-//        }
         conn.connect();
         int id_user = SingletonProfile.getInstance().getUser().getId();
         try {

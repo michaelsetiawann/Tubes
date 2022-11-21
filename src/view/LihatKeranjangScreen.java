@@ -20,6 +20,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -217,25 +218,29 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
             }
     	}
         else{
-            for(Keranjang b : tableKeranjang) {
-                Vector<Object> tableVector = new Vector<>();
-                tableVector.add(b.getId_keranjang());
-                tableVector.add(b.getBarang().getNama_barang());
-                tableVector.add(b.getBarang().getStok_barang()); 
-                tableVector.add(b.getBarang().getHarga_barang());
-                tableVector.add(b.getJumlah_barang());
-                tableVector.add("UNSELECTED");
-                tableModel.addRow(tableVector);
+            if(tableKeranjang != null){
+                for(Keranjang b : tableKeranjang) {
+                    Vector<Object> tableVector = new Vector<>();
+                    tableVector.add(b.getId_keranjang());
+                    tableVector.add(b.getBarang().getNama_barang());
+                    tableVector.add(b.getBarang().getStok_barang()); 
+                    tableVector.add(b.getBarang().getHarga_barang());
+                    tableVector.add(b.getJumlah_barang());
+                    tableVector.add("UNSELECTED");
+                    tableModel.addRow(tableVector);
+                }
             }
         }
         tableData.setModel(tableModel);
     	
         total = 0;
-        for (Keranjang c : selectedItems) {
-            Barang barang = c.getBarang();
-            int jumlah = c.getJumlah_barang();
-            double harga = barang.getHarga_barang();
-            total += jumlah*harga;
+        if(tableKeranjang != null){
+            for (Keranjang c : selectedItems) {
+                Barang barang = c.getBarang();
+                int jumlah = c.getJumlah_barang();
+                double harga = barang.getHarga_barang();
+                total += jumlah*harga;
+            }
         }
         
         labelTotal.setFont(font2);
@@ -246,8 +251,13 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == checkout){
-            frame.setVisible(false);
-            new CheckoutScreen(selectedItems);
+            if(!selectedItems.isEmpty()){
+                frame.setVisible(false);
+                new CheckoutScreen(selectedItems);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Keranjang anda masih kosong... Yuk belanja~~");
+            }
         }
     }
 }

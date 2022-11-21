@@ -19,12 +19,12 @@ public class Transaksi {
     StatusPengirimanEnum status;
     MetodePembayaranEnum metodePembayaran;
     String pesan_review;
-    int rating;
+    double rating;
 
     public Transaksi() {
     }
 
-    public Transaksi(int id_transaksi, Barang barang, int jumlahBarang, Date tanggal, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, int rating) {
+    public Transaksi(int id_transaksi, Barang barang, int jumlahBarang, Date tanggal, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, double rating) {
         this.id_transaksi = id_transaksi;
         this.barang = barang;
         this.jumlahBarang = jumlahBarang;
@@ -91,7 +91,7 @@ public class Transaksi {
         this.pesan_review = pesan_review;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 

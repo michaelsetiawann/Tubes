@@ -132,5 +132,18 @@ public class KeranjangController {
                 // TODO: handle exception
         }
     }
+    public void deleteKeranjang(int id_keranjang) {
+        con.connect();
+        try {
+            String query = "DELETE FROM keranjang WHERE id_keranjang = ?";
+            PreparedStatement state = con.con.prepareStatement(query);
+            state.setInt(1, id_keranjang);
+            state.executeUpdate();
+//            System.out.println(result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+                // TODO: handle exception
+        }
+    }
 
 }
