@@ -74,7 +74,7 @@ public class SingletonBarang {
                 double harga_barang = result.getDouble("harga_barang");
                 String deskripsi_barang = result.getString("deskripsi_barang");
                 int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
-                boolean status = result.getBoolean("status");
+                int status = result.getInt("status");
 
                 Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
                         status);
