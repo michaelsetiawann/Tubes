@@ -32,4 +32,20 @@ public class LaporController {
             return "insert gagal!";
         }
     }
+    public static String insertLaporBarang(int id_barang, int id_user,String pesan, int status) {
+        aa.connect();
+        try {
+            String que = "INSERT INTO laporan_barang (id_barang,id_user,tanggal,pesan,status) VALUES (?,?,NOW(),?,?)";
+            PreparedStatement state = aa.con.prepareStatement(que);
+            state.setString(3, pesan);
+            state.setInt(2, id_user);
+            state.setInt(1, id_barang);
+            state.setInt(4, status);
+            state.executeUpdate();
+            return "insert berhasill..";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "insert gagal!";
+        }
+    }
 }

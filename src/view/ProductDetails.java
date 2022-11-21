@@ -143,7 +143,7 @@ public class ProductDetails extends JFrame {
         btnBack.setBounds(879, 150, 149, 36);
         frame.getContentPane().add(btnBack);
         frame.setVisible(true);
-        
+
         btnBack.addActionListener(
                 new ActionListener() {
             @Override
@@ -164,10 +164,10 @@ public class ProductDetails extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 int id_toko = productId; //sementara karena model barang tidak ada id_toko
-                if (SingletonProfile.getInstance().getUser() != null){
-                int id_user=SingletonProfile.getInstance().getUser().getId();
-                new LaporTokoScreen(id_toko,id_user);
-                frame.setVisible(false);
+                if (SingletonProfile.getInstance().getUser() != null) {
+                    int id_user = SingletonProfile.getInstance().getUser().getId();
+                    new LaporTokoScreen(id_toko, id_user);
+                    frame.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu");
                 }
@@ -184,8 +184,14 @@ public class ProductDetails extends JFrame {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
-                new HomeScreen();
+
+                if (SingletonProfile.getInstance().getUser() != null) {
+                    int id_user = SingletonProfile.getInstance().getUser().getId();
+                    new LaporBarangScreen(productId, id_user);
+                    frame.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu");
+                }
             }
         });
 
