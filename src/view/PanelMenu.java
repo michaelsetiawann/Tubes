@@ -110,16 +110,28 @@ public class PanelMenu {
                     new LogoutController();
                 }
             });
-            JButton regisToko = new JButton("Buat Toko");
-            regisToko.setBounds(820, 30, 120, 20);
-            panelMenu.add(regisToko);
-            regisToko.addActionListener(
+//            JButton regisToko = new JButton("Buat Toko");
+//            regisToko.setBounds(820, 30, 120, 20);
+//            panelMenu.add(regisToko);
+//            regisToko.addActionListener(
+//                    new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent ae
+//                ) {
+//                    frame.setVisible(false);
+//                    new RegistrasiTokoScreen();
+//                }
+//            });
+            JButton menuToko = new JButton("Menu Toko");
+            menuToko.setBounds(820, 30, 120, 20);
+            panelMenu.add(menuToko);
+            menuToko.addActionListener(
                     new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae
                 ) {
                     frame.setVisible(false);
-                    new RegistrasiTokoScreen();
+                    new MenuTokoScreen();
                 }
             });
 
