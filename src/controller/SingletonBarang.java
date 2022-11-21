@@ -135,4 +135,13 @@ public class SingletonBarang {
         }
         return 0;
     }
+
+    public Barang getBarang() {
+        return barang;
+    }
+
+    public void setBarang(Barang barang) {
+        this.barang = barang;
+    }
+    
 }

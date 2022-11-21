@@ -18,6 +18,7 @@ public class Barang {
     String deskripsi_barang;
     int jumlah_pengunjung;
     int status;
+    
 
     public Barang(int id_barang, String nama_barang, int stok_barang, double harga_barang, String deskripsi_barang, int jumlah_pengunjung, int status) {
         this.id_barang = id_barang;
