@@ -95,7 +95,6 @@ public class KeranjangController {
         try {
                 java.sql.Statement stat = con.con.createStatement();
                 ResultSet result = stat.executeQuery("SELECT * FROM keranjang WHERE id_user='" + id_user + "'");
-                System.out.println("result set row: " + result.getRow());
                 while(result.next()) {
                         Keranjang keranjang = mapKeranjang(result);
                         keranjangList.add(keranjang);

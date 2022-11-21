@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Alamat;
 import model.Barang;
 import model.Keranjang;
+import model.MetodePembayaranEnum;
 import static view.LihatKeranjangScreen.frame;
 
 /**
@@ -36,6 +37,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
     private ArrayList<Keranjang> listKeranjang;
     JLabel labelTotal = new JLabel();
     double total;
+    ArrayList<Alamat> listAlamat;
     
     public CheckoutScreen(ArrayList<Keranjang> keranjangList){
         listKeranjang = keranjangList;
@@ -105,29 +107,73 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         
         Font font2 = new Font("SansSerif", Font.PLAIN, 25);
         labelTotal.setFont(font2);
-        labelTotal.setBounds(800, 580, 300, 100);
+        labelTotal.setBounds(700, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
-        System.out.println("total = " + total);
         
         int id_user = SingletonProfile.getInstance().getUser().getId();
-        ArrayList<Alamat> listAlamat = new AlamatController().getAll(id_user);
+        listAlamat = new AlamatController().getAll(id_user);
         
         if(listAlamat == null){
             JButton addAlamat = new JButton("Tambah Alamat");
-            addAlamat.setBounds(800, 550, 130, 30);
+            addAlamat.setBounds(700, 550, 130, 30);
             frame.add(addAlamat);
-            addAlamat.addActionListener(this);
+            addAlamat.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    new AddAlamatScreen(listKeranjang);
+                    frame.setVisible(false);
+                }
+            });
             //add alamat
         }
         else{
-            Alamat[] alamatArray = new Alamat[listAlamat.size()];
-            System.out.println("list alamat : " + listAlamat);
-            for (int i = 0; i < listAlamat.size(); i++) {
-                alamatArray[i] = listAlamat.get(i);
+            String[] alamatArray = new String[listAlamat.size()];
+            int counter = 0;
+            for (Alamat a : listAlamat) {
+                alamatArray[counter] = a.getNama_tempat();
+                counter++;
             }
             JComboBox alamatComboBox = new JComboBox(alamatArray);
-            alamatComboBox.setBounds(800, 550, 130, 30);
+            alamatComboBox.setBounds(700, 430, 130, 30);
             frame.add(alamatComboBox);
+            
+            //get enums
+            int counterx = 0;
+            for (MetodePembayaranEnum x : MetodePembayaranEnum.values()) {
+                counterx++;
+            }
+            String[] enums = new String[counterx];
+            int counterr = 0;
+            for (MetodePembayaranEnum x : MetodePembayaranEnum.values()) {
+                enums[counterr] = String.valueOf(x);
+                counterr++;
+            }
+            
+            JComboBox metodePembayaran = new JComboBox(enums);
+            metodePembayaran.setBounds(550, 430, 130, 30);
+            frame.add(metodePembayaran);
+            
+            
+            JButton addAlamat = new JButton("Tambah Alamat");
+            addAlamat.setBounds(840, 430, 130, 30);
+            frame.add(addAlamat);
+            addAlamat.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    new AddAlamatScreen(listKeranjang);
+                    frame.setVisible(false);
+                }
+            });
+            
+            JButton bayar = new JButton("Bayar");
+            bayar.setBounds(840, 550, 130, 30);
+            frame.add(bayar);
+            bayar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                     
+                }
+            });
         }
         
         frame.add(labelTotal);

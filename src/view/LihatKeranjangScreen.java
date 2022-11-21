@@ -241,7 +241,6 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         labelTotal.setFont(font2);
         labelTotal.setBounds(800, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
-        System.out.println("total = " + total);
         frame.add(labelTotal);
     }
     @Override
