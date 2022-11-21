@@ -10,5 +10,14 @@ package model;
  * @author Lenovo
  */
 public enum StatusPengirimanEnum {
-    MENUNGGU_KONFIRMASI, DIPROSES, DIKIRIM, SAMPAI, SELESAI
+    MENUNGGU_KONFIRMASI(0), DIPROSES(1), DIKIRIM(2), SAMPAI(3), SELESAI(4);
+
+    private final int value;
+    private StatusPengirimanEnum(int value){
+        this.value = value;
+    }
+    
+    public int getValue(){
+        return value;
+    }
 }

@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Barang;
+import controller.TokoController;
 
 /**
  *
@@ -99,7 +100,7 @@ public class PanelMenu {
 
         if (SingletonProfile.getInstance().getUser() != null) {
             JButton btnLogout = new JButton("Logout");
-            btnLogout.setBounds(720, 30, 100, 20);
+            btnLogout.setBounds(710, 30, 100, 20);
             panelMenu.add(btnLogout);
             btnLogout.addActionListener(
                     new ActionListener() {
@@ -110,8 +111,23 @@ public class PanelMenu {
                     new LogoutController();
                 }
             });
-            JButton regisToko = new JButton("Buat Toko");
-            regisToko.setBounds(840, 30, 120, 20);
+            if (TokoController.checkToko(SingletonProfile.getInstance().getUser().getId())) {
+                JButton menuToko = new JButton("Menu Toko");
+            menuToko.setBounds(820, 30, 120, 20);
+            panelMenu.add(menuToko);
+            menuToko.addActionListener(
+                    new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae
+                ) {
+                    frame.setVisible(false);
+                    new MenuTokoScreen();
+                }
+            });
+            
+            } else {
+                JButton regisToko = new JButton("Buat Toko");
+            regisToko.setBounds(820, 30, 120, 20);
             panelMenu.add(regisToko);
             regisToko.addActionListener(
                     new ActionListener() {
@@ -122,9 +138,11 @@ public class PanelMenu {
                     new RegistrasiTokoScreen();
                 }
             });
+            }
+            
 
             JButton btnKeranjang = new JButton("Keranjang");
-            btnKeranjang.setBounds(840, 30, 100, 20);
+            btnKeranjang.setBounds(950, 30, 100, 20);
             panelMenu.add(btnKeranjang);
             btnKeranjang.addActionListener(
                     new ActionListener() {
@@ -137,7 +155,7 @@ public class PanelMenu {
             });
         } else {
             JButton btnLogin = new JButton("Login");
-            btnLogin.setBounds(720, 30, 100, 20);
+            btnLogin.setBounds(710, 30, 100, 20);
             panelMenu.add(btnLogin);
             btnLogin.addActionListener(
                     new ActionListener() {

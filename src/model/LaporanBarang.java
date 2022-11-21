@@ -18,7 +18,7 @@ public class LaporanBarang extends LaporanAbstract{
     public LaporanBarang() {
     }
 
-    public LaporanBarang(Barang barang, int id_laporan, Date tanggal, String komentar, boolean status, User user) {
+    public LaporanBarang(Barang barang, int id_laporan, Date tanggal, String komentar, int status, User user) {
         super(id_laporan, tanggal, komentar, status, user);
         this.barang = barang;
     }
@@ -55,13 +55,15 @@ public class LaporanBarang extends LaporanAbstract{
         this.komentar = komentar;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
     public User getUser() {
         return user;
