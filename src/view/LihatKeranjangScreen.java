@@ -176,6 +176,22 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         });
         loadData();
         
+        JButton delete = new JButton("Delete");
+        delete.setBounds(940,290,80,20);
+        frame.add(delete);
+        delete.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        if(!selectedItems.isEmpty()){
+                            for (Keranjang k : selectedItems) {
+                                new KeranjangController().deleteKeranjang(k.getId_keranjang());
+                            }
+                        }
+                    }
+                });
+        
+        
         checkout = new JButton("Checkout");
         checkout.setBounds(800, 580, 100, 30);
         checkout.addActionListener(this);
@@ -248,6 +264,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                 total += jumlah*harga;
             }
         }
+        
         
         labelTotal.setFont(font2);
         labelTotal.setBounds(800, 580, 300, 100);
