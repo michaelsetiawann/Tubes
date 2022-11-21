@@ -8,6 +8,7 @@ package controller;
 import database.DatabaseHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import model.Barang;
@@ -37,10 +38,9 @@ public class SingletonBarang {
         barang = new Barang();
     }
 
-    public Vector<Barang> getAllBarang() {
+    public ArrayList<Barang> getAllBarang() {
         conn.connect();
-
-        Vector<Barang> barangVector = new Vector<>();
+        ArrayList<Barang> barangArrayList = new ArrayList<>();
         try {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("SELECT * FROM barang");
@@ -52,20 +52,21 @@ public class SingletonBarang {
                 String deskripsi_barang = result.getString("deskripsi_barang");
                 int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
                 int status = result.getInt("status");
+                int id_toko = result.getInt("id_toko");
 
                 Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
-                        status);
-                barangVector.add(barang);
+                        status, id_toko);
+                barangArrayList.add(barang);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
-        return barangVector;
+        return barangArrayList;
     }
 
-    public Vector<Barang> getBarangByName(String nama) {
+    public ArrayList<Barang>  getBarangByName(String nama) {
         conn.connect();
-        Vector<Barang> barangVector = new Vector<>();
+        ArrayList<Barang> barangArrayList = new ArrayList<>();
 
         try {
             java.sql.Statement stat = conn.con.createStatement();
@@ -79,16 +80,18 @@ public class SingletonBarang {
                 String deskripsi_barang = result.getString("deskripsi_barang");
                 int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
                 int status = result.getInt("status");
+                int id_toko = result.getInt("id_toko");
 
                 Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
-                        status);
-                barangVector.add(barang);
+                        status, id_toko);
+                barangArrayList.add(barang);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
-        return barangVector;
+        return barangArrayList;
     }
+
 
     public Barang getProductDetails(int productId) {
         conn.connect();
