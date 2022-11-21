@@ -9,9 +9,12 @@ import database.DatabaseHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import model.Barang;
+import model.Review;
+import model.Transaksi;
 
 /**
  *
@@ -33,8 +36,8 @@ public class SingletonBarang {
     public SingletonBarang() {
         barang = new Barang(0, null, 0, 0, null, 0, 0, 0);
     }
-    
-    public void reset(){
+
+    public void reset() {
         barang = new Barang();
     }
 
@@ -64,14 +67,14 @@ public class SingletonBarang {
         return barangArrayList;
     }
 
-    public ArrayList<Barang>  getBarangByName(String nama) {
+    public ArrayList<Barang> getBarangByName(String nama) {
         conn.connect();
         ArrayList<Barang> barangArrayList = new ArrayList<>();
 
         try {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE nama_barang like'%" + nama + "%'");
-            
+
             while (result.next()) {
                 int id_barang = result.getInt("id_barang");
                 String nama_barang = result.getString("nama_barang");
@@ -91,7 +94,6 @@ public class SingletonBarang {
         }
         return barangArrayList;
     }
-
 
     public Barang getProductDetails(int productId) {
         conn.connect();
@@ -126,33 +128,52 @@ public class SingletonBarang {
             ResultSet result = stat.executeQuery("SELECT * FROM transaksi WHERE id_barang ='" + productId + "'");
             double ratingTotal = 0;
             int counter = 0;
-            while(result.next()) {
+            while (result.next()) {
                 Double rating = result.getDouble("rating");
                 ratingTotal += rating;
                 counter++;
             }
-            return ratingTotal/counter;
+            return ratingTotal / counter;
 
         } catch (SQLException e) {
-                // TODO: handle exception
+            // TODO: handle exception
         }
         return 0;
     }
 
+    public ArrayList<Review> getUserReview(int productId) {
+        conn.connect();
+        ArrayList<Review> transaksiArrayList = new ArrayList<>();
+        try {
+            java.sql.Statement stat = conn.con.createStatement();
+            ResultSet result = stat.executeQuery("SELECT * FROM transaksi WHERE id_barang ='" + productId + "'");
+            while (result.next()) {
+                int id_user = result.getInt("id_user");
+                String pesan_review = result.getString("pesan_review");
+                int rating = result.getInt("rating");
 
-  
+                Review review = new Review(id_user,pesan_review, rating);
+                transaksiArrayList.add(review);
+            }
+
+        } catch (SQLException e) {
+            // TODO: handle exception
+        }
+        return transaksiArrayList;
+    }
+
     public void updateStokBarang(int id_barang, int jumlah_barang_sekarang) {
         conn.connect();
         try {
             java.sql.Statement stat = conn.con.createStatement();
-            stat.executeUpdate("UPDATE barang SET stok_barang = '"+jumlah_barang_sekarang+"' WHERE id_barang= '"+id_barang+"'");
+            stat.executeUpdate("UPDATE barang SET stok_barang = '" + jumlah_barang_sekarang + "' WHERE id_barang= '" + id_barang + "'");
 //            System.out.println(result);
         } catch (SQLException e) {
             e.printStackTrace();
-                // TODO: handle exception
+            // TODO: handle exception
         }
     }
-    
+
     public Barang getBarang() {
         return barang;
     }
@@ -160,5 +181,5 @@ public class SingletonBarang {
     public void setBarang(Barang barang) {
         this.barang = barang;
     }
-    
+
 }
