@@ -13,22 +13,22 @@ import java.util.Date;
  */
 public class LaporanBarang extends LaporanAbstract{
 
-    Barang barang;
+    int id_barang;
 
     public LaporanBarang() {
     }
 
-    public LaporanBarang(Barang barang, int id_laporan, Date tanggal, String komentar, int status, User user) {
-        super(id_laporan, tanggal, komentar, status, user);
-        this.barang = barang;
+    public LaporanBarang(int id_barang, int id_laporan, Date tanggal, String komentar, int status, int id_user) {
+        super(id_laporan, tanggal, komentar, status, id_user);
+        this.id_barang = id_barang;
     }
 
-    public Barang getBarang() {
-        return barang;
+    public int getBarang() {
+        return id_barang;
     }
 
     public void setBarang(Barang barang) {
-        this.barang = barang;
+        this.id_barang = id_barang;
     }
 
     public int getId_laporan() {
@@ -65,16 +65,16 @@ public class LaporanBarang extends LaporanAbstract{
 
     
 
-    public User getUser() {
-        return user;
+    public int getUser() {
+        return id_user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int user) {
+        this.id_user = user;
     }
 
     @Override
     public String toString() {
-        return "LaporanBarang{" + "barang=" + barang + '}';
+        return "LaporanBarang{" + "barang=" + id_barang + '}';
     }
 }
