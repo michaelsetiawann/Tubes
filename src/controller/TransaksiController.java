@@ -24,6 +24,18 @@ public class TransaksiController {
 
     private DatabaseHandler con = new DatabaseHandler();
     private Transaksi transaksi;
+    private static TransaksiController controller = null;
+    
+    public static TransaksiController getInstance() {
+        if (controller == null) {
+            controller = new TransaksiController();
+        }
+        return controller;
+    }
+    
+    public void reset() {
+        transaksi = new Transaksi();
+    }
 
     public void setTransaksi(Transaksi transaksi){
         this.transaksi = transaksi;

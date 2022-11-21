@@ -21,7 +21,19 @@ public class KeranjangController {
 
     private DatabaseHandler con = new DatabaseHandler();
     private Keranjang keranjang;
+    private static KeranjangController controller = null;
 
+    public static KeranjangController getInstance() {
+        if (controller == null) {
+            controller = new KeranjangController();
+        }
+        return controller;
+    }
+    
+    public void reset() {
+        keranjang = new Keranjang();
+    }
+    
     public void setKeranjang(Keranjang keranjang){
         this.keranjang = keranjang;
     }
@@ -98,8 +110,9 @@ public class KeranjangController {
                 while(result.next()) {
                         Keranjang keranjang = mapKeranjang(result);
                         keranjangList.add(keranjang);
-                        return keranjangList;
+                        
                 }
+                return keranjangList;
         } catch (SQLException e) {
                 // TODO: handle exception
         }
