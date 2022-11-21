@@ -5,20 +5,24 @@
  */
 package view;
 
+import controller.KeranjangController;
 import controller.SingletonBarang;
 import controller.SingletonProfile;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import model.Keranjang;
 import static view.LihatKeranjangScreen.frame;
 
 /**
@@ -29,7 +33,6 @@ public class ProductDetails extends JFrame {
 
     static JFrame frame = new JFrame("Product Details");
     private JTextField inputNamaBarang;
-    private JTextField inputQty;
     private JTextField inputPrice;
     private JTextField inputRate;
     private JTable table;
@@ -56,14 +59,19 @@ public class ProductDetails extends JFrame {
         lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblQuantity.setBounds(38, 99, 68, 34);
         frame.getContentPane().add(lblQuantity);
+        
+        JLabel lblStok = new JLabel("Stock = " + SingletonBarang.getInstance().getProductDetails(productId).getStok_barang());
+        lblStok.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblStok.setBounds(225, 99, 100, 34);
+        frame.getContentPane().add(lblStok);
 
-        inputQty = new JTextField();
+        JSpinner inputQty = new JSpinner();
         inputQty.setFont(new Font("Tahoma", Font.PLAIN, 14));
         inputQty.setBounds(116, 102, 86, 29);
-        inputQty.setEditable(false);
-        inputQty.setText(String.valueOf(qty));
+//        inputQty.setEditable(false);
+//        inputQty.setText(String.valueOf(qty));
         frame.getContentPane().add(inputQty);
-        inputQty.setColumns(10);
+//        inputQty.setColumns(10);
 
         JLabel lblPrice = new JLabel("Price");
         lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -117,14 +125,57 @@ public class ProductDetails extends JFrame {
         btnAddToCart.setBounds(879, 86, 149, 36);
         frame.getContentPane().add(btnAddToCart);
         frame.setVisible(true);
-
-//        btnAddToCart.addActionListener(
-//                new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent ae) {
-//                new Cart(productId);
-//            }
-//        });
+        btnAddToCart.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if(SingletonProfile.getInstance().getUser() != null){
+                    int x = (Integer) inputQty.getValue();
+                    if(x == 0){
+                        JOptionPane.showMessageDialog(null, "Kuantitas masih 0");
+                    }
+                    else if(x > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()){
+                        JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
+                    }
+                    else{
+                        int id_user = SingletonProfile.getInstance().getUser().getId();
+                        ArrayList<Keranjang> listKeranjang = new KeranjangController().getAll(id_user);
+                        Keranjang temp = new Keranjang();
+                        if(listKeranjang != null){
+                            boolean isThere = false;
+                            for (Keranjang k : listKeranjang) {
+                                if(productId == k.getBarang().getId_barang()){
+                                   isThere = true;
+                                   temp = k;
+                                }
+                            }
+                            if(isThere){
+                                int jumlah = temp.getJumlah_barang() + x;
+                                System.out.println(jumlah);
+                                new KeranjangController().updateKeranjang(temp.getId_keranjang(), jumlah);
+                                frame.setVisible(false);
+                                new LihatKeranjangScreen();
+                            }
+                            else{
+                                new KeranjangController().insertKeranjang(productId, x);
+                                frame.setVisible(false);
+                                new LihatKeranjangScreen();
+                            }
+                        }
+                        else{
+                            new KeranjangController().insertKeranjang(productId, x);
+                            frame.setVisible(false);
+                            new LihatKeranjangScreen();
+                        }
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Maaf Anda harus login terlebih dahulu");
+                }
+                
+            }
+        });
+        
         JButton btnBack = new JButton("Back to home");
         btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnBack.setBounds(879, 150, 149, 36);
