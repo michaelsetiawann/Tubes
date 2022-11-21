@@ -99,7 +99,7 @@ public class PanelMenu {
 
         if (SingletonProfile.getInstance().getUser() != null) {
             JButton btnLogout = new JButton("Logout");
-            btnLogout.setBounds(720, 30, 100, 20);
+            btnLogout.setBounds(710, 30, 100, 20);
             panelMenu.add(btnLogout);
             btnLogout.addActionListener(
                     new ActionListener() {
@@ -111,7 +111,7 @@ public class PanelMenu {
                 }
             });
             JButton regisToko = new JButton("Buat Toko");
-            regisToko.setBounds(840, 30, 120, 20);
+            regisToko.setBounds(820, 30, 120, 20);
             panelMenu.add(regisToko);
             regisToko.addActionListener(
                     new ActionListener() {
@@ -124,7 +124,7 @@ public class PanelMenu {
             });
 
             JButton btnKeranjang = new JButton("Keranjang");
-            btnKeranjang.setBounds(840, 30, 100, 20);
+            btnKeranjang.setBounds(950, 30, 100, 20);
             panelMenu.add(btnKeranjang);
             btnKeranjang.addActionListener(
                     new ActionListener() {
@@ -137,7 +137,7 @@ public class PanelMenu {
             });
         } else {
             JButton btnLogin = new JButton("Login");
-            btnLogin.setBounds(720, 30, 100, 20);
+            btnLogin.setBounds(710, 30, 100, 20);
             panelMenu.add(btnLogin);
             btnLogin.addActionListener(
                     new ActionListener() {

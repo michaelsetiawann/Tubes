@@ -118,7 +118,6 @@ public class KeranjangController {
                 ResultSet result = stat.executeQuery("SELECT * FROM keranjang WHERE id_keranjang='" + id_keranjang + "'");
                 if(result.next()) {
                         Keranjang keranjang = mapKeranjang(result);
-                        System.out.println(keranjang);
                         return keranjang;
                 }
         } catch (SQLException e) {
@@ -130,8 +129,6 @@ public class KeranjangController {
     public void updateKeranjang(int id_keranjang, int jumlah_barang) {
         con.connect();
         try {
-            System.out.println("id_keranjang" + id_keranjang);
-            System.out.println("jumlah_barang " + jumlah_barang);
             java.sql.Statement stat = con.con.createStatement();
             stat.executeUpdate("UPDATE keranjang SET jumlah_barang = '"+jumlah_barang+"' WHERE id_keranjang= '"+id_keranjang+"'");
 //            System.out.println(result);
