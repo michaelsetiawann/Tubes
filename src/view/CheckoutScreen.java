@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,23 +67,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         };
         scrollPane.setViewportView(tableData);
         
-        int id_user = SingletonProfile.getInstance().getUser().getId();
-        ArrayList<Alamat> listAlamat = new AlamatController().getAll(id_user);
         
-        if(listAlamat == null){
-            System.out.println("still null");
-            //add alamat
-        }
-        else{
-            Alamat[] alamatArray = new Alamat[listAlamat.size()];
-            System.out.println("list alamat : " + listAlamat);
-            for (int i = 0; i < listAlamat.size(); i++) {
-                alamatArray[i] = listAlamat.get(i);
-            }
-            JComboBox alamatComboBox = new JComboBox(alamatArray);
-            alamatComboBox.setBounds(800, 550, 130, 30);
-            frame.add(alamatComboBox);
-        }
         
         loadData();
         
@@ -123,6 +108,28 @@ public class CheckoutScreen extends JFrame implements ActionListener{
         labelTotal.setBounds(800, 580, 300, 100);
         labelTotal.setText("Total Harga : " + total);
         System.out.println("total = " + total);
+        
+        int id_user = SingletonProfile.getInstance().getUser().getId();
+        ArrayList<Alamat> listAlamat = new AlamatController().getAll(id_user);
+        
+        if(listAlamat == null){
+            JButton addAlamat = new JButton("Tambah Alamat");
+            addAlamat.setBounds(800, 550, 130, 30);
+            frame.add(addAlamat);
+            addAlamat.addActionListener(this);
+            //add alamat
+        }
+        else{
+            Alamat[] alamatArray = new Alamat[listAlamat.size()];
+            System.out.println("list alamat : " + listAlamat);
+            for (int i = 0; i < listAlamat.size(); i++) {
+                alamatArray[i] = listAlamat.get(i);
+            }
+            JComboBox alamatComboBox = new JComboBox(alamatArray);
+            alamatComboBox.setBounds(800, 550, 130, 30);
+            frame.add(alamatComboBox);
+        }
+        
         frame.add(labelTotal);
     }
     @Override
