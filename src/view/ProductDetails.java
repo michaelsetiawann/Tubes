@@ -149,7 +149,8 @@ public class ProductDetails extends JFrame {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                int id_toko = productId; //sementara karena model barang tidak ada id_toko
+
+                int id_toko = SingletonBarang.getInstance().getBarang().getId_toko();
                 if (SingletonProfile.getInstance().getUser() != null) {
                     int id_user = SingletonProfile.getInstance().getUser().getId();
                     new LaporTokoScreen(id_toko, id_user);
