@@ -22,6 +22,7 @@ public class BlokirBarang {
     }
     
     public static void menampilkanLaporanBarang(){
+        
         ArrayList<LaporanBarang> listLaporan  = new ArrayList<>();
         listLaporan = controller.LaporController.getLaporBarang();
         
@@ -29,6 +30,7 @@ public class BlokirBarang {
         view.setSize(1100, 800);
         view.setLocationRelativeTo(null);
         view.getContentPane().setLayout(null);
+        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         JLabel judulLaporanId = new JLabel("Laporan ID");
         judulLaporanId.setBounds(20, 20, 150, 50);
@@ -79,6 +81,7 @@ public class BlokirBarang {
             view.add(labelsPesan[i]);
             view.add(labelsStatus[i]);
         }
+        y=80;
         JButton[] buttonApprove = new JButton[listLaporan.size()];
         for(int i=0; i<listLaporan.size(); i++){
             buttonApprove[i] = new JButton("Approve");
@@ -87,10 +90,10 @@ public class BlokirBarang {
             view.add(buttonApprove[i]);
         }
         for(int i=0; i<buttonApprove.length; i++){
+            int index = listLaporan.get(i).getId_laporan();
             buttonApprove[i].addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int index = listLaporan.get(i).getId_laporan();
                     controller.LaporController.approveLaporanBarang(index);
                     view.dispose();
                 }
