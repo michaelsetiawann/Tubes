@@ -112,7 +112,7 @@ public class PanelMenu {
                 }
             });
             if (TokoController.checkToko(SingletonProfile.getInstance().getUser().getId())) {
-                JButton menuToko = new JButton("Menu Toko");
+            JButton menuToko = new JButton("Menu Toko");
             menuToko.setBounds(820, 30, 120, 20);
             panelMenu.add(menuToko);
             menuToko.addActionListener(
