@@ -145,5 +145,20 @@ public class KeranjangController {
                 // TODO: handle exception
         }
     }
-
+    public void insertKeranjang(int id_barang, int jumlah_barang) {
+        con.connect();
+        int id_user = SingletonProfile.getInstance().getUser().getId();
+        try {
+            String query = "INSERT INTO keranjang (id_barang, id_user, jumlah_barang) VALUES (?,?,?)";
+            PreparedStatement state = con.con.prepareStatement(query);
+            state.setInt(1, id_barang);
+            state.setInt(2, id_user);
+            state.setInt(3, jumlah_barang);
+            state.executeUpdate();
+//            System.out.println(result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+                // TODO: handle exception
+        }
+    }
 }
