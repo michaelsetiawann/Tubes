@@ -70,7 +70,7 @@ public class SingletonBarang {
         try {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE nama_barang like'%" + nama + "%'");
-
+            
             while (result.next()) {
                 int id_barang = result.getInt("id_barang");
                 String nama_barang = result.getString("nama_barang");
