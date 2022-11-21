@@ -24,6 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Barang;
+import controller.TokoController;
 
 /**
  *
@@ -110,19 +111,8 @@ public class PanelMenu {
                     new LogoutController();
                 }
             });
-//            JButton regisToko = new JButton("Buat Toko");
-//            regisToko.setBounds(820, 30, 120, 20);
-//            panelMenu.add(regisToko);
-//            regisToko.addActionListener(
-//                    new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent ae
-//                ) {
-//                    frame.setVisible(false);
-//                    new RegistrasiTokoScreen();
-//                }
-//            });
-            JButton menuToko = new JButton("Menu Toko");
+            if (TokoController.checkToko(SingletonProfile.getInstance().getUser().getId())) {
+                JButton menuToko = new JButton("Menu Toko");
             menuToko.setBounds(820, 30, 120, 20);
             panelMenu.add(menuToko);
             menuToko.addActionListener(
@@ -134,6 +124,22 @@ public class PanelMenu {
                     new MenuTokoScreen();
                 }
             });
+            
+            } else {
+                JButton regisToko = new JButton("Buat Toko");
+            regisToko.setBounds(820, 30, 120, 20);
+            panelMenu.add(regisToko);
+            regisToko.addActionListener(
+                    new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae
+                ) {
+                    frame.setVisible(false);
+                    new RegistrasiTokoScreen();
+                }
+            });
+            }
+            
 
             JButton btnKeranjang = new JButton("Keranjang");
             btnKeranjang.setBounds(950, 30, 100, 20);

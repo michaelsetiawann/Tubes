@@ -6,6 +6,10 @@ package controller;
 
 import database.DatabaseHandler;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.Barang;
 
 /**
  *
@@ -32,4 +36,25 @@ public class TokoController {
             return "insert gagal!";
         }
     }
+     public static boolean checkToko(int id_user){
+        aa.connect();
+        boolean stat=false;
+        try {
+            java.sql.Statement state = aa.con.createStatement();
+            ResultSet result = state.executeQuery("SELECT id_user FROM toko");
+            while (result.next()) {
+                if(id_user == result.getInt("id_user")){
+                    stat=true;
+                } else{
+                stat=false;
+            }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
+        }
+        
+        
+        return stat;
+    }
+   
 }
