@@ -10,5 +10,14 @@ package model;
  * @author Lenovo
  */
 public enum MetodePembayaranEnum {
-    TRANSFER_BANK, COD, EMONEY
+    TRANSFER_BANK(0), COD(1), EMONEY(2);
+    
+    private final int value;
+    private MetodePembayaranEnum(int value){
+        this.value = value;
+    }
+    
+    public int getValue(){
+        return value;
+    }
 }
