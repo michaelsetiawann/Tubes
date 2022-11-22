@@ -222,7 +222,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
             for(Keranjang b : tableKeranjang) {
                 for (Keranjang c : selectedItems) {
                     if(b.getId_keranjang() == c.getId_keranjang()){
-                        System.out.println("shit");
+
                         Vector<Object> tableVector = new Vector<>();
                         tableVector.add(b.getId_keranjang());
                         tableVector.add(b.getBarang().getNama_barang());
@@ -233,7 +233,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                         tableModel.addRow(tableVector);
                     }
                     else{
-                        System.out.println("prick");
+
                         Vector<Object> tableVector = new Vector<>();
                         tableVector.add(b.getId_keranjang());
                         tableVector.add(b.getBarang().getNama_barang());
@@ -250,7 +250,6 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
             System.out.println("in here2");
             if(tableKeranjang != null){
                 for(Keranjang b : tableKeranjang) {
-                    System.out.println("asshole");
                     Vector<Object> tableVector = new Vector<>();
                     tableVector.add(b.getId_keranjang());
                     tableVector.add(b.getBarang().getNama_barang());

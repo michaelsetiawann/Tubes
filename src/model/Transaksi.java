@@ -20,11 +20,12 @@ public class Transaksi {
     MetodePembayaranEnum metodePembayaran;
     String pesan_review;
     double rating;
+    int id_user;
 
     public Transaksi() {
     }
 
-    public Transaksi(int id_transaksi, Barang barang, int jumlahBarang, Date tanggal, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, double rating) {
+    public Transaksi(int id_transaksi, Barang barang, int jumlahBarang, Date tanggal, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, double rating, int id_user) {
         this.id_transaksi = id_transaksi;
         this.barang = barang;
         this.jumlahBarang = jumlahBarang;
@@ -33,7 +34,9 @@ public class Transaksi {
         this.metodePembayaran = metodePembayaran;
         this.pesan_review = pesan_review;
         this.rating = rating;
+        this.id_user = id_user;
     }
+
 
     public int getId_transaksi() {
         return id_transaksi;
