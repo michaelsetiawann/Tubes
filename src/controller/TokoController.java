@@ -45,6 +45,7 @@ public class TokoController {
             while (result.next()) {
                 if(id_user == result.getInt("id_user")){
                     stat=true;
+                    break;
                 } else{
                 stat=false;
             }
