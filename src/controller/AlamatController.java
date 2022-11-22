@@ -20,6 +20,18 @@ import model.Alamat;
 public class AlamatController {
     private DatabaseHandler conn = new DatabaseHandler();
     private Alamat alamat;
+    private static AlamatController controller = null;
+
+    public static AlamatController getInstance() {
+        if (controller == null) {
+            controller = new AlamatController();
+        }
+        return controller;
+    }
+    
+    public void reset() {
+        alamat = new Alamat();
+    }
     
     public AlamatController() {
         alamat = new Alamat(0, null, null, null, null);
