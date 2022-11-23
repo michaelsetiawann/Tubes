@@ -236,41 +236,28 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     	tableKeranjang = KeranjangController.getInstance().getAll(user.getId());
         
         tableModel.setRowCount(0);
-//        System.out.println(tableKeranjang);
-//        System.out.println("====================================================");
         if( !selectedItems.isEmpty() && tableKeranjang != null){
-//            System.out.println("check1");
+            
             for(Keranjang b : tableKeranjang) {
-                for (Keranjang c : selectedItems) {
-                    
-                    ArrayList<Keranjang> displayedItems = new ArrayList<>();
-                    System.out.println(displayedItems);
-                    System.out.println("========load data==========");
-                    //if b or c is in displayed items dont do :
-                    if(b.getId_keranjang() == c.getId_keranjang() && !isDisplayed(b, displayedItems) && !isDisplayed(c, displayedItems)){
-                        Vector<Object> tableVector = new Vector<>();
-                        tableVector.add(b.getId_keranjang());
-                        tableVector.add(b.getBarang().getNama_barang());
-                        tableVector.add(b.getBarang().getStok_barang()); 
-                        tableVector.add(b.getBarang().getHarga_barang());
-                        tableVector.add(b.getJumlah_barang());
-                        tableVector.add("SELECTED");
-                        tableModel.addRow(tableVector);
-                        displayedItems.add(c);
-                    }
-                    else{
-                        if(!isDisplayed(b, displayedItems) && !isDisplayed(c, displayedItems)){
-                            Vector<Object> tableVector = new Vector<>();
-                            tableVector.add(b.getId_keranjang());
-                            tableVector.add(b.getBarang().getNama_barang());
-                            tableVector.add(b.getBarang().getStok_barang()); 
-                            tableVector.add(b.getBarang().getHarga_barang());
-                            tableVector.add(b.getJumlah_barang());
-                            tableVector.add("UNSELECTED");
-                            tableModel.addRow(tableVector);
-                            displayedItems.add(c);
-                        }
-                    }
+                if(isInArray(b, selectedItems)){
+                    Vector<Object> tableVector = new Vector<>();
+                    tableVector.add(b.getId_keranjang());
+                    tableVector.add(b.getBarang().getNama_barang());
+                    tableVector.add(b.getBarang().getStok_barang()); 
+                    tableVector.add(b.getBarang().getHarga_barang());
+                    tableVector.add(b.getJumlah_barang());
+                    tableVector.add("SELECTED");
+                    tableModel.addRow(tableVector);
+                }
+                else{
+                    Vector<Object> tableVector = new Vector<>();
+                    tableVector.add(b.getId_keranjang());
+                    tableVector.add(b.getBarang().getNama_barang());
+                    tableVector.add(b.getBarang().getStok_barang()); 
+                    tableVector.add(b.getBarang().getHarga_barang());
+                    tableVector.add(b.getJumlah_barang());
+                    tableVector.add("UNSELECTED");
+                    tableModel.addRow(tableVector);
                 }
             }
     	}
@@ -310,9 +297,9 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
     }
-    boolean isDisplayed(Keranjang x, ArrayList<Keranjang> displayedItems){
+    boolean isInArray(Keranjang x, ArrayList<Keranjang> array){
         boolean isThere = false;
-        for (Keranjang a : displayedItems) {
+        for (Keranjang a : array) {
             if(x.getId_keranjang() == a.getId_keranjang()){
                 isThere = true;
             }
