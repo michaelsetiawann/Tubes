@@ -94,7 +94,9 @@ public class HomeScreen {
                     int selectedRow;
                     selectedRow = jTable.getSelectedRow();
                     int productId = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
+//                    System.out.println("product id: " + productId);
                     new ProductDetails(productId);
+                    frame.setVisible(false);
                 }
             }
         });

@@ -146,7 +146,7 @@ public class SingletonBarang {
         ArrayList<Review> transaksiArrayList = new ArrayList<>();
         try {
             java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("SELECT * FROM transaksi WHERE id_barang ='" + productId + "'");
+            ResultSet result = stat.executeQuery("SELECT * FROM transaksi WHERE id_barang ='" + productId + "' && rating != 0");
             while (result.next()) {
                 int id_user = result.getInt("id_user");
                 String pesan_review = result.getString("pesan_review");
