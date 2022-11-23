@@ -18,6 +18,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -27,29 +28,30 @@ import model.Barang;
  *
  * @author Lenovo
  */
-public class CariProdukJtable extends JFrame {
+public class CariProdukJtable extends JFrame{
 
+    JFrame frame = new JFrame();
     Barang barang;
     private JTable jTable;
     static DatabaseHandler conn = new DatabaseHandler();
+    private DefaultTableModel model;
 
     public CariProdukJtable() {
-
+        
     }
 
     public CariProdukJtable(String nama) {
-        setTitle("Produk yang ditemukan");
-        setSize(1080, 700);
-        setLocationRelativeTo(null);
-        userInterfaceGUI(nama);
-        setVisible(true);
-    }
+        frame.setTitle("Produk yang ditemukan");
+        frame.setSize(1080, 700);
+        frame.setLocationRelativeTo(null);
+        
+        JScrollPane scroll = new JScrollPane();
+        scroll.setBounds(10, 80, 1050, 500);
 
-    private void userInterfaceGUI(String nama) {
         String search = nama;
-        DefaultTableModel model = new DefaultTableModel();
+        model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{
-            "ID Barang", "Nama Barang", "Stok Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status", "Tambah Keranjang"
+            "ID Barang", "Nama Barang", "Stok Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status"
         });
         jTable = new JTable(model) {
             public boolean isCellEditable(int row, int column) {
@@ -94,7 +96,10 @@ public class CariProdukJtable extends JFrame {
                 }
             }
         });
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getBarangByName(nama);
         for (int i = 0; i < tableBarang.size(); i++) {
             int id_barang = tableBarang.get(i).getId_barang();
@@ -104,14 +109,18 @@ public class CariProdukJtable extends JFrame {
             String deskripsiBarang = tableBarang.get(i).getDeskripsi_barang();
             int jumlahPengunjung = tableBarang.get(i).getJumlah_pengunjung();
             int status = tableBarang.get(i).getStatus();
-            int id_toko = tableBarang.get(i).getId_toko();
-            model.addRow(new Object[]{id_barang, nama_barang, stockBarang, hargaBarang, deskripsiBarang, jumlahPengunjung, status, id_toko});
+            model.addRow(new Object[]{id_barang, nama_barang, stockBarang, hargaBarang, deskripsiBarang, jumlahPengunjung, status});
         }
-
-        JScrollPane scroll = new JScrollPane();
+        PanelMenu menu = new PanelMenu();
+        JPanel panelMenu = menu.getPanel(frame);
+        panelMenu.setBounds(0, 200, 1080, 75);
+        
         scroll.setViewportView(jTable);
-
-        getContentPane().add(scroll);
+        
+        frame.getContentPane().add(scroll);
+        
+        frame.add(panelMenu);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
