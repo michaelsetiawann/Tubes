@@ -29,7 +29,7 @@ import model.Keranjang;
  */
 public class AddAlamatScreen extends JFrame {
 
-    public AddAlamatScreen() {
+    public AddAlamatScreen(ArrayList<Keranjang> listKeranjang) {
         JFrame frame = new JFrame("Registrasi");
         frame.setSize(400, 400);
         JPanel contentPane = new JPanel();
@@ -97,6 +97,7 @@ public class AddAlamatScreen extends JFrame {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
                     AlamatController.getInstance().insertAlamat(namaTempat.getText(), alamat.getText(), namaPenerima.getText(), noTelp.getText());
+                    new CheckoutScreen(listKeranjang);
                     frame.setVisible(false);
                 }
             }
@@ -106,6 +107,7 @@ public class AddAlamatScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 frame.setVisible(false);
+                new CheckoutScreen(listKeranjang);
             }
         });
 

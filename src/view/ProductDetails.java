@@ -139,7 +139,7 @@ public class ProductDetails extends JFrame {
                     if (jumlahAddCart == 0) {
                         JOptionPane.showMessageDialog(null, "Kuantitas masih 0");
                     } else if (jumlahAddCart > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
-                        JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
+                        JOptionPane.showMessageDialog(null, "Kuantitas di keranjang melebihi stok barang!");
                     } else {
 //                        System.out.println("at least in here2");
                         int id_user = SingletonProfile.getInstance().getUser().getId();
@@ -164,7 +164,7 @@ public class ProductDetails extends JFrame {
                                     new LihatKeranjangScreen();
                                 }
                                 else{
-                                    JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
+                                    JOptionPane.showMessageDialog(null, "Kuantitas di keranjang melebihi stok barang!");
                                 }
                             } else {
 //                                System.out.println("hello2");

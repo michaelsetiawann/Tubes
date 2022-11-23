@@ -27,8 +27,8 @@ import model.Barang;
  *
  * @author shyen
  */
-public class HomeScreen {
-
+public class HomeScreen extends JFrame{
+    JFrame frame = new JFrame("home");
     public HomeScreen() {
         homeScreen();
     }
@@ -38,7 +38,7 @@ public class HomeScreen {
     private Vector<Object> table;
 
     private void homeScreen() {
-        JFrame frame = new JFrame("home");
+        
         //frame
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
@@ -121,11 +121,14 @@ public class HomeScreen {
         jTable.setModel(tableModel);
         
         frame.setLayout(null);
-        frame.setVisible(true);
-
         PanelMenu menu = new PanelMenu();
         JPanel panelMenu = menu.getPanel(frame);
-
         frame.add(panelMenu);
+        frame.setVisible(false);
+        frame.setVisible(true);
+
+        
+
+        
     }
 }
