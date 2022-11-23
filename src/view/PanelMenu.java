@@ -41,7 +41,7 @@ public class PanelMenu {
         Font font2 = new Font("SansSerif", Font.PLAIN, 25);
         panelMenu.setBounds(0, 1, 1080, 75);
         panelMenu.setLayout(null);
-        
+
         JButton namaApp = new JButton("TOKOMEDIA");
         namaApp.setFont(font2);
         namaApp.setBackground(null);
@@ -107,10 +107,10 @@ public class PanelMenu {
         if (SingletonProfile.getInstance().getUser() != null) {
             JButton btnLogout = new JButton("Logout");
             btnLogout.setFont(font1);
-            btnLogout.setBounds(880, 2, 100, 75);    
+            btnLogout.setBounds(880, 2, 100, 75);
             btnLogout.setBackground(null);
             btnLogout.setBorderPainted(false);
-            
+
             panelMenu.add(btnLogout);
             btnLogout.addActionListener(
                     new ActionListener() {
@@ -122,19 +122,22 @@ public class PanelMenu {
                 }
             });
             if (TokoController.checkToko(SingletonProfile.getInstance().getUser().getId())) {
-            JButton menuToko = new JButton("Menu Toko");
-            menuToko.setBounds(820, 2, 120, 75);
-            panelMenu.add(menuToko);
-            menuToko.addActionListener(
-                    new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae
-                ) {
-                    frame.setVisible(false);
-                    new MenuTokoScreen();
-                }
-            });
-            
+                JButton menuToko = new JButton("Menu Toko");
+                menuToko.setFont(font1);
+                menuToko.setBackground(null);
+                menuToko.setBorderPainted(false);
+                menuToko.setBounds(750, 2, 120, 75);
+                panelMenu.add(menuToko);
+                menuToko.addActionListener(
+                        new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae
+                    ) {
+                        frame.setVisible(false);
+                        new MenuTokoScreen();
+                    }
+                });
+
             } else {
                 JButton regisToko = new JButton("Ingin Buat Toko?");
                 regisToko.setFont(font1);
@@ -143,19 +146,20 @@ public class PanelMenu {
                 regisToko.setBounds(720, 2, 150, 75);
                 panelMenu.add(regisToko);
                 regisToko.addActionListener(
-                    new ActionListener() {
-                @Override                public void actionPerformed(ActionEvent ae
-                ) {
-                    frame.setVisible(false);
-                    new RegistrasiTokoScreen();
-                }
-            });
+                        new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae
+                    ) {
+                        frame.setVisible(false);
+                        new RegistrasiTokoScreen();
+                    }
+                });
             }
-            
+
 //            Icon icon = new ImageIcon("1250px-Shopping_cart_icon.svg.png");
             JButton btnKeranjang = new JButton("🛒");
             btnKeranjang.setBounds(640, 7, 60, 75);
-                    
+
             btnKeranjang.setFont(font2);
             btnKeranjang.setBackground(null);
             btnKeranjang.setBorderPainted(false);
