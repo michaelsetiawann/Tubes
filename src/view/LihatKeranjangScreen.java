@@ -40,7 +40,6 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     private DefaultTableModel tableModel;
     private JTable tableData;
     private Vector<Object> tableVector;
-    static JFrame frame = new JFrame("Keranjang");
     ArrayList<Keranjang> tableKeranjang;
     ArrayList<Keranjang> selectedItems = new ArrayList<>();
     Font font2 = new Font("SansSerif", Font.PLAIN, 25);
@@ -56,6 +55,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     }
     
     private void lihatKeranjang() {
+        JFrame frame = new JFrame("Keranjang");
         
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
@@ -157,6 +157,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                 public void mouseClicked(MouseEvent e) {
                     //select/deselect product
                     if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
+//                        System.out.println(" in here at least");
                         int selectedRow;
                         selectedRow = tableData.getSelectedRow();
                         int keranjangId = Integer.valueOf(tableData.getValueAt(selectedRow, 0).toString());
@@ -170,9 +171,11 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             }
                         }
                         if(isThere){
+//                            System.out.println("in here1");
                             selectedItems.remove(keranjang);
                         }
                         else{
+//                            System.out.println("in here 2");
                             selectedItems.add(keranjang);
                         }
                         //alter selected
@@ -194,7 +197,6 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             for (Keranjang k : selectedItems) {
                                 KeranjangController.getInstance().deleteKeranjang(k.getId_keranjang());
                                 loadData();
-
                             }
                         }
                         loadData();
@@ -205,6 +207,20 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         checkout.setBounds(800, 580, 100, 30);
         checkout.addActionListener(this);
         frame.add(checkout);
+        checkout.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        if(!selectedItems.isEmpty()){
+                            frame.setVisible(false);
+                            new CheckoutScreen(selectedItems);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Keranjang anda masih kosong... Yuk belanja~~");
+                        }
+                    }
+                });
+        
         //frame
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
@@ -219,15 +235,19 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         tableKeranjang = null;
     	tableKeranjang = KeranjangController.getInstance().getAll(user.getId());
         
-    	
-        
-        System.out.println(tableKeranjang);
-        System.out.println("====================================================");
+        tableModel.setRowCount(0);
+//        System.out.println(tableKeranjang);
+//        System.out.println("====================================================");
         if( !selectedItems.isEmpty() && tableKeranjang != null){
-
+//            System.out.println("check1");
             for(Keranjang b : tableKeranjang) {
                 for (Keranjang c : selectedItems) {
-                    if(b.getId_keranjang() == c.getId_keranjang()){
+                    
+                    ArrayList<Keranjang> displayedItems = new ArrayList<>();
+                    System.out.println(displayedItems);
+                    System.out.println("========load data==========");
+                    //if b or c is in displayed items dont do :
+                    if(b.getId_keranjang() == c.getId_keranjang() && !isDisplayed(b, displayedItems) && !isDisplayed(c, displayedItems)){
                         Vector<Object> tableVector = new Vector<>();
                         tableVector.add(b.getId_keranjang());
                         tableVector.add(b.getBarang().getNama_barang());
@@ -236,22 +256,26 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                         tableVector.add(b.getJumlah_barang());
                         tableVector.add("SELECTED");
                         tableModel.addRow(tableVector);
+                        displayedItems.add(c);
                     }
                     else{
-
-                        Vector<Object> tableVector = new Vector<>();
-                        tableVector.add(b.getId_keranjang());
-                        tableVector.add(b.getBarang().getNama_barang());
-                        tableVector.add(b.getBarang().getStok_barang()); 
-                        tableVector.add(b.getBarang().getHarga_barang());
-                        tableVector.add(b.getJumlah_barang());
-                        tableVector.add("UNSELECTED");
-                        tableModel.addRow(tableVector);
+                        if(!isDisplayed(b, displayedItems) && !isDisplayed(c, displayedItems)){
+                            Vector<Object> tableVector = new Vector<>();
+                            tableVector.add(b.getId_keranjang());
+                            tableVector.add(b.getBarang().getNama_barang());
+                            tableVector.add(b.getBarang().getStok_barang()); 
+                            tableVector.add(b.getBarang().getHarga_barang());
+                            tableVector.add(b.getJumlah_barang());
+                            tableVector.add("UNSELECTED");
+                            tableModel.addRow(tableVector);
+                            displayedItems.add(c);
+                        }
                     }
                 }
             }
     	}
         else{
+//            System.out.println("check2");
             if(tableKeranjang != null){
                 for(Keranjang b : tableKeranjang) {
                     Vector<Object> tableVector = new Vector<>();
@@ -285,14 +309,14 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == checkout){
-            if(!selectedItems.isEmpty()){
-                frame.setVisible(false);
-                new CheckoutScreen(selectedItems);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Keranjang anda masih kosong... Yuk belanja~~");
+    }
+    boolean isDisplayed(Keranjang x, ArrayList<Keranjang> displayedItems){
+        boolean isThere = false;
+        for (Keranjang a : displayedItems) {
+            if(x.getId_keranjang() == a.getId_keranjang()){
+                isThere = true;
             }
         }
+        return isThere;
     }
 }

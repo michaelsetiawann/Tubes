@@ -25,7 +25,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import model.Keranjang;
 import model.Review;
-import static view.LihatKeranjangScreen.frame;
 
 /**
  *
