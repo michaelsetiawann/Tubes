@@ -95,7 +95,7 @@ public class CariProdukJtable extends JFrame {
             }
         });
         
-        ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getBarangByName(nama);
+        ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getAllBarang();
         for (int i = 0; i < tableBarang.size(); i++) {
             int id_barang = tableBarang.get(i).getId_barang();
             String nama_barang = tableBarang.get(i).getNama_barang();
