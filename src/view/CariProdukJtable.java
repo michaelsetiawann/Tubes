@@ -96,10 +96,7 @@ public class CariProdukJtable extends JFrame{
                 }
             }
         });
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
+
         ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getBarangByName(nama);
         for (int i = 0; i < tableBarang.size(); i++) {
             int id_barang = tableBarang.get(i).getId_barang();
