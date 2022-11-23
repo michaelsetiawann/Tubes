@@ -57,7 +57,7 @@ public class Keranjang {
 
     @Override
     public String toString() {
-        return "Keranjang{" + "id_keranjang=" + id_keranjang + ", barang=" + barang + ", jumlah_barang=" + jumlah_barang + '}';
+        return "Keranjang{" + "id_keranjang=" + id_keranjang + ", barang=" + barang + ", jumlah_barang=" + jumlah_barang + "}\n";
     }
 
 }

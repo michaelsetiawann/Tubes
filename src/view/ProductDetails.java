@@ -25,7 +25,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import model.Keranjang;
 import model.Review;
-import static view.LihatKeranjangScreen.frame;
 
 /**
  *
@@ -33,14 +32,16 @@ import static view.LihatKeranjangScreen.frame;
  */
 public class ProductDetails extends JFrame {
 
-    static JFrame frame = new JFrame("Product Details");
-    private JTextField inputNamaBarang;
+    private JLabel inputNamaBarang;
     private JTextField inputPrice;
     private JTextField inputRate;
     private JTable table = new JTable();
 
     public ProductDetails(int productId) {
+        JFrame frame = new JFrame("Product Details");
+        System.out.println(productId);
         String namaBarang = SingletonBarang.getInstance().getProductDetails(productId).getNama_barang();
+        System.out.println(namaBarang);
         int qty = SingletonBarang.getInstance().getProductDetails(productId).getStok_barang();
         double price = SingletonBarang.getInstance().getProductDetails(productId).getHarga_barang();
         String descriptionText = SingletonBarang.getInstance().getProductDetails(productId).getDeskripsi_barang();
@@ -49,13 +50,14 @@ public class ProductDetails extends JFrame {
 //        lblProductName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 //        lblProductName.setBounds(38, 37, 1003, 34);
 //        frame.getContentPane().add(lblProductName);
-        inputNamaBarang = new JTextField();
+        inputNamaBarang = new JLabel();
         inputNamaBarang.setFont(new Font("Tahoma", Font.PLAIN, 14));
         inputNamaBarang.setBounds(38, 37, 1003, 34);
-        inputNamaBarang.setEditable(false);
+//        inputNamaBarang.setEditable(false);
         inputNamaBarang.setText(namaBarang);
+        System.out.println(inputNamaBarang.getText());
         frame.getContentPane().add(inputNamaBarang);
-        inputNamaBarang.setColumns(10);
+//        inputNamaBarang.setColumns(10);
 
         JLabel lblQuantity = new JLabel("Quantity");
         lblQuantity.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -130,18 +132,21 @@ public class ProductDetails extends JFrame {
         btnAddToCart.addActionListener(
                 new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent ae) {  
                 if (SingletonProfile.getInstance().getUser() != null) {
+//                    System.out.println("at least in here1");
                     int jumlahAddCart = (Integer) inputQty.getValue();
                     if (jumlahAddCart == 0) {
                         JOptionPane.showMessageDialog(null, "Kuantitas masih 0");
                     } else if (jumlahAddCart > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
-                        JOptionPane.showMessageDialog(null, "Kuantitas melebihi stok barang!");
+                        JOptionPane.showMessageDialog(null, "Kuantitas di keranjang melebihi stok barang!");
                     } else {
+//                        System.out.println("at least in here2");
                         int id_user = SingletonProfile.getInstance().getUser().getId();
                         ArrayList<Keranjang> listKeranjang = new KeranjangController().getAll(id_user);
                         Keranjang temp = new Keranjang();
                         if (listKeranjang != null) {
+//                            System.out.println("should be in here 1");
                             boolean isThere = false;
                             for (Keranjang k : listKeranjang) {
                                 if (productId == k.getBarang().getId_barang()) {
@@ -150,18 +155,25 @@ public class ProductDetails extends JFrame {
                                 }
                             }
                             if (isThere) {
+//                                System.out.println("hello1");
                                 int jumlah = temp.getJumlah_barang() + jumlahAddCart;
-                                if (jumlah > SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
+//                                System.out.println("stok " + SingletonBarang.getInstance().getProductDetails(productId).getStok_barang());
+                                if (jumlah < SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
                                     new KeranjangController().updateKeranjang(temp.getId_keranjang(), jumlah);
                                     frame.setVisible(false);
                                     new LihatKeranjangScreen();
                                 }
+                                else{
+                                    JOptionPane.showMessageDialog(null, "Kuantitas di keranjang melebihi stok barang!");
+                                }
                             } else {
+//                                System.out.println("hello2");
                                 new KeranjangController().insertKeranjang(productId, jumlahAddCart);
                                 frame.setVisible(false);
                                 new LihatKeranjangScreen();
                             }
                         } else {
+//                            System.out.println("should be in here");
                             new KeranjangController().insertKeranjang(productId, jumlahAddCart);
                             frame.setVisible(false);
                             new LihatKeranjangScreen();
@@ -186,6 +198,7 @@ public class ProductDetails extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 SingletonBarang.getInstance().reset();
                 new HomeScreen();
+                frame.setVisible(false);
             }
         });
         JButton laporToko = new JButton("Lapor Toko");

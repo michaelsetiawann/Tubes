@@ -25,6 +25,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Barang;
 import controller.TokoController;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -37,8 +39,9 @@ public class PanelMenu {
         panelMenu.setBackground(Color.GREEN);
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         Font font2 = new Font("SansSerif", Font.PLAIN, 25);
-        panelMenu.setBounds(0, 0, 1080, 75);
+        panelMenu.setBounds(0, 1, 1080, 75);
         panelMenu.setLayout(null);
+        
         JButton namaApp = new JButton("TOKOMEDIA");
         namaApp.setFont(font2);
         namaApp.setBackground(null);
@@ -53,11 +56,11 @@ public class PanelMenu {
             }
         });
 
-        namaApp.setBounds(0, 0, 200, 75);
+        namaApp.setBounds(0, 2, 200, 75);
         panelMenu.add(namaApp);
 
         JButton transaksi = new JButton("Transaksi");
-        transaksi.setBounds(215, 25, 100, 25);
+        transaksi.setBounds(200, 2, 120, 75);
         transaksi.setFont(font1);
         transaksi.setBackground(null);
         transaksi.setBorderPainted(false);
@@ -78,15 +81,18 @@ public class PanelMenu {
 
         JLabel label = new JLabel();
         label.setText("Cari Produk");
-        label.setBounds(350, 33, 110, 10);
+        label.setBounds(350, 33, 110, 13);
         panelMenu.add(label);
 
         JTextField namaBarang = new JTextField();
         namaBarang.setBounds(425, 27, 150, 30);
         panelMenu.add(namaBarang);
 
-        JButton btnCari = new JButton("Klik Cari");
-        btnCari.setBounds(600, 30, 100, 20);
+        JButton btnCari = new JButton("🔍");
+        btnCari.setBounds(570, 3, 60, 75);
+        btnCari.setFont(font2);
+        btnCari.setBackground(null);
+        btnCari.setBorderPainted(false);
         panelMenu.add(btnCari);
         btnCari.addActionListener(
                 new ActionListener() {
@@ -100,7 +106,11 @@ public class PanelMenu {
 
         if (SingletonProfile.getInstance().getUser() != null) {
             JButton btnLogout = new JButton("Logout");
-            btnLogout.setBounds(710, 30, 100, 20);
+            btnLogout.setFont(font1);
+            btnLogout.setBounds(880, 2, 100, 75);    
+            btnLogout.setBackground(null);
+            btnLogout.setBorderPainted(false);
+            
             panelMenu.add(btnLogout);
             btnLogout.addActionListener(
                     new ActionListener() {
@@ -113,7 +123,7 @@ public class PanelMenu {
             });
             if (TokoController.checkToko(SingletonProfile.getInstance().getUser().getId())) {
             JButton menuToko = new JButton("Menu Toko");
-            menuToko.setBounds(820, 30, 120, 20);
+            menuToko.setBounds(820, 2, 120, 75);
             panelMenu.add(menuToko);
             menuToko.addActionListener(
                     new ActionListener() {
@@ -126,13 +136,15 @@ public class PanelMenu {
             });
             
             } else {
-                JButton regisToko = new JButton("Buat Toko");
-            regisToko.setBounds(820, 30, 120, 20);
-            panelMenu.add(regisToko);
-            regisToko.addActionListener(
+                JButton regisToko = new JButton("Ingin Buat Toko?");
+                regisToko.setFont(font1);
+                regisToko.setBackground(null);
+                regisToko.setBorderPainted(false);
+                regisToko.setBounds(720, 2, 150, 75);
+                panelMenu.add(regisToko);
+                regisToko.addActionListener(
                     new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae
+                @Override                public void actionPerformed(ActionEvent ae
                 ) {
                     frame.setVisible(false);
                     new RegistrasiTokoScreen();
@@ -140,9 +152,13 @@ public class PanelMenu {
             });
             }
             
-
-            JButton btnKeranjang = new JButton("Keranjang");
-            btnKeranjang.setBounds(950, 30, 100, 20);
+//            Icon icon = new ImageIcon("1250px-Shopping_cart_icon.svg.png");
+            JButton btnKeranjang = new JButton("🛒");
+            btnKeranjang.setBounds(640, 7, 60, 75);
+                    
+            btnKeranjang.setFont(font2);
+            btnKeranjang.setBackground(null);
+            btnKeranjang.setBorderPainted(false);
             panelMenu.add(btnKeranjang);
             btnKeranjang.addActionListener(
                     new ActionListener() {
@@ -155,7 +171,10 @@ public class PanelMenu {
             });
         } else {
             JButton btnLogin = new JButton("Login");
-            btnLogin.setBounds(710, 30, 100, 20);
+            btnLogin.setFont(font1);
+            btnLogin.setBackground(null);
+            btnLogin.setBorderPainted(false);
+            btnLogin.setBounds(640, 2, 100, 75);
             panelMenu.add(btnLogin);
             btnLogin.addActionListener(
                     new ActionListener() {

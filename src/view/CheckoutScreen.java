@@ -29,7 +29,6 @@ import model.Barang;
 import model.Keranjang;
 import model.MetodePembayaranEnum;
 import model.StatusPengirimanEnum;
-import static view.LihatKeranjangScreen.frame;
 
 /**
  *
@@ -39,11 +38,10 @@ public class CheckoutScreen extends JFrame implements ActionListener{
     private DefaultTableModel tableModel;
     private JTable tableData;
     private Vector<Object> tableVector;
-    static JFrame frame = new JFrame("Checkout");
+    JFrame frame = new JFrame("Checkout");
     private ArrayList<Keranjang> listKeranjang;
     JLabel labelTotal = new JLabel();
     double total;
-    ArrayList<Alamat> listAlamat;
     
     public CheckoutScreen(ArrayList<Keranjang> keranjangList){
         listKeranjang = keranjangList;
@@ -87,6 +85,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
     }
     private void loadData() {
         int id_user = SingletonProfile.getInstance().getUser().getId();
+        ArrayList<Alamat> listAlamat;
         listAlamat = AlamatController.getInstance().getAll(id_user);
     	String headerTitle[] = {
             "ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang"
@@ -125,8 +124,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             addAlamat.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    new AddAlamatScreen();
-                    loadData();
+                    new AddAlamatScreen(listKeranjang);
+                    frame.setVisible(false);
                 }
             });
             //add alamat
@@ -165,8 +164,8 @@ public class CheckoutScreen extends JFrame implements ActionListener{
             addAlamat.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    new AddAlamatScreen();
-                    loadData();
+                    new AddAlamatScreen(listKeranjang);
+                    frame.setVisible(false);
                 }
             });
             

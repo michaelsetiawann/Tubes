@@ -40,7 +40,6 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     private DefaultTableModel tableModel;
     private JTable tableData;
     private Vector<Object> tableVector;
-    static JFrame frame = new JFrame("Keranjang");
     ArrayList<Keranjang> tableKeranjang;
     ArrayList<Keranjang> selectedItems = new ArrayList<>();
     Font font2 = new Font("SansSerif", Font.PLAIN, 25);
@@ -49,15 +48,18 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     JButton checkout;
     
     public LihatKeranjangScreen() {
+        User user = SingletonProfile.getInstance().getUser();
+        tableKeranjang = null;
+    	tableKeranjang = KeranjangController.getInstance().getAll(user.getId());
         lihatKeranjang();
     }
     
     private void lihatKeranjang() {
+        JFrame frame = new JFrame("Keranjang");
         
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         
-        //panel
         //panel add
         PanelMenu menu = new PanelMenu();
         JPanel panelMenu = menu.getPanel(frame);
@@ -67,6 +69,11 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         scrollPane.setBounds(10,80,1050,190);
         frame.getContentPane().add(scrollPane);
         
+        String headerTitle[] = {
+            "ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang", "Seleksi"
+    	};
+        tableModel = null;
+    	tableModel = new DefaultTableModel(headerTitle, 0);
         frame.add(labelTotal);
         tableData = new JTable(tableModel) {
             public boolean isCellEditable(int row, int column) {
@@ -150,6 +157,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                 public void mouseClicked(MouseEvent e) {
                     //select/deselect product
                     if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
+//                        System.out.println(" in here at least");
                         int selectedRow;
                         selectedRow = tableData.getSelectedRow();
                         int keranjangId = Integer.valueOf(tableData.getValueAt(selectedRow, 0).toString());
@@ -163,9 +171,11 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                             }
                         }
                         if(isThere){
+//                            System.out.println("in here1");
                             selectedItems.remove(keranjang);
                         }
                         else{
+//                            System.out.println("in here 2");
                             selectedItems.add(keranjang);
                         }
                         //alter selected
@@ -186,17 +196,31 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                         if(!selectedItems.isEmpty()){
                             for (Keranjang k : selectedItems) {
                                 KeranjangController.getInstance().deleteKeranjang(k.getId_keranjang());
+                                loadData();
                             }
                         }
                         loadData();
                     }
                 });
         
-        
         checkout = new JButton("Checkout");
         checkout.setBounds(800, 580, 100, 30);
         checkout.addActionListener(this);
         frame.add(checkout);
+        checkout.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        if(!selectedItems.isEmpty()){
+                            frame.setVisible(false);
+                            new CheckoutScreen(selectedItems);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Keranjang anda masih kosong... Yuk belanja~~");
+                        }
+                    }
+                });
+        
         //frame
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
@@ -211,43 +235,34 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
         tableKeranjang = null;
     	tableKeranjang = KeranjangController.getInstance().getAll(user.getId());
         
-    	String headerTitle[] = {
-            "ID Keranjang", "Nama Barang", "Stock Barang", "Harga Barang", "Jumlah Barang", "Seleksi"
-    	};
-        tableModel = null;
-    	tableModel = new DefaultTableModel(headerTitle, 0);
-        
-        if( !selectedItems.isEmpty()){
-            System.out.println("in here1");
+        tableModel.setRowCount(0);
+        if( !selectedItems.isEmpty() && tableKeranjang != null){
+            
             for(Keranjang b : tableKeranjang) {
-                for (Keranjang c : selectedItems) {
-                    if(b.getId_keranjang() == c.getId_keranjang()){
-
-                        Vector<Object> tableVector = new Vector<>();
-                        tableVector.add(b.getId_keranjang());
-                        tableVector.add(b.getBarang().getNama_barang());
-                        tableVector.add(b.getBarang().getStok_barang()); 
-                        tableVector.add(b.getBarang().getHarga_barang());
-                        tableVector.add(b.getJumlah_barang());
-                        tableVector.add("SELECTED");
-                        tableModel.addRow(tableVector);
-                    }
-                    else{
-
-                        Vector<Object> tableVector = new Vector<>();
-                        tableVector.add(b.getId_keranjang());
-                        tableVector.add(b.getBarang().getNama_barang());
-                        tableVector.add(b.getBarang().getStok_barang()); 
-                        tableVector.add(b.getBarang().getHarga_barang());
-                        tableVector.add(b.getJumlah_barang());
-                        tableVector.add("UNSELECTED");
-                        tableModel.addRow(tableVector);
-                    }
+                if(isInArray(b, selectedItems)){
+                    Vector<Object> tableVector = new Vector<>();
+                    tableVector.add(b.getId_keranjang());
+                    tableVector.add(b.getBarang().getNama_barang());
+                    tableVector.add(b.getBarang().getStok_barang()); 
+                    tableVector.add(b.getBarang().getHarga_barang());
+                    tableVector.add(b.getJumlah_barang());
+                    tableVector.add("SELECTED");
+                    tableModel.addRow(tableVector);
+                }
+                else{
+                    Vector<Object> tableVector = new Vector<>();
+                    tableVector.add(b.getId_keranjang());
+                    tableVector.add(b.getBarang().getNama_barang());
+                    tableVector.add(b.getBarang().getStok_barang()); 
+                    tableVector.add(b.getBarang().getHarga_barang());
+                    tableVector.add(b.getJumlah_barang());
+                    tableVector.add("UNSELECTED");
+                    tableModel.addRow(tableVector);
                 }
             }
     	}
         else{
-            System.out.println("in here2");
+//            System.out.println("check2");
             if(tableKeranjang != null){
                 for(Keranjang b : tableKeranjang) {
                     Vector<Object> tableVector = new Vector<>();
@@ -281,14 +296,14 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == checkout){
-            if(!selectedItems.isEmpty()){
-                frame.setVisible(false);
-                new CheckoutScreen(selectedItems);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Keranjang anda masih kosong... Yuk belanja~~");
+    }
+    boolean isInArray(Keranjang x, ArrayList<Keranjang> array){
+        boolean isThere = false;
+        for (Keranjang a : array) {
+            if(x.getId_keranjang() == a.getId_keranjang()){
+                isThere = true;
             }
         }
+        return isThere;
     }
 }
