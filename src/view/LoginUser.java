@@ -84,7 +84,7 @@ public class LoginUser extends JFrame {
                 } 
                 if (loginAdmin.equals("Login Berhasil!")) {
                     JOptionPane.showMessageDialog(null,"Selamat Datang Admin!!!");
-                    new HomeScreen();
+                    new MenuAdmin();
                     frame.dispose();
                     //masukin tujuan dibawah
                 } 

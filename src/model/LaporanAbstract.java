@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author acer
  */
-public abstract class LaporanAbstract {
+public abstract class LaporanAbstract implements StatusLaporanInterface{
     int id_laporan;
     Date tanggal;
     String komentar;
