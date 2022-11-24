@@ -141,7 +141,6 @@ public class TransaksiController {
             while (res.next()) {
                 Transaksi trans = map(res);
                 listTrans.add(trans);
-                System.out.println("database aman");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -217,7 +216,6 @@ public class TransaksiController {
             while (res.next()) {
                 Transaksi trans = map(res);
                 listTrans.add(trans);
-                System.out.println("database aman");
             }
         } catch (Exception e) {
             e.printStackTrace();
