@@ -50,7 +50,7 @@ public class UserController {
                     String jenis_kelamin = result.getString("jenis_kelamin");
                     String no_telepon = result.getString("no_telepon");
                     String email = result.getString("email");
-                    
+
                     User user = new User(nama_lengkap_pembeli, tanggal_lahir, jenis_kelamin, no_telepon, email, id_user, userName, passwordTransporter);
 
                     SingletonProfile.getInstance().setUser(user);
@@ -207,7 +207,31 @@ public class UserController {
 
         } catch (SQLException e) {
             if (e.getMessage().contains("'nama_barang'")) {
-                JOptionPane.showMessageDialog(null, "barang sudah di ada");
+                JOptionPane.showMessageDialog(null, "barang sudah ada");
+            } else {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error fatal pusing!");
+            }
+        }
+    }
+
+    public static void updateProduk(String nama_barang, String stok_barang, String harga_barang, String deskripsi_barang) {
+        DatabaseHandler conn = new DatabaseHandler();
+        conn.connect();
+        int id_user = (SingletonProfile.getInstance().getUser().getId());
+        System.out.println(id_user);
+        String query = "UPDATE user SET nama_barang = ?, stok_barang = ?, harga_barang = ?, deskripsi_barang = ?";
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, nama_barang);
+            stmt.setString(2, stok_barang);
+            stmt.setString(3, harga_barang);
+            stmt.setString(4, deskripsi_barang);
+            stmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Berhasil melakukan update produk!");
+        } catch (SQLException e) {
+            if (e.getMessage().contains("'nama_barang'")) {
+                JOptionPane.showMessageDialog(null, "barang sudah ada");
             } else {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Error fatal pusing!");
