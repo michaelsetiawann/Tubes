@@ -70,12 +70,6 @@ public class RegistrasiTokoScreen {
         JTextArea toko = new JTextArea();
         toko.setBounds(175, 280, 300, 200);
         frame.add(toko);
-        
-
-        
-        
-        
-
 
         JButton reg = new JButton("registrasi");
         reg.setBounds(55, 500, 100, 40);
