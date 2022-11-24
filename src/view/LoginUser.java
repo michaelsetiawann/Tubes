@@ -43,7 +43,7 @@ public class LoginUser extends JFrame {
         label2.setBounds(144, 93, 106, 14);
         contentPane.add(label2);
 
-        JTextField username = new JTextField("duh981");
+        JTextField username = new JTextField("BFRtoTheMoon");
         username.setBounds(265, 90, 111, 20);
         contentPane.add(username);
         username.setColumns(10);

@@ -149,12 +149,66 @@ public class TransaksiController {
         return listTrans;
     }
     
-    public static ArrayList<Transaksi> getTransaksiToko(int id_toko) {
+//    public static ArrayList<Transaksi> getTransaksiBerdasarkanStatus(int enumValue) {
+//        ArrayList<Transaksi> listTrans = new ArrayList<>();
+//        aa.connect();
+//        try {
+//            String que = "Select * from transaksi where id_user = '" + id_user + "' WHERE ";
+//            PreparedStatement state = aa.con.prepareStatement(que);
+//            ResultSet res = state.executeQuery(que);
+//            StatusPengirimanEnum status = null;
+//
+//            MetodePembayaranEnum metodePembayaran = null;
+//            while (res.next()) {
+//                Transaksi trans = map(res);
+//                listTrans.add(trans);
+//                System.out.println("database aman");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return listTrans;
+//    }
+    
+//    public static ArrayList<Transaksi> getTransaksiToko() {
+//        ArrayList<Transaksi> listTrans = new ArrayList<>();
+//        aa.connect();
+//        int id_toko = SingletonProfile.getInstance().getUser().getId();
+//        try {
+//            String que = "SELECT * FROM transaksi\n" +
+//                        "WHERE id_barang IN (SELECT id_barang FROM barang WHERE id_toko = "+id_toko+");";
+//            PreparedStatement state = aa.con.prepareStatement(que);
+//            ResultSet res = state.executeQuery(que);
+//            StatusPengirimanEnum status = null;
+//
+//            MetodePembayaranEnum metodePembayaran = null;
+//            while (res.next()) {
+//                Transaksi trans = map(res);
+//                listTrans.add(trans);
+//                System.out.println("database aman");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return listTrans;
+//    }
+    
+    public static ArrayList<Transaksi> getTransaksiTokoBerdasarkanEnumValue(int enumValue) {
         ArrayList<Transaksi> listTrans = new ArrayList<>();
         aa.connect();
-        try {
-            String que = "SELECT * FROM transaksi\n" +
+        int id_toko = SingletonProfile.getInstance().getUser().getId();
+        String que = "";
+        if(enumValue == -1){
+            que = "SELECT * FROM transaksi\n" +
                         "WHERE id_barang IN (SELECT id_barang FROM barang WHERE id_toko = "+id_toko+");";
+        }
+        else{
+            que = "SELECT * FROM transaksi\n" +
+                        "WHERE id_barang IN (SELECT id_barang FROM barang WHERE id_toko = "+id_toko+")"
+                    + "&& status = "+enumValue+";";
+        }
+        try {
+            
             PreparedStatement state = aa.con.prepareStatement(que);
             ResultSet res = state.executeQuery(que);
             StatusPengirimanEnum status = null;
@@ -171,30 +225,16 @@ public class TransaksiController {
         return listTrans;
     }
     
-    public ArrayList<Transaksi> konfirmasiTransaksi() {
+    public ArrayList<Transaksi> setStatusTransaksi(int status) {
         ArrayList<Transaksi> listTrans = new ArrayList<>();
         aa.connect();
         int id_transaksi = TransaksiController.getInstance().getTransaksi().getId_transaksi();
         try {
-            String que = "UPDATE transaksi SET status = 1 WHERE id_transaksi = " + id_transaksi;
+            String que = "UPDATE transaksi SET status = "+status+" WHERE id_transaksi = " + id_transaksi;
             PreparedStatement state = aa.con.prepareStatement(que);
             state.executeUpdate(que);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listTrans;
-    }
-    
-    public ArrayList<Transaksi> batalkanTransaksi() {
-        ArrayList<Transaksi> listTrans = new ArrayList<>();
-        aa.connect();
-        int id_transaksi = TransaksiController.getInstance().getTransaksi().getId_transaksi();
-        try {
-            String que = "UPDATE transaksi SET status = 5 WHERE id_transaksi = " + id_transaksi;
-            PreparedStatement state = aa.con.prepareStatement(que);
-            state.executeUpdate(que);
-            
+            state.close();
+            aa.con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

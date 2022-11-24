@@ -42,8 +42,8 @@ public class PanelMenuToko {
         namaApp.setBounds(0, 0, 200, 75);
         panelMenu.add(namaApp);
 
-        JButton lihatProduk = new JButton("Lihat Produk di Toko");
-        lihatProduk.setBounds(215, 25, 180, 25);
+        JButton lihatProduk = new JButton("Semua Pesanan");
+        lihatProduk.setBounds(200, 0, 150, 75);
         lihatProduk.setFont(font1);
         lihatProduk.setBackground(null);
         lihatProduk.setBorderPainted(false);
@@ -53,12 +53,13 @@ public class PanelMenuToko {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
+                new KonfirmasiPesananMasukScreen(-1);
+                frame.dispose();
             }
         });
 
-        JButton tambah = new JButton("Tambah Produk");
-        tambah.setBounds(410, 25, 150, 25);
+        JButton tambah = new JButton("Pesanan Baru");
+        tambah.setBounds(365, 0, 130, 75);
         panelMenu.add(tambah);
         tambah.setFont(font1);
         tambah.setBackground(null);
@@ -68,11 +69,12 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                new TambahProduk();
+                new KonfirmasiPesananMasukScreen(0);
+                frame.dispose();
             }
         });
-        JButton update = new JButton("Update Produk");
-        update.setBounds(575, 25, 130, 25);
+        JButton update = new JButton("Siap Dikirim");
+        update.setBounds(505, 0, 120, 75);
         panelMenu.add(update);
         update.setFont(font1);
         update.setBackground(null);
@@ -82,11 +84,12 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-
+                new KonfirmasiPesananMasukScreen(1);
+                frame.dispose();
             }
         });
-        JButton konfirmasi = new JButton("Konfirmasi");
-        konfirmasi.setBounds(740, 25, 130, 25);
+        JButton konfirmasi = new JButton("Dalam Pengiriman");
+        konfirmasi.setBounds(630, 0, 170, 75);
         panelMenu.add(konfirmasi);
         konfirmasi.setFont(font1);
         konfirmasi.setBackground(null);
@@ -94,14 +97,14 @@ public class PanelMenuToko {
         konfirmasi.addActionListener(
                 new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae
-            ) {
-
+            public void actionPerformed(ActionEvent ae) {
+                new KonfirmasiPesananMasukScreen(2);
+                frame.dispose();
             }
         });
         
-        JButton riwayat = new JButton("Riwayat");
-        riwayat.setBounds(880, 25, 130, 25);
+        JButton riwayat = new JButton("Pesanan Selesai");
+        riwayat.setBounds(800, 0, 150, 75);
         panelMenu.add(riwayat);
         riwayat.setFont(font1);
         riwayat.setBackground(null);
@@ -111,9 +114,57 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-
+                new KonfirmasiPesananMasukScreen(4);
+                frame.dispose();
             }
         });
+        
+        JButton dibatalkan = new JButton("Dibatalkan");
+        dibatalkan.setBounds(933, 0, 130, 75);
+        panelMenu.add(dibatalkan);
+        dibatalkan.setFont(font1);
+        dibatalkan.setBackground(null);
+        dibatalkan.setBorderPainted(false);
+        dibatalkan.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {
+                new KonfirmasiPesananMasukScreen(5);
+                frame.dispose();
+            }
+        });
+        
+        JButton tambahProduk = new JButton("Tambah Produk");
+        tambahProduk.setBounds(500, 200, 130, 25);
+        panelMenu.add(tambahProduk);
+        tambahProduk.setFont(font1);
+        tambahProduk.setBackground(null);
+        tambahProduk.setBorderPainted(false);
+        tambahProduk.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {
+                new TambahProduk();
+                frame.dispose();            
+            }
+        });
+        
+        JButton lihatProdukToko = new JButton("Lihat produk2 toko");
+        lihatProdukToko.setBounds(500, 300, 130, 25);
+        panelMenu.add(lihatProdukToko);
+        lihatProdukToko.setFont(font1);
+        lihatProdukToko.setBackground(null);
+        lihatProdukToko.setBorderPainted(false);
+        lihatProdukToko.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {          
+            }
+        });
+        
 
         return panelMenu;
     }
