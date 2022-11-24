@@ -157,5 +157,37 @@ public class UserController {
         return jk;
     }
     
+    public void updateUser(String nama_lengkap_pembeli, String no_telepon, String username, String password, String email){
+        DatabaseHandler conn = new DatabaseHandler();
+        conn.connect();
+        String query = "INSERT user SET nama_lengkap_pembeli = ?, no_telepon = ?, username = ?, password = ?, email = ? WHERE id_user = ?";
+        String id_user = String.valueOf(SingletonProfile.getInstance().getUser().getId());
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setString(1, nama_lengkap_pembeli);
+            stmt.setString(2, no_telepon);
+            stmt.setString(3, username);
+            stmt.setString(4, password);
+            stmt.setString(5, email);
+            stmt.setString(6, email);
+            stmt.setString(7, id_user);
+            stmt.executeUpdate(query);
+            JOptionPane.showMessageDialog(null, "Berhasil melakukan update profil!");
+
+        } catch (SQLException e) {
+            if (e.getMessage().contains("'email'")) {
+                JOptionPane.showMessageDialog(null, "email sudah digunakan");
+            } else if (e.getMessage().contains("'password'")) {
+                JOptionPane.showMessageDialog(null, "password sudah digunakan");
+            } else if (e.getMessage().contains("'username'")) {
+                JOptionPane.showMessageDialog(null, "username sudah digunakan");
+            } else if (e.getMessage().contains("'no_telepon'")) {
+                JOptionPane.showMessageDialog(null, "telepon sudah digunakan");
+            } else {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error fatal pusing!");
+            }
+        }
+    }
     
 }

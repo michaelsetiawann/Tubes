@@ -106,11 +106,22 @@ public class PanelMenu {
 
         if (SingletonProfile.getInstance().getUser() != null) {
             JButton btnLogout = new JButton("Logout");
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+            btnLogout.setBounds(720, 30, 100, 20);
+=======
+            btnLogout.setFont(font1);
+            btnLogout.setBounds(820, 2, 100, 75);
+            btnLogout.setBackground(null);
+            btnLogout.setBorderPainted(false);
+>>>>>>> Stashed changes
+=======
             btnLogout.setFont(font1);
             btnLogout.setBounds(880, 2, 100, 75);
             btnLogout.setBackground(null);
             btnLogout.setBorderPainted(false);
 
+>>>>>>> main
             panelMenu.add(btnLogout);
             btnLogout.addActionListener(
                     new ActionListener() {
@@ -121,12 +132,56 @@ public class PanelMenu {
                     new LogoutController();
                 }
             });
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+            JButton regisToko = new JButton("Buat Toko");
+            regisToko.setBounds(840, 30, 120, 20);
+            panelMenu.add(regisToko);
+            regisToko.addActionListener(
+=======
+            
+            String name = SingletonProfile.getInstance().getUser().getUsername();
+            JLabel lblName = new JLabel(name);
+            lblName.setBounds(990, 2, 100, 75);
+            panelMenu.add(lblName);
+            
+            JButton btnProfile = new JButton("👤");
+            btnProfile.setFont(font2);
+            btnProfile.setBounds(920, 2, 70, 75);
+            btnProfile.setBackground(null);
+            btnProfile.setBorderPainted(false);
+            panelMenu.add(btnProfile);
+            btnProfile.addActionListener(
+>>>>>>> Stashed changes
+                    new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae
+                ) {
+<<<<<<< Updated upstream
+                    frame.setVisible(false);
+                    new RegistrasiTokoScreen();
+                }
+            });
+=======
+                    frame.dispose();
+                    new LihatProfille();
+                }
+            });
+
+            
+            
+=======
+>>>>>>> main
             if (TokoController.checkToko(SingletonProfile.getInstance().getUser().getId())) {
                 JButton menuToko = new JButton("Menu Toko");
                 menuToko.setFont(font1);
                 menuToko.setBackground(null);
                 menuToko.setBorderPainted(false);
+<<<<<<< HEAD
+                menuToko.setBounds(710, 2, 120, 75);
+=======
                 menuToko.setBounds(750, 2, 120, 75);
+>>>>>>> main
                 panelMenu.add(menuToko);
                 menuToko.addActionListener(
                         new ActionListener() {
@@ -137,6 +192,32 @@ public class PanelMenu {
                         new MenuTokoScreen();
                     }
                 });
+<<<<<<< HEAD
+
+            } else {
+                JButton regisToko = new JButton("Ingin Buat Toko?");
+                regisToko.setFont(font1);
+                regisToko.setBackground(null);
+                regisToko.setBorderPainted(false);
+                regisToko.setBounds(720, 2, 150, 75);
+                panelMenu.add(regisToko);
+                regisToko.addActionListener(
+                        new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae
+                    ) {
+                        frame.setVisible(false);
+                        new RegistrasiTokoScreen();
+                    }
+                });
+            }
+
+//            Icon icon = new ImageIcon("1250px-Shopping_cart_icon.svg.png");
+            JButton btnKeranjang = new JButton("🛒");
+            btnKeranjang.setBounds(640, 7, 60, 75);
+>>>>>>> Stashed changes
+=======
+>>>>>>> main
 
             } else {
                 JButton regisToko = new JButton("Ingin Buat Toko?");
