@@ -160,8 +160,9 @@ public class UserController {
     public void updateUser(String nama_lengkap_pembeli, String no_telepon, String username, String password, String email){
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
-        String query = "INSERT user SET nama_lengkap_pembeli = ?, no_telepon = ?, username = ?, password = ?, email = ? WHERE id_user = ?";
-        String id_user = String.valueOf(SingletonProfile.getInstance().getUser().getId());
+        int id_user = (SingletonProfile.getInstance().getUser().getId());
+        System.out.println(id_user);
+        String query = "UPDATE user SET nama_lengkap_pembeli = ?, no_telepon = ?, username = ?, password = ?, email = ? WHERE id_user = ?";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, nama_lengkap_pembeli);
@@ -169,8 +170,7 @@ public class UserController {
             stmt.setString(3, username);
             stmt.setString(4, password);
             stmt.setString(5, email);
-            stmt.setString(6, email);
-            stmt.setString(7, id_user);
+//            stmt.setInt(6, id_user);
             stmt.executeUpdate(query);
             JOptionPane.showMessageDialog(null, "Berhasil melakukan update profil!");
 

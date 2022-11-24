@@ -102,22 +102,22 @@ public class LaporController {
         return listLaporanBarang;
     }
     
-    public static void approveLaporanBarang (int id_laporan){
+    public static void approveLaporanBarang (int id_laporan, int status){
         aa.connect();
         try{
-            PreparedStatement state = aa.con.prepareStatement("UPDATE laporan_barang SET status = 1 WHERE id_laporan = '"+id_laporan+"'");
+            PreparedStatement state = aa.con.prepareStatement("UPDATE laporan_barang SET status = '"+status+"' WHERE id_laporan = '"+id_laporan+"'");
             state.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Berhasil approve laporan");
+            System.out.println("Berhasil update");
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
     }
-    public static void approveLaporanToko (int id_laporan){
+    public static void approveLaporanToko (int id_laporan, int status){
         aa.connect();
         try{
-            PreparedStatement state = aa.con.prepareStatement("UPDATE laporan_toko SET status = 1 WHERE id_laporan = '"+id_laporan+"'");
+            PreparedStatement state = aa.con.prepareStatement("UPDATE laporan_toko SET status = '"+status+"' WHERE id_laporan = '"+id_laporan+"'");
             state.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Berhasil approve laporan");
+            System.out.println("Berhasil update");
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }

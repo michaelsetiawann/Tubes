@@ -5,106 +5,129 @@
  */
 package view;
 
+import controller.SingletonBarang;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import model.Barang;
 import model.LaporanBarang;
+import model.StatusLaporanInterface;
 
 /**
  *
  * @author acer
  */
-public class BlokirBarang {
-    
-    public BlokirBarang(){
+public class BlokirBarang implements StatusLaporanInterface {
+
+    public BlokirBarang() {
         menampilkanLaporanBarang();
     }
-    
-    public static void menampilkanLaporanBarang(){
-        
-        ArrayList<LaporanBarang> listLaporan  = new ArrayList<>();
+    private int status_barang = WAITING;
+    private DefaultTableModel tableModel;
+    private JTable jTable;
+    private Vector<Object> table;
+
+    public void menampilkanLaporanBarang() {
+
+        ArrayList<LaporanBarang> listLaporan = new ArrayList<>();
         listLaporan = controller.LaporController.getLaporBarang();
-        
         JFrame view = new JFrame();
         view.setSize(1100, 800);
         view.setLocationRelativeTo(null);
         view.getContentPane().setLayout(null);
         view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        JLabel judulLaporanId = new JLabel("Laporan ID");
-        judulLaporanId.setBounds(20, 20, 150, 50);
-        JLabel judulIdBarang = new JLabel("ID Barang");
-        judulIdBarang.setBounds(180, 20, 150, 50);
-        JLabel judulIdUser = new JLabel("ID User");
-        judulIdUser.setBounds(340, 20, 150, 50);
-        JLabel judulTanggal = new JLabel("Tanggal");
-        judulTanggal.setBounds(500, 20, 150, 50);
-        JLabel judulPesan = new JLabel("Isi Pesan");
-        judulPesan.setBounds(660, 20, 150, 50);
-        JLabel judulStatus = new JLabel("Status");
-        judulStatus.setBounds(820, 20, 150, 50);
-        
-        JLabel[] labelsLaporanId = new JLabel[listLaporan.size()];
-        JLabel[] labelsIdBarang = new JLabel[listLaporan.size()];
-        JLabel[] labelsIdUser = new JLabel[listLaporan.size()];
-        JLabel[] labelsTanggal = new JLabel[listLaporan.size()];
-        JLabel[] labelsPesan = new JLabel[listLaporan.size()];
-        JLabel[] labelsStatus = new JLabel[listLaporan.size()];
-        int panjang = 150;
-        int lebar = 100;
-        int y=80;
-        for(int i=0; i<listLaporan.size(); i++){
-            labelsLaporanId[i] = new JLabel(""+listLaporan.get(i).getId_laporan());
-            labelsIdBarang[i] = new JLabel(""+listLaporan.get(i).getBarang());
-            labelsIdUser[i] = new JLabel(""+listLaporan.get(i).getUser());
-            labelsTanggal[i] = new JLabel(""+listLaporan.get(i).getTanggal());
-            labelsPesan[i] = new JLabel(listLaporan.get(i).getKomentar());
-            labelsStatus[i] = new JLabel(""+listLaporan.get(i).getStatus());
-            int x=20;
-            labelsLaporanId[i].setBounds(x, y, panjang, lebar);
-            x += panjang + 10;
-            labelsIdBarang[i].setBounds(x, y, panjang, lebar);
-            x += panjang+10;
-            labelsIdUser[i].setBounds(x, y, panjang, lebar);
-            x += panjang + 10;
-            labelsTanggal[i].setBounds(x, y, panjang, lebar);
-            x += panjang + 10;
-            labelsPesan[i].setBounds(x, y, panjang, lebar);
-            x += panjang + 10;
-            labelsStatus[i].setBounds(x, y, panjang, lebar);
-            y += lebar + 10;
-            view.add(labelsLaporanId[i]);
-            view.add(labelsIdBarang[i]);
-            view.add(labelsIdUser[i]);
-            view.add(labelsTanggal[i]);
-            view.add(labelsPesan[i]);
-            view.add(labelsStatus[i]);
-        }
-        y=80;
-        JButton[] buttonApprove = new JButton[listLaporan.size()];
-        for(int i=0; i<listLaporan.size(); i++){
-            buttonApprove[i] = new JButton("Approve");
-            buttonApprove[i].setBounds(980, y, 100, lebar);
-            y += lebar + 10;
-            view.add(buttonApprove[i]);
-        }
-        for(int i=0; i<buttonApprove.length; i++){
-            int index = listLaporan.get(i).getId_laporan();
-            buttonApprove[i].addActionListener(new ActionListener(){
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    controller.LaporController.approveLaporanBarang(index);
-                    view.dispose();
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 80, 1050, 500);
+        view.getContentPane().add(scrollPane);
+
+        tableModel = new DefaultTableModel();
+        jTable = new JTable(tableModel) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        scrollPane.setViewportView(jTable);
+
+        jTable.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+//            @Override
+
+            public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                    int selectedRow = jTable.getSelectedRow();
+                    int lapor_id = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
+                    if (JOptionPane.showConfirmDialog(null, "APPROVE?", "REJECT",
+                            JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        status_barang = ACCEPTED;
+                        JOptionPane.showMessageDialog(null, "Approve Berhasil!");
+                    } else {
+                        status_barang = REJECTED;
+                        JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
+                    }
+                    controller.LaporController.approveLaporanBarang(lapor_id, status_barang);
                 }
-            });
+            }
+        });
+
+        String[] column = {"ID Laporan", "ID Barang", "ID User", "Tanggal", "Isi Pesan", "Status"};
+        DefaultTableModel tableModel = new DefaultTableModel(column, 0);
+        for (int i = 0; i < listLaporan.size(); i++) {
+            int id_laporan = listLaporan.get(i).getId_laporan();
+            int id_barang = listLaporan.get(i).getBarang();
+            int id_user = listLaporan.get(i).getUser();
+            Date tanggal = listLaporan.get(i).getTanggal();
+            String isi_pesan = listLaporan.get(i).getKomentar();
+            int status = listLaporan.get(i).getStatus();
+            tableModel.addRow(new Object[]{id_barang, id_laporan, id_user, tanggal, isi_pesan, status});
         }
-        view.add(judulLaporanId);
-        view.add(judulIdBarang);
-        view.add(judulIdUser);
-        view.add(judulTanggal);
-        view.add(judulPesan);
-        view.add(judulStatus);
+        
+        JButton kembali = new JButton("Kembali");
+        kembali.setBounds(10, 10, 100, 40);
+        kembali.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.dispose();
+            }
+        });
+        
+        view.add(kembali);
+        jTable.setModel(tableModel);
+
         view.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new BlokirBarang();
     }
 }
