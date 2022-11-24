@@ -45,18 +45,28 @@ public class ProductDetails extends JFrame {
         int qty = SingletonBarang.getInstance().getProductDetails(productId).getStok_barang();
         double price = SingletonBarang.getInstance().getProductDetails(productId).getHarga_barang();
         String descriptionText = SingletonBarang.getInstance().getProductDetails(productId).getDeskripsi_barang();
-
+        if(SingletonProfile.getInstance().getUser() != null){
+            SingletonBarang.getInstance().tambahPengunjung(productId);
+        }
+        
 //        JLabel lblProductName = new JLabel(namaBarang);
 //        lblProductName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 //        lblProductName.setBounds(38, 37, 1003, 34);
 //        frame.getContentPane().add(lblProductName);
         inputNamaBarang = new JLabel();
         inputNamaBarang.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        inputNamaBarang.setBounds(38, 37, 1003, 34);
+        inputNamaBarang.setBounds(38, 37, 1002, 34);
 //        inputNamaBarang.setEditable(false);
         inputNamaBarang.setText(namaBarang);
-        System.out.println(inputNamaBarang.getText());
         frame.getContentPane().add(inputNamaBarang);
+        
+        JLabel viewedBy = new JLabel();
+        viewedBy.setFont(new Font("Tahoma", Font.ITALIC, 11));
+        viewedBy.setBounds(38, 65, 1003, 34);
+//        inputNamaBarang.setEditable(false);
+        String viewed = String.valueOf(SingletonBarang.getInstance().getPengunjung(productId));
+        viewedBy.setText("Viewed by " + viewed);
+        frame.getContentPane().add(viewedBy);
 //        inputNamaBarang.setColumns(10);
 
         JLabel lblQuantity = new JLabel("Quantity");

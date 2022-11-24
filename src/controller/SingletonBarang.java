@@ -166,12 +166,45 @@ public class SingletonBarang {
         conn.connect();
         try {
             java.sql.Statement stat = conn.con.createStatement();
-            stat.executeUpdate("UPDATE barang SET stok_barang = '" + jumlah_barang_sekarang + "' WHERE id_barang= '" + id_barang + "'");
-//            System.out.println(result);
+            stat.executeUpdate("UPDATE barang SET stok_barang = '" + jumlah_barang_sekarang + "' WHERE id_barang= '" + id_barang + "'");        } catch (SQLException e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+    }
+    
+    public void tambahPengunjung(int id_barang) {
+        conn.connect();
+        try {
+            java.sql.Statement stat = conn.con.createStatement();
+            int id_user = SingletonProfile.getInstance().getUser().getId();
+            
+            stat.executeUpdate("INSERT INTO viewed (id_user, id_barang) VALUES ("+id_user+","+id_barang+")");
         } catch (SQLException e) {
             e.printStackTrace();
             // TODO: handle exception
         }
+    }
+    
+    public int getPengunjung(int id_barang) {
+        conn.connect();
+        int jumlah_pengunjung = 0;
+        try {
+            java.sql.Statement stat = conn.con.createStatement();
+//            Statement s = cd.createStatement();
+//            ResultSet r = s.executeQuery("SELECT COUNT(*) AS recordCount FROM FieldMaster");
+//            r.next();
+//            int count = r.getInt("recordCount");
+//            r.close();
+//            System.out.println("MyTable has " + count + " row(s).");
+            ResultSet result = stat.executeQuery("SELECT COUNT(id_user) AS count FROM viewed WHERE id_barang = " + id_barang);
+            result.next();
+            jumlah_pengunjung = result.getInt("count");
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // TODO: handle exception
+        }
+        return jumlah_pengunjung;
     }
 
     public Barang getBarang() {
