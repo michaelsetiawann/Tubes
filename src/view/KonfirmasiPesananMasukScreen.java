@@ -50,18 +50,43 @@ public class KonfirmasiPesananMasukScreen extends JFrame implements ActionListen
         User user = SingletonProfile.getInstance().getUser();
         tableTransaksi = null;
     	tableTransaksi = TransaksiController.getInstance().getTransaksiTokoBerdasarkanEnumValue(enumValue);
-        lihatKeranjang();
+        lihatTransaksi();
     }
     
-    private void lihatKeranjang() {
-        JFrame frame = new JFrame("Daftar Pesanan");
+    private void lihatTransaksi() {
+        JFrame frame = new JFrame();
+        switch (enumValue){
+            case -1:
+                frame.setTitle("Semua Pesanan");
+                break;
+            case 0:
+                frame.setTitle("Pesanan Menunggu Konfirmasi");
+                break;
+            case 1:
+                frame.setTitle("Pesanan Menunggu Dikirim");
+                break;
+            case 2:
+                frame.setTitle("Pesanan Dijalan");
+                break;
+            case 3:
+                break;
+            case 4:
+                frame.setTitle("Pesanan Selesai");
+                break;
+            case 5:
+                frame.setTitle("Pesanan Dibatalkan");
+                break;
+            default:
+                break;
+        }
+        
         
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
         
         //panel add
-        PanelMenuToko menu = new PanelMenuToko();
-        JPanel panelMenu = menu.getPanelToko(frame);
+        PanelMenuTokoPesanan menu = new PanelMenuTokoPesanan();
+        JPanel panelMenu = menu.getPanelToko(frame, enumValue);
         frame.add(panelMenu);
         
         JScrollPane scrollPane = new JScrollPane();

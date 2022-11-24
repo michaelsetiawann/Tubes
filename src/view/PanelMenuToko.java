@@ -34,7 +34,7 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                frame.dispose();
+                frame.setVisible(false);
                 new HomeScreen();
             }
         });
@@ -42,8 +42,8 @@ public class PanelMenuToko {
         namaApp.setBounds(0, 0, 200, 75);
         panelMenu.add(namaApp);
 
-        JButton lihatProduk = new JButton("Semua Pesanan");
-        lihatProduk.setBounds(200, 0, 150, 75);
+        JButton lihatProduk = new JButton("Lihat Produk di Toko");
+        lihatProduk.setBounds(215, 25, 180, 25);
         lihatProduk.setFont(font1);
         lihatProduk.setBackground(null);
         lihatProduk.setBorderPainted(false);
@@ -53,13 +53,12 @@ public class PanelMenuToko {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new KonfirmasiPesananMasukScreen(-1);
-                frame.dispose();
+
             }
         });
 
-        JButton tambah = new JButton("Pesanan Baru");
-        tambah.setBounds(365, 0, 130, 75);
+        JButton tambah = new JButton("Tambah Produk");
+        tambah.setBounds(410, 25, 150, 25);
         panelMenu.add(tambah);
         tambah.setFont(font1);
         tambah.setBackground(null);
@@ -69,27 +68,27 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                new KonfirmasiPesananMasukScreen(0);
-                frame.dispose();
+                new TambahProduk();
             }
         });
-        JButton update = new JButton("Siap Dikirim");
-        update.setBounds(505, 0, 120, 75);
-        panelMenu.add(update);
-        update.setFont(font1);
-        update.setBackground(null);
-        update.setBorderPainted(false);
-        update.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae
-            ) {
-                new KonfirmasiPesananMasukScreen(1);
-                frame.dispose();
-            }
-        });
-        JButton konfirmasi = new JButton("Dalam Pengiriman");
-        konfirmasi.setBounds(630, 0, 170, 75);
+        //abis klik di tabel baru nongol halaman produk, tpi beda ama productdetails, mirip2, minus add to card etc
+        
+//        JButton update = new JButton("Update Produk");
+//        update.setBounds(575, 25, 130, 25);
+//        panelMenu.add(update);
+//        update.setFont(font1);
+//        update.setBackground(null);
+//        update.setBorderPainted(false);
+//        update.addActionListener(
+//                new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae
+//            ) {
+//
+//            }
+//        });
+        JButton konfirmasi = new JButton("Lihat Pesanan");
+        konfirmasi.setBounds(740, 25, 130, 25);
         panelMenu.add(konfirmasi);
         konfirmasi.setFont(font1);
         konfirmasi.setBackground(null);
@@ -97,75 +96,29 @@ public class PanelMenuToko {
         konfirmasi.addActionListener(
                 new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
-                new KonfirmasiPesananMasukScreen(2);
-                frame.dispose();
-            }
-        });
-        
-        JButton riwayat = new JButton("Pesanan Selesai");
-        riwayat.setBounds(800, 0, 150, 75);
-        panelMenu.add(riwayat);
-        riwayat.setFont(font1);
-        riwayat.setBackground(null);
-        riwayat.setBorderPainted(false);
-        riwayat.addActionListener(
-                new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                new KonfirmasiPesananMasukScreen(4);
                 frame.dispose();
+                new KonfirmasiPesananMasukScreen(0);
             }
         });
-        
-        JButton dibatalkan = new JButton("Dibatalkan");
-        dibatalkan.setBounds(933, 0, 130, 75);
-        panelMenu.add(dibatalkan);
-        dibatalkan.setFont(font1);
-        dibatalkan.setBackground(null);
-        dibatalkan.setBorderPainted(false);
-        dibatalkan.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae
-            ) {
-                new KonfirmasiPesananMasukScreen(5);
-                frame.dispose();
-            }
-        });
-        
-        JButton tambahProduk = new JButton("Tambah Produk");
-        tambahProduk.setBounds(500, 200, 130, 25);
-        panelMenu.add(tambahProduk);
-        tambahProduk.setFont(font1);
-        tambahProduk.setBackground(null);
-        tambahProduk.setBorderPainted(false);
-        tambahProduk.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae
-            ) {
-                new TambahProduk();
-                frame.dispose();            
-            }
-        });
-        
-        JButton lihatProdukToko = new JButton("Lihat produk2 toko");
-        lihatProdukToko.setBounds(500, 300, 130, 25);
-        panelMenu.add(lihatProdukToko);
-        lihatProdukToko.setFont(font1);
-        lihatProdukToko.setBackground(null);
-        lihatProdukToko.setBorderPainted(false);
-        lihatProdukToko.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae
-            ) {          
-            }
-        });
-        
+        //riwayat jdi masuk pesanan, di bagian selesai
+//        JButton riwayat = new JButton("Riwayat");
+//        riwayat.setBounds(880, 25, 130, 25);
+//        panelMenu.add(riwayat);
+//        riwayat.setFont(font1);
+//        riwayat.setBackground(null);
+//        riwayat.setBorderPainted(false);
+//        riwayat.addActionListener(
+//                new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae
+//            ) {
+//
+//            }
+//        });
 
         return panelMenu;
     }
 }
+
