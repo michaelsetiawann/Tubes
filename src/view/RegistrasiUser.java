@@ -25,6 +25,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import controller.DateLabelFormatter;
 import controller.SingletonProfile;
+import javax.swing.JCheckBox;
 
 /**
  *
@@ -67,6 +68,20 @@ public class RegistrasiUser extends JFrame {
         password.setBounds(103, 75, 86, 20);
         contentPane.add(password);
 
+        JCheckBox showPassword = new JCheckBox("Show Password");
+        showPassword.setBounds(195, 74, 150, 25);
+        showPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    password.setEchoChar((char) 0);
+                } else {
+                    password.setEchoChar('•');
+                }
+            }
+        });
+        contentPane.add(showPassword);
+
         JLabel label3 = new JLabel("Nama Lengkap");
         label3.setBounds(10, 124, 86, 14);
         contentPane.add(label3);
@@ -80,7 +95,6 @@ public class RegistrasiUser extends JFrame {
         label4.setBounds(10, 163, 86, 14);
         contentPane.add(label4);
 
-//        JTextField tanggalLahir = new JTextField();
         UtilDateModel model = new UtilDateModel();
         Properties p = new Properties();
         p.put("text.today", "Today");

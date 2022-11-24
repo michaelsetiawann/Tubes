@@ -87,7 +87,8 @@ public class EditProfille {
         JTextField txtUsername = new JTextField();
         txtUsername.setBounds(200, 275, 150, 25);
         txtUsername.setText(username);
-        JPasswordField txtPassword = new JPasswordField();
+        String passwordd = SingletonProfile.getInstance().getUser().getPassword();
+        JPasswordField txtPassword = new JPasswordField(passwordd);
         txtPassword.setBounds(200, 310, 150, 25);
         JCheckBox showPassword = new JCheckBox("Show Password");
         showPassword.setBounds(360, 310, 150, 25);
