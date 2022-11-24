@@ -32,7 +32,11 @@ public class TransaksiController {
         }
         return controller;
     }
-
+    
+    private TransaksiController() {
+        transaksi = new Transaksi(0, null, 0, null, null, null, null, 0, 0);
+    }
+    
     public void reset() {
         transaksi = new Transaksi();
     }
@@ -40,12 +44,12 @@ public class TransaksiController {
     public void setTransaksi(Transaksi transaksi) {
         this.transaksi = transaksi;
     }
-
-    public TransaksiController() {
-        transaksi = new Transaksi(0, null, 0, null, null, null, null, 0, 0);
+    
+    public Transaksi getTransaksi() {
+        return this.transaksi;
     }
 
-        public Transaksi getTrans(int id_trans) {
+    public Transaksi getTrans(int id_trans) {
         aa.connect();
         ArrayList<Transaksi> transList = new ArrayList<>();
         try {
@@ -128,7 +132,7 @@ public class TransaksiController {
         ArrayList<Transaksi> listTrans = new ArrayList<>();
         aa.connect();
         try {
-            String que = "Select*from transaksi where id_user = '" + id_user + "'";
+            String que = "Select * from transaksi where id_user = '" + id_user + "'";
             PreparedStatement state = aa.con.prepareStatement(que);
             ResultSet res = state.executeQuery(que);
             StatusPengirimanEnum status = null;
@@ -144,5 +148,59 @@ public class TransaksiController {
         }
         return listTrans;
     }
+    
+    public static ArrayList<Transaksi> getTransaksiToko(int id_toko) {
+        ArrayList<Transaksi> listTrans = new ArrayList<>();
+        aa.connect();
+        try {
+            String que = "SELECT * FROM transaksi\n" +
+                        "WHERE id_barang IN (SELECT id_barang FROM barang WHERE id_toko = "+id_toko+");";
+            PreparedStatement state = aa.con.prepareStatement(que);
+            ResultSet res = state.executeQuery(que);
+            StatusPengirimanEnum status = null;
 
+            MetodePembayaranEnum metodePembayaran = null;
+            while (res.next()) {
+                Transaksi trans = map(res);
+                listTrans.add(trans);
+                System.out.println("database aman");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listTrans;
+    }
+    
+    public ArrayList<Transaksi> konfirmasiTransaksi() {
+        ArrayList<Transaksi> listTrans = new ArrayList<>();
+        aa.connect();
+        int id_transaksi = TransaksiController.getInstance().getTransaksi().getId_transaksi();
+        try {
+            String que = "UPDATE transaksi SET status = 1 WHERE id_transaksi = " + id_transaksi;
+            PreparedStatement state = aa.con.prepareStatement(que);
+            state.executeUpdate(que);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listTrans;
+    }
+    
+    public ArrayList<Transaksi> batalkanTransaksi() {
+        ArrayList<Transaksi> listTrans = new ArrayList<>();
+        aa.connect();
+        int id_transaksi = TransaksiController.getInstance().getTransaksi().getId_transaksi();
+        try {
+            String que = "UPDATE transaksi SET status = 5 WHERE id_transaksi = " + id_transaksi;
+            PreparedStatement state = aa.con.prepareStatement(que);
+            state.executeUpdate(que);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listTrans;
+    }
+    
+  
+    
 }

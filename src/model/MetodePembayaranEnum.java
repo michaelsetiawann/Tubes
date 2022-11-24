@@ -16,7 +16,15 @@ public enum MetodePembayaranEnum {
     private MetodePembayaranEnum(int value){
         this.value = value;
     }
-    
+    public static String getStringValueFromInt(int i) {
+        for (MetodePembayaranEnum status : MetodePembayaranEnum.values()) {
+            if (status.getValue() == i) {
+                return status.toString();
+            }
+        }
+        // throw an IllegalArgumentException or return null
+        throw new IllegalArgumentException("the given number doesn't match any Status.");
+    }
     public int getValue(){
         return value;
     }
