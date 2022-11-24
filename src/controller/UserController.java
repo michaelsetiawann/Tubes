@@ -25,7 +25,7 @@ public class UserController {
 
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
-
+        String passwordTransporter = password;
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.update(password.getBytes());
@@ -45,14 +45,13 @@ public class UserController {
                 if (password.equals(result.getString("password"))) {
                     int id_user = result.getInt("id_user");
                     String userName = result.getString("username");
-                    String passWord = result.getString("password");
                     String nama_lengkap_pembeli = result.getString("nama_lengkap_pembeli");
                     String tanggal_lahir = result.getString("tanggal_lahir");
                     String jenis_kelamin = result.getString("jenis_kelamin");
                     String no_telepon = result.getString("no_telepon");
                     String email = result.getString("email");
                     
-                    User user = new User(nama_lengkap_pembeli, tanggal_lahir, jenis_kelamin, no_telepon, email, id_user, userName, passWord);
+                    User user = new User(nama_lengkap_pembeli, tanggal_lahir, jenis_kelamin, no_telepon, email, id_user, userName, passwordTransporter);
                     SingletonProfile.getInstance().setUser(user);
                     
                     return "Login Berhasil!";

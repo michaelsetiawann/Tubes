@@ -8,10 +8,12 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -50,10 +52,24 @@ public class LoginUser extends JFrame {
         label3.setBounds(144, 142, 94, 14);
         contentPane.add(label3);
 
-        JTextField password = new JTextField("ayam");
+        JPasswordField password = new JPasswordField("ayam");
         password.setBounds(265, 139, 111, 20);
         contentPane.add(password);
         password.setColumns(10);
+
+        JCheckBox showPassword = new JCheckBox("Show Password");
+        showPassword.setBounds(380, 136, 150, 25);
+        showPassword.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    password.setEchoChar((char) 0);
+                } else {
+                    password.setEchoChar('•');
+                }
+            }
+        });
+        contentPane.add(showPassword);
 
         JLabel label4 = new JLabel("TIDAK PUNYA AKUN?");
         label4.setBounds(144, 247, 200, 14);
@@ -66,7 +82,7 @@ public class LoginUser extends JFrame {
         JButton btnLogin = new JButton("LOGIN");
         btnLogin.setBounds(287, 197, 89, 23);
         contentPane.add(btnLogin);
-        
+
         JButton btnBack = new JButton("BACK");
         btnBack.setBounds(270, 272, 106, 23);
         contentPane.add(btnBack);
@@ -77,28 +93,25 @@ public class LoginUser extends JFrame {
                 String loginUser = controller.UserController.LoginUser(username.getText(), password.getText());
                 String loginAdmin = controller.UserController.LoginAdmin(username.getText(), password.getText());
                 if (loginUser.equals("Login Berhasil!")) {
-                    JOptionPane.showMessageDialog(null,"Selamat Datang " + username.getText() + "!!!");
+                    JOptionPane.showMessageDialog(null, "Selamat Datang " + username.getText() + "!!!");
                     new HomeScreen();
                     frame.dispose();
                     //masukin tujuan dibawah
-                } 
+                }
                 if (loginAdmin.equals("Login Berhasil!")) {
-                    JOptionPane.showMessageDialog(null,"Selamat Datang Admin!!!");
+                    JOptionPane.showMessageDialog(null, "Selamat Datang Admin!!!");
                     new MenuAdmin();
                     frame.dispose();
                     //masukin tujuan dibawah
-                } 
-                else if (loginUser.equals("Password Salah!")) {
+                } else if (loginUser.equals("Password Salah!")) {
                     JOptionPane.showMessageDialog(null, loginUser);
                     password.setText("");
                     password.requestFocus();
-                }  
-                else if (loginAdmin.equals("Password Salah!")) {
+                } else if (loginAdmin.equals("Password Salah!")) {
                     JOptionPane.showMessageDialog(null, loginAdmin);
                     password.setText("");
                     password.requestFocus();
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(null, loginUser);
                     username.setText("");
                     password.setText("");
@@ -116,7 +129,7 @@ public class LoginUser extends JFrame {
                 new RegistrasiUser();
             }
         });
-        
+
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
