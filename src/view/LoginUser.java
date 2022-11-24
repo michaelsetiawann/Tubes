@@ -41,7 +41,7 @@ public class LoginUser extends JFrame {
         label2.setBounds(144, 93, 106, 14);
         contentPane.add(label2);
 
-        JTextField username = new JTextField();
+        JTextField username = new JTextField("duh981");
         username.setBounds(265, 90, 111, 20);
         contentPane.add(username);
         username.setColumns(10);
@@ -50,7 +50,7 @@ public class LoginUser extends JFrame {
         label3.setBounds(144, 142, 94, 14);
         contentPane.add(label3);
 
-        JTextField password = new JTextField();
+        JTextField password = new JTextField("ayam");
         password.setBounds(265, 139, 111, 20);
         contentPane.add(password);
         password.setColumns(10);
@@ -77,15 +77,15 @@ public class LoginUser extends JFrame {
                 String loginUser = controller.UserController.LoginUser(username.getText(), password.getText());
                 String loginAdmin = controller.UserController.LoginAdmin(username.getText(), password.getText());
                 if (loginUser.equals("Login Berhasil!")) {
+                    JOptionPane.showMessageDialog(null,"Selamat Datang " + username.getText() + "!!!");
                     new HomeScreen();
                     frame.dispose();
-                    JOptionPane.showMessageDialog(null, loginUser);
                     //masukin tujuan dibawah
                 } 
                 if (loginAdmin.equals("Login Berhasil!")) {
+                    JOptionPane.showMessageDialog(null,"Selamat Datang Admin!!!");
                     new HomeScreen();
                     frame.dispose();
-                    JOptionPane.showMessageDialog(null, loginAdmin);
                     //masukin tujuan dibawah
                 } 
                 else if (loginUser.equals("Password Salah!")) {

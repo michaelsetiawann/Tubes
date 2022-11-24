@@ -89,9 +89,13 @@ public class UserController {
             java.sql.Statement stat = conn.con.createStatement();
             ResultSet result = stat.executeQuery("select * from admin where username='" + username + "'");
             if (result.next()) {
+                System.out.println(result.getString("password"));
+                System.out.println(result.getString("username"));
                 if (password.equals(result.getString("password"))) {
+                    System.out.println("in here 1");
                     return "Login Berhasil!";
                 } else {
+                    System.out.println("in here 2");
                     return "Password Salah!";
                 }
             } else {

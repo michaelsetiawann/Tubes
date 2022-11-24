@@ -14,19 +14,21 @@ public abstract class LaporanAbstract {
     int id_laporan;
     Date tanggal;
     String komentar;
-    boolean status;
-    User user;
+    int status;
+    int id_user;
 
     public LaporanAbstract() {
     }
 
-    public LaporanAbstract(int id_laporan, Date tanggal, String komentar, boolean status, User user) {
+    public LaporanAbstract(int id_laporan, Date tanggal, String komentar, int status, int user) {
         this.id_laporan = id_laporan;
         this.tanggal = tanggal;
         this.komentar = komentar;
         this.status = status;
-        this.user = user;
+        this.id_user = user;
     }
+
+    
 
     public int getId_laporan() {
         return id_laporan;
@@ -52,24 +54,26 @@ public abstract class LaporanAbstract {
         this.komentar = komentar;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
+    
+
+    public int getUser() {
+        return id_user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int user) {
+        this.id_user = user;
     }
 
     @Override
     public String toString() {
-        return "LaporanAbstract{" + "id_laporan=" + id_laporan + ", tanggal=" + tanggal + ", komentar=" + komentar + ", status=" + status + ", user=" + user + '}';
+        return "LaporanAbstract{" + "id_laporan=" + id_laporan + ", tanggal=" + tanggal + ", komentar=" + komentar + ", status=" + status + ", user=" + id_user + '}';
     }
 }

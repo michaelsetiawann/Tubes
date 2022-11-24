@@ -7,6 +7,8 @@ package view;
 
 import controller.SingletonBarang;
 import database.DatabaseHandler;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -25,53 +28,96 @@ import model.Barang;
  *
  * @author Lenovo
  */
-public class CariProdukJtable extends JFrame {
+public class CariProdukJtable extends JFrame{
 
+    JFrame frame = new JFrame();
     Barang barang;
+    private JTable jTable;
     static DatabaseHandler conn = new DatabaseHandler();
+    private DefaultTableModel model;
 
     public CariProdukJtable() {
-
+        
     }
 
     public CariProdukJtable(String nama) {
-        setTitle("Produk yang ditemukan");
-        setSize(1080, 700);
-        setLocationRelativeTo(null);
-        userInterfaceGUI(nama);
-        setVisible(true);
-    }
+        frame.setTitle("Produk yang ditemukan");
+        frame.setSize(1080, 700);
+        frame.setLocationRelativeTo(null);
+        
+        JScrollPane scroll = new JScrollPane();
+        scroll.setBounds(10, 80, 1050, 500);
 
-    private void userInterfaceGUI(String nama) {
         String search = nama;
-        DefaultTableModel model = new DefaultTableModel();
+        model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[]{
-            "ID Barang", "Nama Barang", "Stok Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status", "Tambah Keranjang"
+            "ID Barang", "Nama Barang", "Stok Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status"
         });
-        JTable tabel = new JTable(model);
-        tabel = new JTable(model) {
+        jTable = new JTable(model) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        Vector<Barang> tableBarang = SingletonBarang.getInstance().getBarangByName(nama);
-        for (Barang b : tableBarang) {
-            int id_barang = b.getId_barang();
-            String nama_barang = b.getNama_barang();
-            int stok_barang = b.getStok_barang();
-            double harga_barang = b.getHarga_barang();
-            String deskripsi_barang = b.getDeskripsi_barang();
-            int jumlah_pengunjung = b.getJumlah_pengunjung();
-            int status = b.getStatus();
-            JButton btnCari = new JButton("Klik Cari");
-            btnCari.setBounds(580, 20, 150, 40);
-            model.addRow(new Object[]{id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung, status, new JButton("Button1")});
+        
+         jTable.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+//            @Override
+
+            public void mouseClicked(MouseEvent e) {
+                // TODO Auto-generated method stub
+                if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                    int selectedRow;
+                    selectedRow = jTable.getSelectedRow();
+                    int productId = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
+                    new ProductDetails(productId);
+                }
+            }
+        });
+
+        ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getBarangByName(nama);
+        for (int i = 0; i < tableBarang.size(); i++) {
+            int id_barang = tableBarang.get(i).getId_barang();
+            String nama_barang = tableBarang.get(i).getNama_barang();
+            int stockBarang = tableBarang.get(i).getStok_barang();
+            Double hargaBarang = tableBarang.get(i).getHarga_barang();
+            String deskripsiBarang = tableBarang.get(i).getDeskripsi_barang();
+            int jumlahPengunjung = tableBarang.get(i).getJumlah_pengunjung();
+            int status = tableBarang.get(i).getStatus();
+            model.addRow(new Object[]{id_barang, nama_barang, stockBarang, hargaBarang, deskripsiBarang, jumlahPengunjung, status});
         }
-
-        JScrollPane scroll = new JScrollPane();
-        scroll.setViewportView(tabel);
-
-        getContentPane().add(scroll);
+        PanelMenu menu = new PanelMenu();
+        JPanel panelMenu = menu.getPanel(frame);
+        panelMenu.setBounds(0, 200, 1080, 75);
+        
+        scroll.setViewportView(jTable);
+        
+        frame.getContentPane().add(scroll);
+        
+        frame.add(panelMenu);
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+import controller.DateLabelFormatter;
+import controller.SingletonProfile;
 
 /**
  *
@@ -74,10 +80,17 @@ public class RegistrasiUser extends JFrame {
         label4.setBounds(10, 163, 86, 14);
         contentPane.add(label4);
 
-        JTextField tanggalLahir = new JTextField();
+//        JTextField tanggalLahir = new JTextField();
+        UtilDateModel model = new UtilDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        JDatePickerImpl tanggalLahir = new JDatePickerImpl(datePanel, new controller.DateLabelFormatter());
         tanggalLahir.setBounds(103, 160, 86, 20);
         contentPane.add(tanggalLahir);
-        tanggalLahir.setColumns(10);
+//        tanggalLahir.setColumns(10);
 
         JLabel lblNewLabel_5 = new JLabel("");
         lblNewLabel_5.setBounds(10, 204, 46, 14);
@@ -150,10 +163,12 @@ public class RegistrasiUser extends JFrame {
         btnRegis.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (namaLengkap.getText().isEmpty() || tanggalLahir.getText().isEmpty() || controller.UserController.findJK(jk1, jk2).isEmpty() || noTelepon.getText().isEmpty() || email.getText().isEmpty() || username.getText().isEmpty() || password.getPassword().equals("")) {
+                if (namaLengkap.getText().isEmpty() || tanggalLahir.getJFormattedTextField().getText().isEmpty() || controller.UserController.findJK(jk1, jk2).isEmpty() || noTelepon.getText().isEmpty() || email.getText().isEmpty() || username.getText().isEmpty() || password.getPassword().equals("")) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
-                    controller.UserController.register(namaLengkap.getText(), tanggalLahir.getText(), controller.UserController.findJK(jk1, jk2), noTelepon.getText(), email.getText(), username.getText(), password.getText());
+                    controller.UserController.register(namaLengkap.getText(), tanggalLahir.getJFormattedTextField().getText(), controller.UserController.findJK(jk1, jk2), noTelepon.getText(), email.getText(), username.getText(), password.getText());
+                    controller.UserController.LoginUser(username.getText(), password.getText());
+                    new HomeScreen();
                 }
             }
         });

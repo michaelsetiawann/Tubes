@@ -130,8 +130,4 @@ public class LihatProfille {
         view.setVisible(true);
         view.setLocationRelativeTo(null);
     }
-    public static void main(String[] args) {
-        User user1 = new User("Udin Saepufin ", "2003-01-02", "Pria", "09823164372", "usin@gmail.com", 2211, "DinSAe", "DIDINGANT");
-        tampilProfille(user,1);
-    }
 }

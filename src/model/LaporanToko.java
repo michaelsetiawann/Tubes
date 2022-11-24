@@ -13,22 +13,22 @@ import java.util.Date;
  */
 public class LaporanToko extends LaporanAbstract{
 
-    Toko toko;
+    int id_toko;
 
     public LaporanToko() {
     }
 
-    public LaporanToko(Toko toko, int id_laporan, Date tanggal, String komentar, boolean status, User user) {
-        super(id_laporan, tanggal, komentar, status, user);
-        this.toko = toko;
+    public LaporanToko(int id_toko, int id_laporan, Date tanggal, String komentar, int status, int id_user) {
+        super(id_laporan, tanggal, komentar, status, id_user);
+        this.id_toko = id_toko;
     }
 
-    public Toko getToko() {
-        return toko;
+    public int getToko() {
+        return id_toko;
     }
 
-    public void setToko(Toko toko) {
-        this.toko = toko;
+    public void setToko(int toko) {
+        this.id_toko = toko;
     }
 
     public int getId_laporan() {
@@ -55,24 +55,26 @@ public class LaporanToko extends LaporanAbstract{
         this.komentar = komentar;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public User getUser() {
-        return user;
+    
+
+    public int getUser() {
+        return id_user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int user) {
+        this.id_user = user;
     }
 
     @Override
     public String toString() {
-        return "LaporanToko{" + "toko=" + toko + '}';
+        return "LaporanToko{" + "toko=" + id_toko + '}';
     }
 }

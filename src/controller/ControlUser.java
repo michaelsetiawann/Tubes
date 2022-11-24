@@ -1,8 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
 import database.DatabaseHandler;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,30 +48,26 @@ public class ControlUser {
         return user;
     }
     
-    public static void mengubahData(int user_id, String nama_lengkap_pembeli, String tanggal_lahir, String jenis_kelamin, String no_telepon, String email, String username, String password) throws SQLException {
+    public static User mengubahData(int index, String namaLengkap, String tglLahir, String jenisKelamin, String noTelepon, String email, String username, String password){
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
-        try {
-            PreparedStatement stat = conn.con.prepareStatement("UPDATE user SET nama_lengkap_pembeli = ?,tanggal_lahir = ?,jenis_kelamin = ?,no_telepon = ?,email = ?,username = ?,password = ? WHERE id_user ='"+user_id+"'");
-            stat.setString(1, nama_lengkap_pembeli);
-            stat.setString(2, tanggal_lahir);
-            stat.setString(3, jenis_kelamin);
-            stat.setString(4, no_telepon);
+        try{
+            PreparedStatement stat = conn.con.prepareStatement("UPDATE user SET nama_lengkap_pembeli = ?,tanggal_lahir = ?,jenis_kelamin = ?,no_telepon = ?,email = ?,username = ?,password = ? WHERE id_user ='"+index+"'");
+            stat.setString(1, namaLengkap);
+            stat.setString(2, tglLahir);
+            stat.setString(3, jenisKelamin);
+            stat.setString(4, noTelepon);
             stat.setString(5, email);
             stat.setString(6, username);
             stat.setString(7, password);
             stat.executeUpdate();
             JOptionPane.showMessageDialog(null, "Berhasil update profille");
-
-        } catch (SQLException e) {
-            if (e.getMessage().contains("'email'")) {
-                JOptionPane.showMessageDialog(null, "email sudah digunakan");
-            } else if (e.getMessage().contains("'password'")) {
-                JOptionPane.showMessageDialog(null, "password sudah digunakan");
-            } else {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error fatal pusing!");
-            }
         }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "Error!! Gagal update profille");
+            System.out.println(e);
+        }
+        conn.disconnect();
+        return user;
     }
 }
