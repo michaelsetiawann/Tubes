@@ -10,5 +10,5 @@ package model;
  */
 public interface StatusInterface {
     final int UNBLOCK = 0;
-    final int BLOCK =1;
+    final int BLOCK = 1;
 }

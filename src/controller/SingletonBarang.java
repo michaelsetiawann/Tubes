@@ -33,7 +33,7 @@ public class SingletonBarang {
         return controller;
     }
 
-    public SingletonBarang() {
+    private SingletonBarang() {
         barang = new Barang(0, null, 0, 0, null, 0, 0, 0);
     }
 
@@ -100,7 +100,7 @@ public class SingletonBarang {
 
         try {
             java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE id_barang ='" + productId + "'");
+            ResultSet result = stat.executeQuery("SELECT * FROM barang WHERE id_barang ='" + productId + " && '");
             if (result.next()) {
                 int id_barang = result.getInt("id_barang");
                 String nama_barang = result.getString("nama_barang");
@@ -200,8 +200,6 @@ public class SingletonBarang {
             jumlah_pengunjung = result.getInt("count");
             result.close();
         } catch (SQLException e) {
-            e.printStackTrace();
-            // TODO: handle exception
         }
         return jumlah_pengunjung;
     }
