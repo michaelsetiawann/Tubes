@@ -113,7 +113,7 @@ public class UpdateProduk extends JFrame {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
                     controller.UserController.updateProduk(nama_barang.getText(), stok_barang.getText(),harga_barang.getText(), deskripsi_barang.getText());
-                    new HomeScreen();
+                    new MenuTokoScreen();
                 }
             }
         });
@@ -121,7 +121,7 @@ public class UpdateProduk extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new HomeScreen();
+                new MenuTokoScreen();
             }
         });
 
