@@ -124,7 +124,7 @@ public class LihatKeranjangScreen extends JFrame implements ActionListener{
                                             }
                                             counter++;
                                         }
-                                        f.setVisible(false);
+                                        f.dispose();
                                         loadData();
                                     }
                                     else{

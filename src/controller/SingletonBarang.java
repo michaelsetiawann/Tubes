@@ -121,11 +121,11 @@ public class SingletonBarang {
 
     }
 
-    public double getAverage(int productId) {
+    public String getAverage(int productId) {
         conn.connect();
         try {
             java.sql.Statement stat = conn.con.createStatement();
-            ResultSet result = stat.executeQuery("SELECT * FROM transaksi WHERE id_barang ='" + productId + "'");
+            ResultSet result = stat.executeQuery("SELECT * FROM transaksi WHERE id_barang ='" + productId + "' && status = 4");
             double ratingTotal = 0;
             int counter = 0;
             while (result.next()) {
@@ -133,12 +133,12 @@ public class SingletonBarang {
                 ratingTotal += rating;
                 counter++;
             }
-            return ratingTotal / counter;
+            return String.valueOf(ratingTotal / counter);
 
         } catch (SQLException e) {
             // TODO: handle exception
         }
-        return 0;
+        return "NaN";
     }
 
     public ArrayList<Review> getUserReview(int productId) {
@@ -180,7 +180,6 @@ public class SingletonBarang {
             
             stat.executeUpdate("INSERT INTO viewed (id_user, id_barang) VALUES ("+id_user+","+id_barang+")");
         } catch (SQLException e) {
-            e.printStackTrace();
             // TODO: handle exception
         }
     }

@@ -98,7 +98,7 @@ public class AddAlamatScreen extends JFrame {
                 } else {
                     AlamatController.getInstance().insertAlamat(namaTempat.getText(), alamat.getText(), namaPenerima.getText(), noTelp.getText());
                     new CheckoutScreen(listKeranjang);
-                    frame.setVisible(false);
+                    frame.dispose();
                 }
             }
         });
@@ -106,7 +106,7 @@ public class AddAlamatScreen extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
+                frame.dispose();
                 new CheckoutScreen(listKeranjang);
             }
         });

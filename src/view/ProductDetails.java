@@ -125,7 +125,7 @@ public class ProductDetails extends JFrame {
         lblRating.setBounds(38, 431, 123, 20);
         frame.getContentPane().add(lblRating);
 
-        double rate = SingletonBarang.getInstance().getAverage(productId);
+        String rate = SingletonBarang.getInstance().getAverage(productId);
         inputRate = new JTextField();
         inputRate.setFont(new Font("Tahoma", Font.PLAIN, 14));
         inputRate.setBounds(38, 462, 60, 20);
@@ -185,7 +185,7 @@ public class ProductDetails extends JFrame {
                         } else {
 //                            System.out.println("should be in here");
                             new KeranjangController().insertKeranjang(productId, jumlahAddCart);
-                            frame.setVisible(false);
+                            frame.dispose();
                             new LihatKeranjangScreen();
                         }
                     }
@@ -208,7 +208,7 @@ public class ProductDetails extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 SingletonBarang.getInstance().reset();
                 new HomeScreen();
-                frame.setVisible(false);
+                frame.dispose();
             }
         });
         JButton laporToko = new JButton("Lapor Toko");
@@ -226,7 +226,7 @@ public class ProductDetails extends JFrame {
                 if (SingletonProfile.getInstance().getUser() != null) {
                     int id_user = SingletonProfile.getInstance().getUser().getId();
                     new LaporTokoScreen(id_toko, id_user);
-                    frame.setVisible(false);
+                    frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu");
                 }
@@ -247,7 +247,7 @@ public class ProductDetails extends JFrame {
                 if (SingletonProfile.getInstance().getUser() != null) {
                     int id_user = SingletonProfile.getInstance().getUser().getId();
                     new LaporBarangScreen(productId, id_user);
-                    frame.setVisible(false);
+                    frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Anda harus login terlebih dahulu");
                 }

@@ -34,7 +34,7 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                frame.setVisible(false);
+                frame.dispose();
                 new HomeScreen();
             }
         });
