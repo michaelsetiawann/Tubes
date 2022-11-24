@@ -96,7 +96,8 @@ public class RegistrasiTokoScreen {
                     int user_id = user.getId();
                     int status =0; //default 0
                     JOptionPane.showMessageDialog(null, controller.TokoController.insertDataToko(namaToko.getText(),alamat.getText(),toko.getText(),user_id,status));
-            
+                    frame.dispose();
+                    new HomeScreen();
                 }
             }
         });
@@ -104,7 +105,7 @@ public class RegistrasiTokoScreen {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
+                frame.dispose();
                 new HomeScreen();
             }
         });

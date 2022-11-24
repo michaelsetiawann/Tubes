@@ -74,7 +74,7 @@ public class LaporBarangScreen {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                frame.setVisible(false);
+                frame.dispose();
                 new HomeScreen();
             }
         });

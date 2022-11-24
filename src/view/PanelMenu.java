@@ -51,7 +51,7 @@ public class PanelMenu {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                frame.setVisible(false);
+                frame.dispose();
                 new HomeScreen();
             }
         });
@@ -71,7 +71,7 @@ public class PanelMenu {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (SingletonProfile.getInstance().getUser() != null) {
-                    frame.setVisible(false);
+                    frame.dispose();
                     new TransactionScreen();
                 } else {
                     JOptionPane.showMessageDialog(null, "Mohon untuk login terlebih dahulu!");
@@ -99,7 +99,7 @@ public class PanelMenu {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-                frame.setVisible(false);
+                frame.dispose();
                 new CariProdukJtable(namaBarang.getText());
             }
         });
@@ -122,7 +122,7 @@ public class PanelMenu {
                 @Override
                 public void actionPerformed(ActionEvent ae
                 ) {
-                    frame.setVisible(false);
+                    frame.dispose();
                     new LogoutController();
                 }
             });
@@ -161,7 +161,7 @@ public class PanelMenu {
                     @Override
                     public void actionPerformed(ActionEvent ae
                     ) {
-                        frame.setVisible(false);
+                        frame.dispose();
                         new MenuTokoScreen();
                     }
                 });
@@ -178,7 +178,7 @@ public class PanelMenu {
                     @Override
                     public void actionPerformed(ActionEvent ae
                     ) {
-                        frame.setVisible(false);
+                        frame.dispose();
                         new RegistrasiTokoScreen();
                     }
                 });
@@ -197,7 +197,7 @@ public class PanelMenu {
                 @Override
                 public void actionPerformed(ActionEvent ae
                 ) {
-                    frame.setVisible(false);
+                    frame.dispose();
                     new LihatKeranjangScreen();
                 }
             });
@@ -213,7 +213,7 @@ public class PanelMenu {
                 @Override
                 public void actionPerformed(ActionEvent ae
                 ) {
-                    frame.setVisible(false);
+                    frame.dispose();
                     new LoginUser();
                 }
             });

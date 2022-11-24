@@ -11,14 +11,14 @@ package model;
  */
 public class Barang {
 
-    int id_barang;
-    String nama_barang;
-    int stok_barang;
-    double harga_barang;
-    String deskripsi_barang;
-    int jumlah_pengunjung;
-    int status;
-    int id_toko;
+    private int id_barang;
+    private String nama_barang;
+    private int stok_barang;
+    private double harga_barang;
+    private String deskripsi_barang;
+    private int jumlah_pengunjung;
+    private int status;
+    private int id_toko;
 
     public Barang(int id_barang, String nama_barang, int stok_barang, double harga_barang, String deskripsi_barang, int jumlah_pengunjung, int status, int id_toko) {
         this.id_barang = id_barang;

@@ -125,7 +125,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     new AddAlamatScreen(listKeranjang);
-                    frame.setVisible(false);
+                    frame.dispose();
                 }
             });
             //add alamat
@@ -165,7 +165,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     new AddAlamatScreen(listKeranjang);
-                    frame.setVisible(false);
+                    frame.dispose();
                 }
             });
             
@@ -196,7 +196,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                         KeranjangController.getInstance().deleteKeranjang(b.getId_keranjang());
                         int newQuantity = b.getBarang().getStok_barang() - e2;
                         SingletonBarang.getInstance().updateStokBarang(b.getBarang().getId_barang(), newQuantity);
-                        frame.setVisible(false);
+                        frame.dispose();
                         JOptionPane.showMessageDialog(null, "Yay! Transaksi Anda Berhasil!!");
                         new HomeScreen();
                     }

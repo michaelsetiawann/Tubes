@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class LaporanBarang extends LaporanAbstract{
 
-    int id_barang;
+    private int id_barang;
 
     public LaporanBarang() {
     }
@@ -29,48 +29,6 @@ public class LaporanBarang extends LaporanAbstract{
 
     public void setBarang(Barang barang) {
         this.id_barang = id_barang;
-    }
-
-    public int getId_laporan() {
-        return id_laporan;
-    }
-
-    public void setId_laporan(int id_laporan) {
-        this.id_laporan = id_laporan;
-    }
-
-    public Date getTanggal() {
-        return tanggal;
-    }
-
-    public void setTanggal(Date tanggal) {
-        this.tanggal = tanggal;
-    }
-
-    public String getKomentar() {
-        return komentar;
-    }
-
-    public void setKomentar(String komentar) {
-        this.komentar = komentar;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    
-
-    public int getUser() {
-        return id_user;
-    }
-
-    public void setUser(int user) {
-        this.id_user = user;
     }
 
     @Override

@@ -12,15 +12,15 @@ import java.util.Date;
  */
 public class Transaksi {
 
-    int id_transaksi;
-    Barang barang;
-    int jumlahBarang;
-    Date tanggal;
-    StatusPengirimanEnum status;
-    MetodePembayaranEnum metodePembayaran;
-    String pesan_review;
-    double rating;
-    int id_user;
+    private int id_transaksi;
+    private Barang barang;
+    private int jumlahBarang;
+    private Date tanggal;
+    private StatusPengirimanEnum status;
+    private MetodePembayaranEnum metodePembayaran;
+    private String pesan_review;
+    private double rating;
+    private int id_user;
 
     public Transaksi() {
     }

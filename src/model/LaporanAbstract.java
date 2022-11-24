@@ -11,11 +11,11 @@ import java.util.Date;
  * @author acer
  */
 public abstract class LaporanAbstract {
-    int id_laporan;
-    Date tanggal;
-    String komentar;
-    int status;
-    int id_user;
+    private int id_laporan;
+    private Date tanggal;
+    private String komentar;
+    private int status;
+    private int id_user;
 
     public LaporanAbstract() {
     }

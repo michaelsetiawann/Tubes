@@ -136,7 +136,7 @@ public class TransactionScreen extends JFrame {
 //                                            }
 //                                            counter++;
 //                                        }
-                                        f.setVisible(false);
+                                        f.dispose();
                                         printTable();
                                     }
                                     else{
