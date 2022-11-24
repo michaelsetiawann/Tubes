@@ -43,7 +43,7 @@ public class UpdateProduk extends JFrame {
         harga = SingletonBarang.getInstance().getBarang().getHarga_barang();
         deskripsi = SingletonBarang.getInstance().getBarang().getDeskripsi_barang();
         
-        JFrame frame = new JFrame("Tambah Produk");
+        JFrame frame = new JFrame("Update Produk");
         frame.setSize(1080, 700);
         JPanel contentPane = new JPanel();
         frame.setLocationRelativeTo(null);

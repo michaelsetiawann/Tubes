@@ -53,7 +53,7 @@ public class PanelMenuToko {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
+                new MenuTokoScreen();
             }
         });
 
