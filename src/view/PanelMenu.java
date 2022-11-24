@@ -107,11 +107,10 @@ public class PanelMenu {
         if (SingletonProfile.getInstance().getUser() != null) {
             JButton btnLogout = new JButton("Logout");
             btnLogout.setFont(font1);
-            btnLogout.setBounds(730, 2, 80, 75);
             btnLogout.setBackground(null);
             btnLogout.setBorderPainted(false);
             btnLogout.setFont(font1);
-            btnLogout.setBounds(860, 2, 100, 75);
+            btnLogout.setBounds(810, 2, 80, 75);
             btnLogout.setBackground(null);
             btnLogout.setBorderPainted(false);
 
@@ -129,12 +128,12 @@ public class PanelMenu {
             
             String name = SingletonProfile.getInstance().getUser().getUsername();
             JLabel lblName = new JLabel(name);
-            lblName.setBounds(1010, 2, 100, 75);
+            lblName.setBounds(940, 2, 100, 75);
             panelMenu.add(lblName);
             
             JButton btnProfile = new JButton("👤");
             btnProfile.setFont(font2);
-            btnProfile.setBounds(940, 2, 70, 75);
+            btnProfile.setBounds(880, 2, 60, 75);
             btnProfile.setBackground(null);
             btnProfile.setBorderPainted(false);
             panelMenu.add(btnProfile);
@@ -153,7 +152,7 @@ public class PanelMenu {
                 menuToko.setFont(font1);
                 menuToko.setBackground(null);
                 menuToko.setBorderPainted(false);
-                menuToko.setBounds(710, 2, 120, 75);
+                menuToko.setBounds(700, 2, 110, 75);
 
                 panelMenu.add(menuToko);
                 menuToko.addActionListener(
