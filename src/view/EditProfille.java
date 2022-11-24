@@ -23,20 +23,9 @@ import org.jdatepicker.impl.UtilDateModel;
  * @author acer
  */
 public class EditProfille {
-
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-    static User user;
-
-=======
->>>>>>> main
-    public EditProfille(User user, int user_id) {
-        user = controller.ControlUser.searchUser(user_id);
-        mengeditProfille(user, user_id);
-=======
     public EditProfille() {
         mengeditProfille();
->>>>>>> Stashed changes
+
     }
 
     public void mengeditProfille() {
@@ -132,34 +121,12 @@ public class EditProfille {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-                try {
-                    if (txtNama.getText().isEmpty() || tglLahir.getJFormattedTextField().getText().isEmpty() || controller.UserController.findJK(pria, wanita).isEmpty() || txtNoTelepon.getText().isEmpty() || txtEmail.getText().isEmpty() || txtUsername.getText().isEmpty() || txtPassword.getPassword().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
-                    } else {
-                        cu.mengubahData(user_id, txtNama.getText(), tglLahir.getJFormattedTextField().getText(), controller.UserController.findJK(pria, wanita), txtNoTelepon.getText(), txtEmail.getText(), txtUsername.getText(), txtPassword.getText());
-                        new LihatProfille(user_id);
-                        view.dispose();
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(EditProfille.class.getName()).log(Level.SEVERE, null, ex);
-=======
                 if (txtNama.getText().isEmpty() || txtNoTelepon.getText().isEmpty() || txtEmail.getText().isEmpty() || txtUsername.getText().isEmpty() || String.valueOf(txtPassword.getPassword()).isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
                     new UserController().updateUser(txtNama.getText(), txtNoTelepon.getText(), txtUsername.getText(), String.valueOf(txtPassword.getPassword()), txtEmail.getText());
                     new LihatProfille();
                     view.dispose();
->>>>>>> Stashed changes
-=======
-                if (txtNama.getText().isEmpty() || tglLahir.getJFormattedTextField().getText().isEmpty() || controller.UserController.findJK(pria, wanita).isEmpty() || txtNoTelepon.getText().isEmpty() || txtEmail.getText().isEmpty() || txtUsername.getText().isEmpty() || txtPassword.getPassword().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
-                } else {
-                    cu.mengubahData(user_id, txtNama.getText(), tglLahir.getJFormattedTextField().getText(), controller.UserController.findJK(pria, wanita), txtNoTelepon.getText(), txtEmail.getText(), txtUsername.getText(), txtPassword.getText());
-                    new LihatProfille(user_id);
-                    view.dispose();
->>>>>>> main
                 }
             }
         });
