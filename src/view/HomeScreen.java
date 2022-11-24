@@ -126,7 +126,7 @@ public class HomeScreen extends JFrame{
         frame.add(panelMenu);
         frame.setVisible(false);
         frame.setVisible(true);
-
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 
         
