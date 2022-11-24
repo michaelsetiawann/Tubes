@@ -52,7 +52,7 @@ public class User extends PersonAbstract{
         this.tanggal_lahir = tanggal_lahir;
     }
 
-    public String isJenis_kelamin() {
+    public String getJenis_kelamin() {
         return jenis_kelamin;
     }
 

@@ -2,6 +2,8 @@ package view;
 
 import controller.ControlUser;
 import controller.DateLabelFormatter;
+import controller.SingletonProfile;
+import controller.UserController;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +24,26 @@ import org.jdatepicker.impl.UtilDateModel;
  */
 public class EditProfille {
 
+<<<<<<< Updated upstream
     static User user;
 
     public EditProfille(User user, int user_id) {
         user = controller.ControlUser.searchUser(user_id);
         mengeditProfille(user, user_id);
+=======
+    public EditProfille() {
+        mengeditProfille();
+>>>>>>> Stashed changes
     }
 
-    public static void mengeditProfille(User user, int user_id) {
-        ControlUser cu = new ControlUser();
+    public void mengeditProfille() {
+        String nama, tanggalLahir, jenisKelamin, noTelp, email, username, password;
+        nama = SingletonProfile.getInstance().getUser().getNama_lengkap();
+        tanggalLahir = SingletonProfile.getInstance().getUser().getTanggal_lahir();
+        jenisKelamin = SingletonProfile.getInstance().getUser().getJenis_kelamin();
+        noTelp = SingletonProfile.getInstance().getUser().getNo_telepon();
+        username = SingletonProfile.getInstance().getUser().getUsername();
+        email = SingletonProfile.getInstance().getUser().getEmail();
 
         JFrame view = new JFrame();
         view.setSize(600, 500);
@@ -58,36 +71,48 @@ public class EditProfille {
 
         JTextField txtNama = new JTextField();
         txtNama.setBounds(200, 100, 150, 25);
-        txtNama.setText(user.getNama_lengkap());
-        UtilDateModel model = new UtilDateModel();
-        Properties p = new Properties();
-        p.put("text.today", "Today");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-        JDatePickerImpl tglLahir = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        txtNama.setText(nama);
+//        UtilDateModel model = new UtilDateModel();
+//        Properties p = new Properties();
+//        p.put("text.today", "Today");
+//        p.put("text.month", "Month");
+//        p.put("text.year", "Year");
+//        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+//        JDatePickerImpl tglLahir = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        JLabel tglLahir = new JLabel(tanggalLahir);
         tglLahir.setBounds(200, 135, 150, 25);
-        JRadioButton pria = new JRadioButton("Laki-laki");
-        pria.setBounds(200, 170, 100, 25);
-        JRadioButton wanita = new JRadioButton("Perempuan");
-        wanita.setBounds(280, 170, 100, 25);
-        ButtonGroup grupJenisKelamin = new ButtonGroup();
-        grupJenisKelamin.add(pria);
-        grupJenisKelamin.add(wanita);
+        JLabel jk = new JLabel(jenisKelamin);
+        jk.setBounds(200, 170, 100, 25);
+//        ButtonGroup grupJenisKelamin = new ButtonGroup();
+//        grupJenisKelamin.add(pria);
+//        grupJenisKelamin.add(wanita);
         JTextField txtNoTelepon = new JTextField();
         txtNoTelepon.setBounds(200, 205, 150, 25);
-        txtNoTelepon.setText(user.getNo_telepon());
+        txtNoTelepon.setText(noTelp);
         JTextField txtEmail = new JTextField();
         txtEmail.setBounds(200, 240, 150, 25);
-        txtEmail.setText(user.getEmail());
+        txtEmail.setText(email);
         JTextField txtUsername = new JTextField();
         txtUsername.setBounds(200, 275, 150, 25);
-        txtUsername.setText(user.getUsername());
+        txtUsername.setText(username);
         JPasswordField txtPassword = new JPasswordField();
         txtPassword.setBounds(200, 310, 150, 25);
-        txtPassword.setText(user.getPassword());
+        JCheckBox showPassword = new JCheckBox("Show Password");
+        showPassword.setBounds(360, 310, 150, 25);
+        showPassword.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(showPassword.isSelected()){
+                    txtPassword.setEchoChar((char)0);
+                }
+                else{
+                    txtPassword.setEchoChar('•');
+                }
+            }
+        });
+        view.add(showPassword);
 
-        JButton kembali = new JButton("Kembali");
+        JButton kembali = new JButton("Back");
         kembali.setEnabled(true);
         kembali.setBounds(80, 350, 120, 30);
         JButton save = new JButton("Save");
@@ -97,13 +122,14 @@ public class EditProfille {
         kembali.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LihatProfille(user_id);
+                new LihatProfille();
                 view.dispose();
             }
         });
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+<<<<<<< Updated upstream
                 try {
                     if (txtNama.getText().isEmpty() || tglLahir.getJFormattedTextField().getText().isEmpty() || controller.UserController.findJK(pria, wanita).isEmpty() || txtNoTelepon.getText().isEmpty() || txtEmail.getText().isEmpty() || txtUsername.getText().isEmpty() || txtPassword.getPassword().equals("")) {
                         JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
@@ -114,6 +140,14 @@ public class EditProfille {
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(EditProfille.class.getName()).log(Level.SEVERE, null, ex);
+=======
+                if (txtNama.getText().isEmpty() || txtNoTelepon.getText().isEmpty() || txtEmail.getText().isEmpty() || txtUsername.getText().isEmpty() || String.valueOf(txtPassword.getPassword()).isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
+                } else {
+                    new UserController().updateUser(txtNama.getText(), txtNoTelepon.getText(), txtUsername.getText(), String.valueOf(txtPassword.getPassword()), txtEmail.getText());
+                    new LihatProfille();
+                    view.dispose();
+>>>>>>> Stashed changes
                 }
             }
         });
@@ -125,12 +159,11 @@ public class EditProfille {
         }
         view.add(txtNama);
         view.add(tglLahir);
-        view.add(pria);
-        view.add(wanita);
         view.add(txtNoTelepon);
         view.add(txtEmail);
         view.add(txtUsername);
         view.add(txtPassword);
+        view.add(jk);
         view.add(kembali);
         view.add(save);
         view.setVisible(true);
