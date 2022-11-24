@@ -52,8 +52,9 @@ public class UserController {
                     String email = result.getString("email");
                     
                     User user = new User(nama_lengkap_pembeli, tanggal_lahir, jenis_kelamin, no_telepon, email, id_user, userName, passwordTransporter);
+
                     SingletonProfile.getInstance().setUser(user);
-                    
+
                     return "Login Berhasil!";
                 } else {
                     return "Password Salah!";
@@ -66,7 +67,7 @@ public class UserController {
             return "Error";
         }
     }
-    
+
     public static String LoginAdmin(String username, String password) {
 
         DatabaseHandler conn = new DatabaseHandler();
@@ -155,8 +156,8 @@ public class UserController {
         }
         return jk;
     }
-    
-    public void updateUser(String nama_lengkap_pembeli, String no_telepon, String username, String password, String email){
+
+    public void updateUser(String nama_lengkap_pembeli, String no_telepon, String username, String password, String email) {
         DatabaseHandler conn = new DatabaseHandler();
         conn.connect();
         int id_user = (SingletonProfile.getInstance().getUser().getId());
@@ -188,5 +189,29 @@ public class UserController {
             }
         }
     }
-    
+
+    public static void tambahProduk(String nama_barang, String stok_barang, String harga_barang, String deskripsi_barang) {
+        DatabaseHandler conn = new DatabaseHandler();
+        conn.connect();
+        String query = "INSERT INTO barang(id_toko, nama_barang, stok_barang, harga_barang, deskripsi_barang) VALUES(?,?,?,?,?)";
+        int id_toko = SingletonProfile.getInstance().getUser().getId();
+        try {
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            stmt.setInt(1, id_toko);
+            stmt.setString(2, nama_barang);
+            stmt.setString(3, stok_barang);
+            stmt.setString(4, harga_barang);
+            stmt.setString(5, deskripsi_barang);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Berhasil melakukan Tambah Produk");
+
+        } catch (SQLException e) {
+            if (e.getMessage().contains("'nama_barang'")) {
+                JOptionPane.showMessageDialog(null, "barang sudah di ada");
+            } else {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error fatal pusing!");
+            }
+        }
+    }
 }
