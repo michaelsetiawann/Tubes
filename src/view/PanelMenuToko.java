@@ -68,7 +68,7 @@ public class PanelMenuToko {
             @Override
             public void actionPerformed(ActionEvent ae
             ) {
-
+                new TambahProduk();
             }
         });
         JButton update = new JButton("Update Produk");
