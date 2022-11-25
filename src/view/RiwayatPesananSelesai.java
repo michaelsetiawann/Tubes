@@ -32,7 +32,7 @@ import model.Transaksi;
 public class RiwayatPesananSelesai {
     private DefaultTableModel kolom;
     private JTable tabel;
-    private static JFrame frame = new JFrame("Transaksi");
+    private static JFrame frame = new JFrame("Riwayat Pesanan");
 
     public RiwayatPesananSelesai() {
         transScreen();
