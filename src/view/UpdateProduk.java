@@ -35,9 +35,11 @@ import model.Barang;
  */
 public class UpdateProduk extends JFrame {
     public UpdateProduk() {
+        int id_barang;
         String nama,deskripsi;
         int stok; 
         Double harga;
+        id_barang = SingletonBarang.getInstance().getBarang().getId_barang();
         nama = SingletonBarang.getInstance().getBarang().getNama_barang();
         stok = SingletonBarang.getInstance().getBarang().getStok_barang();
         harga = SingletonBarang.getInstance().getBarang().getHarga_barang();
@@ -112,7 +114,7 @@ public class UpdateProduk extends JFrame {
                 if (nama_barang.getText().isEmpty() || stok_barang.getText().isEmpty() || harga_barang.getText().isEmpty() || deskripsi_barang.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
-                    controller.UserController.updateProduk(nama_barang.getText(), stok_barang.getText(),harga_barang.getText(), deskripsi_barang.getText());
+                    controller.UserController.updateProduk(String.valueOf(id_barang), nama_barang.getText(), stok_barang.getText(),harga_barang.getText(), deskripsi_barang.getText());
                     new MenuTokoScreen();
                 }
             }
