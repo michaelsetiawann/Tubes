@@ -122,8 +122,11 @@ public class BlokirToko implements StatusLaporanInterface {
                 case 2:
                     statusName = "REJECTED";
                     break;
+                default :
+                    statusName = "WAITING";
+                    break;
             }
-
+            
             tableModel.addRow(new Object[]{id_barang, id_laporan, id_user, tanggal, isi_pesan, statusName});
         }
 
