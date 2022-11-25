@@ -33,7 +33,7 @@ public class MenuTokoScreen extends JFrame {
 
     private void homeScreen() {
 
-        JFrame frame = new JFrame("transaksi");
+        JFrame frame = new JFrame("Menu Toko");
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);

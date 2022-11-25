@@ -64,20 +64,12 @@ public class EditProfille {
         JTextField txtNama = new JTextField();
         txtNama.setBounds(200, 100, 150, 25);
         txtNama.setText(nama);
-//        UtilDateModel model = new UtilDateModel();
-//        Properties p = new Properties();
-//        p.put("text.today", "Today");
-//        p.put("text.month", "Month");
-//        p.put("text.year", "Year");
-//        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-//        JDatePickerImpl tglLahir = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+
         JLabel tglLahir = new JLabel(tanggalLahir);
         tglLahir.setBounds(200, 135, 150, 25);
         JLabel jk = new JLabel(jenisKelamin);
         jk.setBounds(200, 170, 100, 25);
-//        ButtonGroup grupJenisKelamin = new ButtonGroup();
-//        grupJenisKelamin.add(pria);
-//        grupJenisKelamin.add(wanita);
+
         JTextField txtNoTelepon = new JTextField();
         txtNoTelepon.setBounds(200, 205, 150, 25);
         txtNoTelepon.setText(noTelp);
