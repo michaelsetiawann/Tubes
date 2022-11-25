@@ -9,7 +9,7 @@ package model;
  * @author shyen
  */
 public interface StatusLaporanInterface {
-    final int  WAITING=0;
+    final int WAITING = 0;
     final int ACCEPTED = 1;
     final int REJECTED = 2;
     
