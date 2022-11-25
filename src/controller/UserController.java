@@ -92,10 +92,8 @@ public class UserController {
                 System.out.println(result.getString("password"));
                 System.out.println(result.getString("username"));
                 if (password.equals(result.getString("password"))) {
-                    System.out.println("in here 1");
                     return "Login Berhasil!";
                 } else {
-                    System.out.println("in here 2");
                     return "Password Salah!";
                 }
             } else {
@@ -163,6 +161,18 @@ public class UserController {
         int id_user = (SingletonProfile.getInstance().getUser().getId());
         System.out.println(id_user);
         String query = "UPDATE user SET nama_lengkap_pembeli = ?, no_telepon = ?, username = ?, password = ?, email = ? WHERE id_user = ?";
+        try {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(password.getBytes());
+            byte[] bytes = m.digest();
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            password = s.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, nama_lengkap_pembeli);
