@@ -53,7 +53,7 @@ public class PanelMenuToko {
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-
+                new MenuTokoScreen();
             }
         });
 
@@ -73,20 +73,20 @@ public class PanelMenuToko {
         });
         //abis klik di tabel baru nongol halaman produk, tpi beda ama productdetails, mirip2, minus add to card etc
         
-//        JButton update = new JButton("Update Produk");
-//        update.setBounds(575, 25, 130, 25);
-//        panelMenu.add(update);
-//        update.setFont(font1);
-//        update.setBackground(null);
-//        update.setBorderPainted(false);
-//        update.addActionListener(
-//                new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent ae
-//            ) {
-//
-//            }
-//        });
+        JButton menuPembeli = new JButton("Menu Pembeli");
+        menuPembeli.setBounds(575, 25, 130, 25);
+        panelMenu.add(menuPembeli);
+        menuPembeli.setFont(font1);
+        menuPembeli.setBackground(null);
+        menuPembeli.setBorderPainted(false);
+        menuPembeli.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae
+            ) {
+                new HomeScreen();
+            }
+        });
         JButton konfirmasi = new JButton("Lihat Pesanan");
         konfirmasi.setBounds(740, 25, 130, 25);
         panelMenu.add(konfirmasi);

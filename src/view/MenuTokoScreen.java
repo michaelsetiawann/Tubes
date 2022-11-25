@@ -97,7 +97,7 @@ public class MenuTokoScreen extends JFrame {
                     selectedRow = jTable.getSelectedRow();
                     int productId = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
 //                    System.out.println("product id: " + productId);
-                    new ProductDetails(productId);
+                    new UpdateProduk();
                     frame.setVisible(false);
                 }
             }

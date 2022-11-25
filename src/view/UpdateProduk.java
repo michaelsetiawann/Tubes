@@ -43,7 +43,7 @@ public class UpdateProduk extends JFrame {
         harga = SingletonBarang.getInstance().getBarang().getHarga_barang();
         deskripsi = SingletonBarang.getInstance().getBarang().getDeskripsi_barang();
         
-        JFrame frame = new JFrame("Tambah Produk");
+        JFrame frame = new JFrame("Update Produk");
         frame.setSize(1080, 700);
         JPanel contentPane = new JPanel();
         frame.setLocationRelativeTo(null);
@@ -113,7 +113,7 @@ public class UpdateProduk extends JFrame {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
                     controller.UserController.updateProduk(nama_barang.getText(), stok_barang.getText(),harga_barang.getText(), deskripsi_barang.getText());
-                    new HomeScreen();
+                    new MenuTokoScreen();
                 }
             }
         });
@@ -121,7 +121,7 @@ public class UpdateProduk extends JFrame {
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new HomeScreen();
+                new MenuTokoScreen();
             }
         });
 
