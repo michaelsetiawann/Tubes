@@ -4,6 +4,7 @@
  */
 package view;
 
+<<<<<<< Updated upstream
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
@@ -19,11 +20,14 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+=======
+>>>>>>> Stashed changes
 /**
  *
  * @author William
  */
 public class TambahProduk {
+<<<<<<< Updated upstream
     public TambahProduk() {
         JFrame frame = new JFrame("Registrasi");
         frame.setSize(1080, 700);
@@ -187,4 +191,7 @@ public class TambahProduk {
     private void setDefaultCloseOperation(int EXIT_ON_CLOSE) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+=======
+    
+>>>>>>> Stashed changes
 }
