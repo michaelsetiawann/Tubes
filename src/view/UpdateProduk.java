@@ -41,7 +41,7 @@ public class UpdateProduk {
         view.setLocationRelativeTo(null);
         view.getContentPane().setLayout(null);
 
-        JLabel title = new JLabel("Your Profille");
+        JLabel title = new JLabel("Update Produk");
         title.setFont(new Font("Serif", Font.PLAIN, 34));
         title.setBounds(80, 40, 200, 50);
         JLabel[] labels = new JLabel[7];
