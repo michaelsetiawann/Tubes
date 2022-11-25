@@ -83,7 +83,6 @@ public class BlokirBarang implements StatusLaporanInterface {
 //            @Override
 
             public void mouseClicked(MouseEvent e) {
-                // TODO Auto-generated method stub
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     int selectedRow = jTable.getSelectedRow();
                     int stat_bar;
@@ -98,8 +97,6 @@ public class BlokirBarang implements StatusLaporanInterface {
                         stat_bar=2;
                         JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
                     }
-//                    System.out.println("in here now");
-//                    System.out.println("status barang"+status_barang);
                     controller.LaporController.approveLaporanBarang(lapor_id, stat_bar);
                 }
             }

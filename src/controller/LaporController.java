@@ -110,7 +110,6 @@ public class LaporController {
             System.out.println(status);
             System.out.println("Berhasil update");
         }catch (Exception e){
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
     }
