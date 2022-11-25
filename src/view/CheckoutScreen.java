@@ -190,7 +190,7 @@ public class CheckoutScreen extends JFrame implements ActionListener{
                             }
                         }
                         String e5 = "";
-                        double e6 = 0;
+                        int e6 = 0;
                         
                         TransaksiController.getInstance().insertTransaksi(e1, e2, e3, e4, e5, e6);
                         KeranjangController.getInstance().deleteKeranjang(b.getId_keranjang());

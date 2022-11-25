@@ -39,7 +39,7 @@ public class TransactionScreen extends JFrame {
 
     private DefaultTableModel kolom;
     private JTable tabel;
-    private static JFrame frame = new JFrame("Transaksi");
+
 
     public TransactionScreen() {
         transScreen();
@@ -47,7 +47,7 @@ public class TransactionScreen extends JFrame {
     }
 
     private void transScreen() {
-
+        JFrame frame = new JFrame("Transaksi");
         frame.setSize(1080, 720);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
@@ -61,12 +61,13 @@ public class TransactionScreen extends JFrame {
         JPanel panelMenu = menu.getPanel(frame);
         frame.add(panelMenu);
 
-        printTable();
+        printTable(frame);
         frame.setLayout(null);
         frame.setVisible(true);
     }
 
-    private void printTable() {
+    private void printTable(JFrame frame) {
+        
         kolom = new DefaultTableModel();
         kolom.setColumnIdentifiers(new Object[]{
             "Id Transaksi", "Nama Barang", "Tanggal", "Rating", "Jumlah Barang", "Status", "Metode Pembayaran", "Review"
@@ -80,7 +81,7 @@ public class TransactionScreen extends JFrame {
             int idTrnas = aa.get(i).getId_transaksi();
             String namaBarang = aa.get(i).getBarang().getNama_barang();
             Date tgl = aa.get(i).getTanggal();
-            Double rate = aa.get(i).getRating();
+            int rate = aa.get(i).getRating();
             int qty = aa.get(i).getJumlahBarang();
             StatusPengirimanEnum stats = aa.get(i).getStatus();
             MetodePembayaranEnum met = aa.get(i).getMetodePembayaran();
@@ -91,108 +92,53 @@ public class TransactionScreen extends JFrame {
         scroll.setViewportView(tabel);
         scroll.setBounds(10, 80, 1050, 190);
         frame.getContentPane().add(scroll);
-        
+
         tabel.addMouseListener(new MouseListener() {
-                Date pressedTime;
-                long timeClicked;
-			
-                @Override
-                public void mouseReleased(MouseEvent e) {
-                    timeClicked = new Date().getTime() - pressedTime.getTime();
-                    if (timeClicked >= 500){
-                        int selectedRow;
-                        selectedRow = tabel.getSelectedRow();
-                        int transId = Integer.valueOf(tabel.getValueAt(selectedRow, 0).toString());
-                        double rate = Double.valueOf(tabel.getValueAt(selectedRow, 3).toString());
-                        
-                        JFrame f = new JFrame();
-                        f.setSize(500, 500);
-                        
-                        JSpinner spinner = new JSpinner();
-                        spinner.setValue(Double.valueOf(rate));
-                        spinner.setBounds(60, 100, 60, 40);
-                        f.add(spinner);
-                        
-                        JButton update = new JButton("Update");
-                        update.setBounds(140, 105, 100, 30);
-                        f.add(update);
-                        f.setLayout(null);
-                        f.setVisible(true);
-                        update.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent ae) {
-                                if (ae.getSource() == update){
-                                    int rateBaru = (Integer) spinner.getValue();
-                                    if(rateBaru <=5){
-//                                        Keranjang keranjangA = KeranjangController.getInstance().getKeranjang(transId);
-//                                        KeranjangController.getInstance().updateKeranjang(transId, rateBaru);
-//                                        Keranjang keranjangB = KeranjangController.getInstance().getKeranjang(transId);
-                                        Transaksi trans = TransaksiController.getInstance().getTrans(transId);
-                                        trans.setRating(rateBaru);
-//                                        int counter = 0;
-//                                        for (Keranjang temp : selectedItems) {                                        
-//                                            if(temp.getId_keranjang() == keranjangA.getId_keranjang()){
-//                                                selectedItems.set(counter, keranjangB);
-//                                            }
-//                                            counter++;
-//                                        }
-                                        f.dispose();
-                                        printTable();
-                                    }
-                                    else{
-                                        JOptionPane.showMessageDialog(null, "Bintang maksimal 5");
-                                    }
-                                } 
-                            }
-                        });
+            Date pressedTime;
+            long timeClicked;
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                timeClicked = new Date().getTime() - pressedTime.getTime();
+                if (timeClicked >= 500) {
+                    
+                    int selectedRow;
+                    selectedRow = tabel.getSelectedRow();
+                    int transId = Integer.valueOf(tabel.getValueAt(selectedRow, 0).toString());
+                    int rate = Integer.valueOf(tabel.getValueAt(selectedRow, 3).toString());
+                    String status =tabel.getValueAt(selectedRow, 5).toString();
+                    if (status.equals("SELESAI")) {
+                        frame.dispose();
+                        new ReviewRatingProdukScreen(transId,rate);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Pesanan Belum Selesai !");
                     }
-                }
-
-                @Override
-                public void mousePressed(MouseEvent e) {
-                    pressedTime = new Date();
-                }
-
-                @Override
-                public void mouseExited(MouseEvent e) {
-                        // TODO Auto-generated method stub
 
                 }
+            }
 
-                @Override
-                public void mouseEntered(MouseEvent e) {
-                        // TODO Auto-generated method stub
+            @Override
+            public void mousePressed(MouseEvent e) {
+                pressedTime = new Date();
+            }
 
-                }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // TODO Auto-generated method stub
 
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    //select/deselect product
-//                    if(e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-//                        int selectedRow;
-//                        selectedRow = tabel.getSelectedRow();
-//                        int keranjangId = Integer.valueOf(tableData.getValueAt(selectedRow, 0).toString());
-//                        //check if in selected
-//                        boolean isThere = false;
-//                        Keranjang keranjang = KeranjangController.getInstance().getKeranjang(keranjangId);
-//                        for (Keranjang c : selectedItems) {
-//                            if(c.getId_keranjang() == keranjangId){
-//                                isThere = true;
-//                                keranjang = c;
-//                            }
-//                        }
-//                        if(isThere){
-//                            selectedItems.remove(keranjang);
-//                        }
-//                        else{
-//                            selectedItems.add(keranjang);
-//                        }
-//                        //alter selected
-//                        tableData.setModel(tableModel);
-//                        loadData();
-//                    }
-                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
         });
-        
+
     }
 }
