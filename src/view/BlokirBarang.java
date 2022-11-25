@@ -89,11 +89,9 @@ public class BlokirBarang implements StatusLaporanInterface {
                     int lapor_id = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
                     if (JOptionPane.showConfirmDialog(null, "APPROVE?", "REJECT",
                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        status_barang = ACCEPTED;
                         stat_bar = 1;
                         JOptionPane.showMessageDialog(null, "Approve Berhasil!");
                     } else {
-                        status_barang = REJECTED;
                         stat_bar=2;
                         JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
                     }
@@ -111,7 +109,16 @@ public class BlokirBarang implements StatusLaporanInterface {
             Date tanggal = listLaporan.get(i).getTanggal();
             String isi_pesan = listLaporan.get(i).getKomentar();
             int status = listLaporan.get(i).getStatus();
-            tableModel.addRow(new Object[]{id_barang, id_laporan, id_user, tanggal, isi_pesan, status});
+            String statusName="";
+            switch (status) {
+                case 1:
+                    statusName = "ACCEPTED";
+                    break;
+                case 2:
+                    statusName = "REJECTED";
+                    break;
+            }
+            tableModel.addRow(new Object[]{id_barang, id_laporan, id_user, tanggal, isi_pesan, statusName});
         }
         
         JButton kembali = new JButton("Kembali");
