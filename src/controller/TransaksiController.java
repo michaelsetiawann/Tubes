@@ -70,7 +70,7 @@ public class TransaksiController {
         int jumlahBarang;
         Date tanggal;
         String pesan_review;
-        double rating;
+        int rating;
 
         Barang barang;
         StatusPengirimanEnum status = null;
@@ -81,7 +81,7 @@ public class TransaksiController {
             jumlahBarang = rs.getInt("jumlah_barang");
             tanggal = rs.getDate("tanggal");
             pesan_review = rs.getString("pesan_review");
-            rating = rs.getDouble("rating");
+            rating = rs.getInt("rating");
             int id_barang = rs.getInt("id_barang");
             barang = SingletonBarang.getInstance().getProductDetails(id_barang);
             int statuss = rs.getInt("status");
@@ -104,7 +104,7 @@ public class TransaksiController {
         return null;
     }
 
-    public void insertTransaksi(Barang barang, int jumlahBarang, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, double rating) {
+    public void insertTransaksi(Barang barang, int jumlahBarang, StatusPengirimanEnum status, MetodePembayaranEnum metodePembayaran, String pesan_review, int rating) {
         aa.connect();
         int id_user = SingletonProfile.getInstance().getUser().getId();
         int id_barang = barang.getId_barang();
@@ -238,6 +238,20 @@ public class TransaksiController {
         }
         return listTrans;
     }
+    
+    public static void updateRatingReview(int rateNew,int id_transaksi,String rev) {
+        aa.connect();
+        try {
+            String que = "UPDATE transaksi SET rating = "+rateNew+",pesan_review='"+rev+"' WHERE id_transaksi = " + id_transaksi;
+            PreparedStatement state = aa.con.prepareStatement(que);
+            state.executeUpdate(que);
+            state.close();
+            aa.con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     
   
     
