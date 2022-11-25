@@ -50,7 +50,7 @@ public class KonfirmasiPengirimanBarang extends JFrame implements ActionListener
     }
     
     private void lihatKeranjang() {
-        JFrame frame = new JFrame("Keranjang");
+        JFrame frame = new JFrame("Konfirmasi Barang yang akan Dikirim");
         
         //font 
         Font font1 = new Font("SansSerif", Font.PLAIN, 15);
