@@ -26,20 +26,21 @@ import model.StatusLaporanInterface;
  *
  * @author acer
  */
-public class BlokirToko implements StatusLaporanInterface{
-    public BlokirToko(){
+public class BlokirToko implements StatusLaporanInterface {
+
+    public BlokirToko() {
         menampilkanLaporanToko();
     }
-    
+
     private int status_toko = WAITING;
     private DefaultTableModel tableModel;
     private JTable jTable;
     private Vector<Object> table;
-    
-    public void menampilkanLaporanToko(){
-        ArrayList<LaporanToko> listLaporan  = new ArrayList<>();
+
+    public void menampilkanLaporanToko() {
+        ArrayList<LaporanToko> listLaporan = new ArrayList<>();
         listLaporan = controller.LaporController.getLaporToko();
-        
+
         JFrame view = new JFrame();
         view.setSize(1100, 800);
         view.setLocationRelativeTo(null);
@@ -93,12 +94,10 @@ public class BlokirToko implements StatusLaporanInterface{
                     int lapor_id = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
                     if (JOptionPane.showConfirmDialog(null, "APPROVE?", "REJECT",
                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        status_toko = ACCEPTED;
-                        stat_toko=1;
+                        stat_toko = 1;
                         JOptionPane.showMessageDialog(null, "Approve Berhasil!");
                     } else {
-                        status_toko = REJECTED;
-                        stat_toko=2;
+                        stat_toko = 2;
                         JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
                     }
                     controller.LaporController.approveLaporanToko(lapor_id, stat_toko);
@@ -115,24 +114,38 @@ public class BlokirToko implements StatusLaporanInterface{
             Date tanggal = listLaporan.get(i).getTanggal();
             String isi_pesan = listLaporan.get(i).getKomentar();
             int status = listLaporan.get(i).getStatus();
-            tableModel.addRow(new Object[]{id_barang, id_laporan, id_user, tanggal, isi_pesan, status});
+            String statusName = "";
+            switch (status) {
+                case 1:
+                    statusName = "ACCEPTED";
+                    break;
+                case 2:
+                    statusName = "REJECTED";
+                    break;
+                default :
+                    statusName = "WAITING";
+                    break;
+            }
+            
+            tableModel.addRow(new Object[]{id_barang, id_laporan, id_user, tanggal, isi_pesan, statusName});
         }
-        
+
         JButton kembali = new JButton("Kembali");
         kembali.setBounds(10, 10, 100, 40);
-        kembali.addActionListener(new ActionListener(){
+        kembali.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new MenuAdmin();
                 view.dispose();
             }
         });
-        
+
         view.add(kembali);
         jTable.setModel(tableModel);
 
         view.setVisible(true);
     }
+
     public static void main(String[] args) {
         new BlokirToko();
     }

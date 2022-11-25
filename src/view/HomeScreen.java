@@ -104,7 +104,7 @@ public class HomeScreen extends JFrame{
             "ID Barang", "Nama Barang", "Stock Barang", "Harga Barang", "Deskripsi Barang", "Jumlah Pengunjung", "Status"
         };
         DefaultTableModel tableModel = new DefaultTableModel(headerTitle, 0);
-        ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getAllBarang();
+        ArrayList<Barang> tableBarang = SingletonBarang.getInstance().getBarangUnblokir();
         for (int i = 0; i < tableBarang.size(); i++) {
             int id_barang = tableBarang.get(i).getId_barang();
             String nama_barang = tableBarang.get(i).getNama_barang();

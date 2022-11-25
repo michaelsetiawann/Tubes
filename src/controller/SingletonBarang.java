@@ -66,6 +66,32 @@ public class SingletonBarang {
         }
         return barangArrayList;
     }
+    
+    public ArrayList<Barang> getBarangUnblokir() {
+        conn.connect();
+        ArrayList<Barang> barangArrayList = new ArrayList<>();
+        try {
+            java.sql.Statement stat = conn.con.createStatement();
+            ResultSet result = stat.executeQuery("SELECT * FROM barang where status=0");
+            while (result.next()) {
+                int id_barang = result.getInt("id_barang");
+                String nama_barang = result.getString("nama_barang");
+                int stok_barang = result.getInt("stok_barang");
+                double harga_barang = result.getDouble("harga_barang");
+                String deskripsi_barang = result.getString("deskripsi_barang");
+                int jumlah_pengunjung = result.getInt("jumlah_pengunjung");
+                int status = result.getInt("status");
+                int id_toko = result.getInt("id_toko");
+
+                Barang barang = new Barang(id_barang, nama_barang, stok_barang, harga_barang, deskripsi_barang, jumlah_pengunjung,
+                        status, id_toko);
+                barangArrayList.add(barang);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
+        }
+        return barangArrayList;
+    }
 
     public ArrayList<Barang> getBarangByName(String nama) {
         conn.connect();
