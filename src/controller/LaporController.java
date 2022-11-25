@@ -107,8 +107,10 @@ public class LaporController {
         try{
             PreparedStatement state = aa.con.prepareStatement("UPDATE laporan_barang SET status = '"+status+"' WHERE id_laporan = '"+id_laporan+"'");
             state.executeUpdate();
+            System.out.println(status);
             System.out.println("Berhasil update");
         }catch (Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error occured when connecting to database.");
         }
     }

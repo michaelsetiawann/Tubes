@@ -86,18 +86,21 @@ public class BlokirBarang implements StatusLaporanInterface {
                 // TODO Auto-generated method stub
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     int selectedRow = jTable.getSelectedRow();
+                    int stat_bar;
                     int lapor_id = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
                     if (JOptionPane.showConfirmDialog(null, "APPROVE?", "REJECT",
                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         status_barang = ACCEPTED;
+                        stat_bar = 1;
                         JOptionPane.showMessageDialog(null, "Approve Berhasil!");
                     } else {
                         status_barang = REJECTED;
+                        stat_bar=2;
                         JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
                     }
 //                    System.out.println("in here now");
 //                    System.out.println("status barang"+status_barang);
-                    controller.LaporController.approveLaporanBarang(lapor_id, status_barang);
+                    controller.LaporController.approveLaporanBarang(lapor_id, stat_bar);
                 }
             }
         });
