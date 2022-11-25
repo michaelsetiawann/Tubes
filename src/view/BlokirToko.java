@@ -89,16 +89,19 @@ public class BlokirToko implements StatusLaporanInterface{
                 // TODO Auto-generated method stub
                 if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
                     int selectedRow = jTable.getSelectedRow();
+                    int stat_toko;
                     int lapor_id = Integer.valueOf(jTable.getValueAt(selectedRow, 0).toString());
                     if (JOptionPane.showConfirmDialog(null, "APPROVE?", "REJECT",
                             JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                         status_toko = ACCEPTED;
+                        stat_toko=1;
                         JOptionPane.showMessageDialog(null, "Approve Berhasil!");
                     } else {
                         status_toko = REJECTED;
+                        stat_toko=2;
                         JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
                     }
-                    controller.LaporController.approveLaporanBarang(lapor_id, status_toko);
+                    controller.LaporController.approveLaporanToko(lapor_id, stat_toko);
                 }
             }
         });
