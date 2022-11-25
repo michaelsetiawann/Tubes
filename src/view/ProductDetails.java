@@ -165,9 +165,9 @@ public class ProductDetails extends JFrame {
                                 }
                             }
                             if (isThere) {
-//                                System.out.println("hello1");
+
                                 int jumlah = temp.getJumlah_barang() + jumlahAddCart;
-//                                System.out.println("stok " + SingletonBarang.getInstance().getProductDetails(productId).getStok_barang());
+
                                 if (jumlah < SingletonBarang.getInstance().getProductDetails(productId).getStok_barang()) {
                                     new KeranjangController().updateKeranjang(temp.getId_keranjang(), jumlah);
                                     frame.setVisible(false);
@@ -177,13 +177,13 @@ public class ProductDetails extends JFrame {
                                     JOptionPane.showMessageDialog(null, "Kuantitas di keranjang melebihi stok barang!");
                                 }
                             } else {
-//                                System.out.println("hello2");
+
                                 new KeranjangController().insertKeranjang(productId, jumlahAddCart);
                                 frame.setVisible(false);
                                 new LihatKeranjangScreen();
                             }
                         } else {
-//                            System.out.println("should be in here");
+
                             new KeranjangController().insertKeranjang(productId, jumlahAddCart);
                             frame.dispose();
                             new LihatKeranjangScreen();
