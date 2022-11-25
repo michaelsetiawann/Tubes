@@ -23,7 +23,7 @@ public class LaporBarangScreen {
         tokoScreen(id_barang,id_user);
     }
 
-    private void tokoScreen(int id_toko,int id_user) {
+    private void tokoScreen(int id_barang,int id_user) {
 
         JFrame frame = new JFrame("Lapor Barang");
         frame.setSize(1080, 720);
@@ -64,7 +64,7 @@ public class LaporBarangScreen {
                     JOptionPane.showMessageDialog(null, "Semua kolom wajib diisi!");
                 } else {
                     int status =0;
-                    String aa = LaporController.insertLaporToko(id_toko, id_user, laporan.getText(),status);   
+                    String aa = LaporController.insertLaporBarang(id_barang, id_user, laporan.getText(),status);   
                     JOptionPane.showMessageDialog(null, aa);
             
                 }
