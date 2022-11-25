@@ -170,8 +170,8 @@ public class UserController {
             stmt.setString(3, username);
             stmt.setString(4, password);
             stmt.setString(5, email);
-//            stmt.setInt(6, id_user);
-            stmt.executeUpdate(query);
+            stmt.setInt(6, id_user);
+            stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Berhasil melakukan update profil!");
 
         } catch (SQLException e) {
@@ -215,19 +215,20 @@ public class UserController {
         }
     }
 
-    public static void updateProduk(String nama_barang, String stok_barang, String harga_barang, String deskripsi_barang) {
-        DatabaseHandler conn = new DatabaseHandler();
-        conn.connect();
-        int id_user = (SingletonProfile.getInstance().getUser().getId());
-        System.out.println(id_user);
-        String query = "UPDATE user SET nama_barang = ?, stok_barang = ?, harga_barang = ?, deskripsi_barang = ?";
+    public static void updateProduk(String id_barang, String nama_barang, String stok_barang, String harga_barang, String deskripsi_barang) {
+
         try {
+            DatabaseHandler conn = new DatabaseHandler();
+            conn.connect();
+            String query = "UPDATE barang SET nama_barang = ?, stok_barang = ?, harga_barang = ?, deskripsi_barang = ? WHERE id_barang = ?";
+            
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setString(1, nama_barang);
             stmt.setString(2, stok_barang);
             stmt.setString(3, harga_barang);
             stmt.setString(4, deskripsi_barang);
-            stmt.executeUpdate(query);
+            stmt.setString(5, id_barang);
+            stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Berhasil melakukan update produk!");
         } catch (SQLException e) {
             if (e.getMessage().contains("'nama_barang'")) {
