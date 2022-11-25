@@ -120,6 +120,7 @@ public class BlokirToko implements StatusLaporanInterface{
         kembali.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                new MenuAdmin();
                 view.dispose();
             }
         });
@@ -128,5 +129,8 @@ public class BlokirToko implements StatusLaporanInterface{
         jTable.setModel(tableModel);
 
         view.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new BlokirToko();
     }
 }

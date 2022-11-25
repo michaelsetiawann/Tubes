@@ -95,6 +95,8 @@ public class BlokirBarang implements StatusLaporanInterface {
                         status_barang = REJECTED;
                         JOptionPane.showMessageDialog(jTable, "Reject Berhasil!");
                     }
+//                    System.out.println("in here now");
+//                    System.out.println("status barang"+status_barang);
                     controller.LaporController.approveLaporanBarang(lapor_id, status_barang);
                 }
             }
@@ -117,6 +119,7 @@ public class BlokirBarang implements StatusLaporanInterface {
         kembali.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                new MenuAdmin();
                 view.dispose();
             }
         });

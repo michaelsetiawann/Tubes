@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.SingletonProfile;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,26 +24,33 @@ public class MenuAdmin {
     
     public void menampilkanMenu(){
         JFrame view = new JFrame("Menu Admin");
-        view.setSize(180, 280);
+        view.setLayout(null);
+        view.setSize(500, 600);
+        view.setLocationRelativeTo(null);
         
         JLabel title = new JLabel("Menu Admin");
-        title.setFont(new Font("Serif", Font.PLAIN, 28));
-        title.setBounds(20, 30, 140, 40);
+        title.setFont(new Font("Serif", Font.PLAIN, 35));
+        title.setBounds(160, 50, 240, 30);
+        view.add(title);
         
         JButton tokoButton = new JButton("Lihat Laporan Toko");
-        tokoButton.setBounds(20, 80, 140, 50);
-        JButton barangButton = new JButton("Lihat Laporan Barang");
-        barangButton.setBounds(20, 140, 140, 50);
-        JButton kembali = new JButton("Kembali");
-        kembali.setBounds(20, 200, 140, 50);
+        tokoButton.setBounds(170, 120, 160, 40);
+        view.add(tokoButton);
         
-        view.setVisible(true);
-        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton barangButton = new JButton("Lihat Laporan Barang");
+        barangButton.setBounds(170, 180, 160, 40);
+        view.add(barangButton);
+        
+        JButton kembali = new JButton("Keluar Menu Admin");
+        kembali.setBounds(170, 240, 160, 40);
+        view.add(kembali);
+        
         
         kembali.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 new HomeScreen();
+                SingletonProfile.getInstance().setUser(null);
                 view.dispose();
             }
         });
@@ -51,6 +59,7 @@ public class MenuAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new BlokirToko();
+                view.dispose();
             }
         });
         
@@ -58,7 +67,13 @@ public class MenuAdmin {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new BlokirBarang();
+                view.dispose();
             }
         });
+        
+        view.setVisible(true);
+//        view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
     }
 }
